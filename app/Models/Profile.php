@@ -14,10 +14,10 @@ class Profile extends Model
         'phone_number',
         'age',
         'gender',
-        'language'
+        'language',
     ];
 
-    public function profileable(){ 
+    public function profileable(){
         return $this->morphTo();
     }
 }

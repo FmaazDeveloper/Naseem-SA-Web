@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tourist_id')->constrained('tourists');
-            $table->foreignId('guide_id')->constrained('guides');
-            $table->enum('status', ['Active', 'Pending', 'Completed', 'Canceled'])->nullable();
+            $table->foreignId('guide_id')->constrained('guides')->nullable();
+            $table->enum('status', ['Active', 'Pending', 'Completed', 'Canceled']);
             $table->date('date_end');
             $table->time('time_end');
             $table->timestamps();
