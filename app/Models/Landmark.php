@@ -12,6 +12,8 @@ class Landmark extends Model
     protected $table = 'landmarks';
 
     protected $fillable = [
+        'landmarkable_id',
+        'landmarkable_type',
         'name',
         'description',
         'photo',

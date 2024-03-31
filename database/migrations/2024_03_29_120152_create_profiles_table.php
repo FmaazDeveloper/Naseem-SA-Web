@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('profileable');
             $table->string('nationality')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number')->unique()->nullable();
             $table->integer('age')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();
             $table->String('language')->nullable();

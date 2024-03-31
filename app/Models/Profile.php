@@ -11,6 +11,8 @@ class Profile extends Model
     protected $table = 'profiles';
 
     protected $fillable = [
+        'profileable_id',
+        'profileable_type',
         'nationality',
         'phone_number',
         'age',
