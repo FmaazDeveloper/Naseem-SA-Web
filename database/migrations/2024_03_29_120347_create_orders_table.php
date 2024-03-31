@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tourist_id')->constrained('tourists');
             $table->foreignId('guide_id')->constrained('guides')->nullable();
+            $table->foreignId('admin_id')->constrained('admins')->nullable();
+            $table->morphs('regionable');
+            $table->String('location');
+            $table->integer('number_of_people');
+            $table->integer('number_of_days');
             $table->enum('status', ['Active', 'Pending', 'Completed', 'Canceled']);
-            $table->date('date_end');
-            $table->time('time_end');
+            $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });
     }

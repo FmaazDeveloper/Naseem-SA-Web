@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Landmark extends Model
 {
     use HasFactory;
-    protected $table = 'profiles';
+
+    protected $table = 'landmarks';
 
     protected $fillable = [
-        'nationality',
-        'phone_number',
-        'age',
-        'gender',
-        'language',
+        'name',
+        'description',
+        'photo',
+        'location',
     ];
 
-    public function profileable(){
+    public function landmarkable(){
         return $this->morphTo();
     }
 }

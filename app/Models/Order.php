@@ -14,9 +14,12 @@ class Order extends Model
     protected $fillable = [
         'tourist_id',
         'guide_id',
+        'admin_id',
+        'location',
+        'number_of_people',
+        'number_of_days',
         'status',
-        'date_end',
-        'time_end',
+        'closed_at',
     ];
 
     public function tourist(){
@@ -24,5 +27,11 @@ class Order extends Model
     }
     public function guide(){
         return $this->belongsTo(Guide::class);
+    }
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
+    public function regionable(){
+        return $this->morphTo();
     }
 }
