@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tourist_id')->constrained('users');
             $table->foreignId('guide_id')->constrained('users')->nullable();
             $table->foreignId('admin_id')->constrained('users')->nullable();
-            $table->foreignId('region_id')->constrained('regions');
+            // $table->foreignId('region_id')->constrained('regions');
             $table->integer('number_of_people');
             $table->integer('number_of_days');
             $table->enum('status', ['Active', 'Pending', 'Completed', 'Canceled']);

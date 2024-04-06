@@ -3,7 +3,7 @@
 @section('content')
     <div class="row row-cols-1 row-cols-md-2 g-4 m-3">
 
-        @foreach ($city->landmarks as $landmark)
+        @foreach ($region->landmarks as $landmark)
             <div class="card mb-3">
                 <img src="{{ asset('images/' . $landmark->photo) }}" class="card-img-top" alt="{{ $landmark->photo }}"
                     height="250">

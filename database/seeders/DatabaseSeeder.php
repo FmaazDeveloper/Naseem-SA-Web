@@ -26,6 +26,6 @@ class DatabaseSeeder extends Seeder
         Region::factory(20)->create();
         Landmark::factory(40)->create();
         Activity::factory(50)->create();
-        Order::factory(30)->create();
+        // Order::factory(30)->create();
     }
 }
