@@ -20,7 +20,7 @@ class Profile extends Model
         'language',
     ];
 
-    public function profileable(){
-        return $this->morphTo();
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

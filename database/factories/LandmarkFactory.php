@@ -2,8 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\City;
-use App\Models\Island;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,11 +18,10 @@ class LandmarkFactory extends Factory
     public function definition(): array
     {
         return [
-            'landmarkable_id' => fake()->randomElement([City::all()->random(),Island::all()->random()]),
-            'landmarkable_type' => fake()->randomElement([City::class,Island::class]),
+            'region_id' => Region::all()->random(),
             'name' => fake()->name(),
             'description' => fake()->paragraph(2),
-            'photo' => fake()->paragraph(1),
+            'photo' => fake()->randomElement(['Abha city.jpg','IMG_3410.JPG','IMG_3422.JPG','Art_Museum.jpg']),
             'location' => fake()->city(),
 
         ];

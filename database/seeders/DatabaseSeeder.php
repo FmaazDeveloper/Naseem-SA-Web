@@ -2,14 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Activity;
-use App\Models\Admin;
-use App\Models\City;
-use App\Models\Guide;
-use App\Models\Island;
-use App\Models\Landmark;
+use App\Models\User;
 use App\Models\Profile;
-use App\Models\Tourist;
+use App\Models\Region;
+use App\Models\Landmark;
+use App\Models\Activity;
+use App\Models\Order;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Ramsey\Uuid\Guid\Guid;
@@ -21,20 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // $this->call(LaratrustSeeder::class);
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // Admin::factory(10)->create();
-        // Guide::factory(10)->create();
-        // Tourist::factory(10)->create();
-        // Profile::factory(10)->create();
-        // City::factory(10)->create();
-        // Island::factory(10)->create();
-        // Landmark::factory(10)->create();
-        // Activity::factory(10)->create();
+        User::factory(30)->create();
+        Profile::factory(30)->create();
+        Region::factory(20)->create();
+        Landmark::factory(40)->create();
+        Activity::factory(50)->create();
+        Order::factory(30)->create();
     }
 }

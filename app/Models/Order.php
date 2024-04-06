@@ -9,29 +9,23 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $table = 'order';
+    protected $table = 'orders';
 
     protected $fillable = [
         'tourist_id',
         'guide_id',
         'admin_id',
-        'location',
+        'region_id',
         'number_of_people',
         'number_of_days',
         'status',
         'closed_at',
     ];
 
-    public function tourist(){
-        return $this->belongsTo(Tourist::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
-    public function guide(){
-        return $this->belongsTo(Guide::class);
-    }
-    public function admin(){
-        return $this->belongsTo(Admin::class);
-    }
-    public function regionable(){
-        return $this->morphTo();
+    public function region(){
+        return $this->belongsTo(Region::class);
     }
 }

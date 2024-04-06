@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('region_id')->constrained('regions');
             $table->foreignId('landmark_id')->constrained('landmarks');
-            $table->morphs('activityable');
             $table->text('description');
             $table->timestamps();
         });

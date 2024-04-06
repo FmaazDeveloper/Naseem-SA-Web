@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('landmarks', function (Blueprint $table) {
             $table->id();
-            $table->morphs('landmarkable');
+            $table->foreignId('region_id')->constrained('regions');
             $table->string('name');
             $table->text('description');
             $table->string('photo');

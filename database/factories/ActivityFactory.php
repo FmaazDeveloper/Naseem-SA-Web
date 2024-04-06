@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\City;
-use App\Models\Island;
+use App\Models\Region;
+use App\Models\Landmark;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +19,8 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            'landmark_id' => rand(1,10),
-            'activityable_id' => fake()->randomElement([City::all()->random(),Island::all()->random()]),
-            'activityable_type' => fake()->randomElement([City::class,Island::class]),
+            'region_id' => Region::all()->random(),
+            'landmark_id' => Landmark::all()->random(),
             'description' => fake()->paragraph(2),
         ];
     }

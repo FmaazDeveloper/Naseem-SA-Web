@@ -12,15 +12,17 @@ class Landmark extends Model
     protected $table = 'landmarks';
 
     protected $fillable = [
-        'landmarkable_id',
-        'landmarkable_type',
+        'region_id',
         'name',
         'description',
         'photo',
         'location',
     ];
 
-    public function landmarkable(){
-        return $this->morphTo();
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
+    public function activities(){
+        return $this->hasMany(Activity::class,'region_id');
     }
 }

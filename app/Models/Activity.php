@@ -18,10 +18,10 @@ class Activity extends Model
         'description',
     ];
 
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
     public function landmark(){
         return $this->belongsTo(Landmark::class);
-    }
-    public function activityable(){
-        return $this->morphTo();
     }
 }
