@@ -12,8 +12,7 @@ class Activity extends Model
     protected $table = 'activities';
 
     protected $fillable = [
-        'profileable_id',
-        'profileable_type',
+        'region_id',
         'landmark_id',
         'description',
     ];

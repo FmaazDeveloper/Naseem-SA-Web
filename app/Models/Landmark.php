@@ -22,7 +22,10 @@ class Landmark extends Model
     public function region(){
         return $this->belongsTo(Region::class);
     }
+    public function activity(){
+        return $this->hasOne(Activity::class,'landmark_id');
+    }
     public function activities(){
-        return $this->hasMany(Activity::class,'region_id');
+        return $this->hasMany(Activity::class,'landmark_id');
     }
 }

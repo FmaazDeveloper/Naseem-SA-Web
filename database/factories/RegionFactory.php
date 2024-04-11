@@ -24,7 +24,7 @@ class RegionFactory extends Factory
             'main_description' => fake()->paragraph(4),
             'weather_description' => fake()->paragraph(2),
             'card_description' => fake()->paragraph(2),
-            'card_photo' => fake()->randomElement(['Abha city.jpg','IMG_3410.JPG','IMG_3422.JPG','Art_Museum.jpg']),
+            'card_photo' => fake()->randomElement(['Abha city.jpg','الرياض 12.jpg','IMG_3422.JPG','Art_Museum.jpg']),
         ];
     }
 }

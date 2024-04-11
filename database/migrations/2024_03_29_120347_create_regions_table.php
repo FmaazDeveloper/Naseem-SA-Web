@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('users');
+            $table->foreignId('admin_id')->constrained('users')->nullable()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type', ['City', 'Island']);
             $table->string('name');
             $table->text('main_description');
             $table->string('weather_description');
             $table->string('card_description');
             $table->string('card_photo');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

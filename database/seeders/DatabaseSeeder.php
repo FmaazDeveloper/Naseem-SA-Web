@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(LaratrustSeeder::class);
+        $this->call(LaratrustSeeder::class);
 
-        User::factory(30)->create();
-        Profile::factory(30)->create();
+        User::factory(1000)->create();
+        Profile::factory(1000)->create();
         Region::factory(20)->create();
-        Landmark::factory(40)->create();
-        Activity::factory(50)->create();
+        Landmark::factory(100)->create();
+        Activity::factory(150)->create();
         Order::factory(30)->create();
     }
 }

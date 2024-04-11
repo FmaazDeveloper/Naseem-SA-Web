@@ -12,23 +12,34 @@ class Region extends Model
     protected $table ='regions';
 
     protected $fillable = [
+        'admin_id',
         'type',
         'name',
         'main_description',
         'weather_description',
         'card_description',
         'card_photo',
+        'is_active',
     ];
 
     public function admin(){
         return $this->belongsTo(User::class);
     }
+    //landmark
     public function landmarks(){
         return $this->hasMany(Landmark::class);
     }
+    public function landmark(){
+        return $this->hasOne(Landmark::class);
+    }
+     //activity
     public function activities(){
         return $this->hasMany(Activity::class);
     }
+    public function activity(){
+        return $this->hasOne(Activity::class);
+    }
+
     public function orders(){
         return $this->hasMany(Order::class);
     }
