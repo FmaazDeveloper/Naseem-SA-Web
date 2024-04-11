@@ -8,7 +8,7 @@
             @if ($region->type === 'City' && $region->is_active)
                 <div class="col">
                     <div class="card h-100">
-                        <img src="{{ asset('images/' . $region->card_photo) }}" class="rounded"
+                        <img src="{{ asset($region->card_photo) }}" class="rounded"
                             alt="{{ $region->card_photo }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $region->name }}</h5>

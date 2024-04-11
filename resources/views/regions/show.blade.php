@@ -12,7 +12,7 @@
                         <div class="card-header text-center">
                             {{ $landmark->name }}
                         </div>
-                        <img src="{{ asset('images/' . $landmark->photo) }}" class="rounded" alt="{{ $landmark->photo }}"
+                        <img src="{{ asset($landmark->photo) }}" class="rounded" alt="{{ $landmark->photo }}"
                             height="250">
                         <div class="card-body">
                             <h5 class="card-title">{{ $landmark->description }}</h5>
