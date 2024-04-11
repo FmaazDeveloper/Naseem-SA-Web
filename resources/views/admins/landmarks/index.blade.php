@@ -15,6 +15,7 @@
                 <th scope="col">Location</th>
                 <th scope="col">Photo</th>
                 <th scope="col">Activity</th>
+                <th scope="col">Active</th>
                 <th scope="col">Time</th>
                 <th scope="col">Action</th>
             </tr>
@@ -26,7 +27,7 @@
                     <td>{{ $landmark->region->name }}</td>
                     <td>{{ $landmark->name }}</td>
                     <td>{{ $landmark->location }}</td>
-                    <td><img src="{{ asset('images/' . $landmark->photo) }}" class="rounded w-auto" alt="{{ $landmark->photo }}"
+                    <td><img src="{{ asset($landmark->photo) }}" class="rounded w-auto" alt="{{ $landmark->photo }}"
                             width="75" height="75"></td>
                     <td>
                         <ol>
@@ -35,6 +36,7 @@
                             @endforeach
                         </ol>
                     </td>
+                    <td>{{ $landmark->is_active ? "True" : "False" }}</td>
                     <td>
                         <small>
                             <p>{{ 'Created : ' . $landmark->created_at }}</p>

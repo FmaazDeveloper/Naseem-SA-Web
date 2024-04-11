@@ -53,7 +53,7 @@ class RegionController extends Controller
             $file = $request->file('card_photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . '.' . $extension;
+            $file_name = $request->name . time() .'.' . $extension;
 
             $path = 'images/regions/';
             $file->move($path, $file_name);
@@ -111,7 +111,7 @@ class RegionController extends Controller
             $file = $request->file('card_photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . '.' . $extension;
+            $file_name = $request->name . time() .'.' . $extension;
 
             $path = 'images/regions/';
             $file->move($path, $file_name);
@@ -146,6 +146,6 @@ class RegionController extends Controller
             File::delete($region->card_photo);
         }
         $region->delete();
-        return to_route('regions.index');
+        return to_route('regions.index_edit');
     }
 }

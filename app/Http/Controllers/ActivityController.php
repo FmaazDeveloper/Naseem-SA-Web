@@ -37,12 +37,14 @@ class ActivityController extends Controller
             // 'region_id' => ['required', 'exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
+            'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         Activity::create([
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
+            'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
         return to_route('activities.index',$request->landmark_id);
@@ -75,12 +77,14 @@ class ActivityController extends Controller
         request()->validate([
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
+            'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         $activity->update([
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
+            'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
         return to_route('activities.index',$request->landmark_id);

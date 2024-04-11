@@ -9,14 +9,14 @@
 
             <div class="mb-3">
                 <label for="region_id" class="form-label">Region</label>
-                <input type="text" value="{{ $activity->landmark->region->id . ' - ' . $activity->landmark->region->name }}"
+                <input type="text" value="{{ $activity->region->id . ' - ' . $activity->region->name }}"
                     class="form-control" id="region_id" disabled>
             </div>
 
             <div class="mb-3">
                 <label for="region" class="form-label">Select landmark</label>
                 <select class="form-select" name="landmark_id" aria-label="Default select example" id="region">
-                    @foreach ($landmarks as $landmark)
+                    @foreach ($activity->region->landmarks as $landmark)
                         <option value="{{ $landmark->id }}" @selected($activity->landmark->id == $landmark->id)>
                             {{ $landmark->id . ' - ' . $landmark->name }}</option>
                     @endforeach

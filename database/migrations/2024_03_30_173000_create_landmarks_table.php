@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('photo');
             $table->string('location');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LaratrustSeeder::class);
 
-        User::factory(1000)->create();
-        Profile::factory(1000)->create();
+        User::factory(100)->create();
+        Profile::factory(100)->create();
         Region::factory(20)->create();
         Landmark::factory(100)->create();
         Activity::factory(150)->create();

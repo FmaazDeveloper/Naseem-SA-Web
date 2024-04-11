@@ -17,6 +17,7 @@ class Landmark extends Model
         'description',
         'photo',
         'location',
+        'is_active',
     ];
 
     public function region(){

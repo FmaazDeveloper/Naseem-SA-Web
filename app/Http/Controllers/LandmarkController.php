@@ -38,13 +38,14 @@ class LandmarkController extends Controller
             'description' => ['required', 'string', 'min:10', 'max:255'],
             'location' => ['required', 'string', 'min:3', 'max:255'],
             'photo' => ['required', 'mimes:png'],
+            'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         if ($request->has('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . '.' . $extension;
+            $file_name = $request->name . time() .'.' . $extension;
 
             $path = 'images/landmarks/';
             $file->move($path, $file_name);
@@ -55,10 +56,11 @@ class LandmarkController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'location' => $request->location,
-            'photo' => $request->photo,
+            'photo' => $path . $file_name,
+            'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('landmarks.store',$request->region_id);
+        return to_route('landmarks.index', $request->region_id);
     }
 
     /**
@@ -89,6 +91,7 @@ class LandmarkController extends Controller
             'description' => ['required', 'string', 'min:10', 'max:255'],
             'location' => ['required', 'string', 'min:3', 'max:255'],
             'photo' => ['nullable', 'mimes:png'],
+            'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         $update_photo = null;
@@ -97,7 +100,7 @@ class LandmarkController extends Controller
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . '.' . $extension;
+            $file_name = $request->name . time() .'.' . $extension;
 
             $path = 'images/landmarks/';
             $file->move($path, $file_name);
@@ -115,10 +118,10 @@ class LandmarkController extends Controller
             'description' => $request->description,
             'location' => $request->location,
             'photo' => $update_photo ? $update_photo : $landmark->photo,
+            'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('landmarks.store',$request->region_id);
-
+        return to_route('landmarks.index', $request->region_id);
     }
 
     /**
@@ -131,6 +134,7 @@ class LandmarkController extends Controller
             File::delete($landmark->photo);
         }
         $landmark->delete();
-        return to_route('landmarks.index');
+        $region = $landmark->region_id;
+        return to_route('landmarks.index',['region'=>$region]);
     }
 }

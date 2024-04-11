@@ -22,6 +22,7 @@ class ActivityFactory extends Factory
             'region_id' => Region::all()->random(),
             'landmark_id' => Landmark::all()->random(),
             'description' => fake()->paragraph(2),
+            'is_active' => fake()->randomElement(['0','1']),
         ];
     }
 }

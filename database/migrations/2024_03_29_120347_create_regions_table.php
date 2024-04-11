@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('weather_description');
             $table->string('card_description');
             $table->string('card_photo');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

@@ -21,9 +21,9 @@ class LandmarkFactory extends Factory
             'region_id' => Region::all()->random(),
             'name' => fake()->name(),
             'description' => fake()->paragraph(2),
-            'photo' => fake()->randomElement(['Abha city.jpg','الرياض 12.jpg','IMG_3422.JPG','Art_Museum.jpg']),
+            'photo' => fake()->randomElement(['zxv.png','log1.png','add.png','ad1.png']),
             'location' => fake()->city(),
-
+            'is_active' => fake()->randomElement(['0','1']),
         ];
     }
 }

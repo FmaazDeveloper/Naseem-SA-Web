@@ -16,7 +16,7 @@
                 <label for="landmark_id" class="form-label">Select landmark</label>
                 <select class="form-select" name="landmark_id" aria-label="Default select example" id="landmark_id">
                     <option selected>Select region</option>
-                    @foreach ($landmarks as $landmark)
+                    @foreach ($landmark_activity->region->landmarks as $landmark)
                         <option value="{{ $landmark->id }}" @selected($landmark->id == $landmark_activity->id)>
                             {{ $landmark->id . ' - ' . $landmark->name }}</option>
                     @endforeach

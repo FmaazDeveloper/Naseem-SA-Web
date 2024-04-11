@@ -15,6 +15,7 @@ class Activity extends Model
         'region_id',
         'landmark_id',
         'description',
+        'is_active',
     ];
 
     public function region(){

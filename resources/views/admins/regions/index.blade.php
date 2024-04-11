@@ -14,7 +14,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Card photo</th>
                 <th scope="col">Landmarks</th>
-                <th scope="col">Is active</th>
+                <th scope="col">Active</th>
                 <th scope="col">Time</th>
                 <th scope="col">Action</th>
             </tr>
@@ -26,7 +26,7 @@
                     <td>{{ $region->admin->name }}</td>
                     <td>{{ $region->type }}</td>
                     <td>{{ $region->name }}</td>
-                    <td><img src="{{ asset('images/' . $region->card_photo) }}" class="rounded w-auto"
+                    <td><img src="{{ asset($region->card_photo) }}" class="rounded w-auto"
                             alt="{{ $region->card_photo }}" width="75" height="75"></td>
                     <td>
                         <ol>
@@ -35,7 +35,7 @@
                             @endforeach
                         </ol>
                     </td>
-                    <td>{{ $region->is_active }}</td>
+                    <td>{{ $region->is_active ? "True" : "False" }}</td>
                     <td>
                         <small>
                             <p>{{ 'Created : ' . $region->created_at }}</p>
