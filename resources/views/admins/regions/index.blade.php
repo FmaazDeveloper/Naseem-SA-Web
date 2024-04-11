@@ -5,7 +5,9 @@
         <a href="{{ route('regions.create') }}" class="btn btn-success m-3">Create region</a>
     </div>
     <table class="table table-hover table-bordered text-center table-light shadow p-3 mb-5 bg-body-tertiary rounded">
-        <caption>Number of regions is : {{ $regions->count() }} </caption>
+        <caption>
+            Number of regions is : {{ $regions->count() }} | Number of landmarks is : {{ $landmarks->count() }} | Number of activities is : {{ $activities->count() }}
+        </caption>
         <thead>
             <tr>
                 <th scope="col">#</th>

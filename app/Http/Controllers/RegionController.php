@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\Landmark;
 use App\Models\Region;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class RegionController extends Controller
@@ -17,7 +16,9 @@ class RegionController extends Controller
     public function index_edit()
     {
         $regions = Region::all();
-        return view('admins.regions.index', ['regions' => $regions]);
+        $landmarks = Landmark::all();
+        $activities = Activity::all();
+        return view('admins.regions.index', ['regions' => $regions, 'landmarks' => $landmarks, 'activities' => $activities]);
     }
     public function index()
     {

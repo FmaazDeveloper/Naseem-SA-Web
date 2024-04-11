@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Landmark;
 use App\Models\Region;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class LandmarkController extends Controller
      */
     public function index(Region $region)
     {
-        $landmarks = Landmark::all();
-        return view('admins.landmarks.index', ['landmarks' => $landmarks, 'region' => $region]);
+        $landmarks = Landmark::where('region_id', '=' ,$region->id)->get();
+        $activities = Activity::where('region_id', '=' ,$region->id)->count();
+        return view('admins.landmarks.index', ['landmarks' => $landmarks, 'region' => $region, 'activities' => $activities]);
     }
 
     /**

@@ -6,7 +6,9 @@
     </div>
 
     <table class="table table-hover table-bordered text-center table-light shadow p-3 mb-5 bg-body-tertiary rounded">
-        <caption>Number of landmarks is : {{ $region->landmarks->count() }} </caption>
+        <caption>
+            Number of landmarks is : {{ $landmarks->count() }} | Number of activities is : {{ $activities }}
+        </caption>
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -21,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($region->landmarks as $landmark)
+            @foreach ($landmarks as $landmark)
                 <tr>
                     <td>{{ $landmark->id }}</td>
                     <td>{{ $landmark->region->name }}</td>
