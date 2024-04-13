@@ -14,21 +14,24 @@
             </div>
 
             <div class="mb-3">
-                <label for="region" class="form-label">Select landmark</label>
-                <select class="form-select" name="landmark_id" aria-label="Default select example" id="region">
+                <label for="landmark_id" class="form-label">Select landmark</label>
+                <select class="form-select" name="landmark_id" aria-label="Default select example" id="landmark_id">
                     @foreach ($activity->landmark->region->landmarks as $landmark)
                         <option value="{{ $landmark->id }}" @selected($activity->landmark->id == $landmark->id)>
                             {{ $landmark->id . ' - ' . $landmark->name }}</option>
                     @endforeach
                 </select>
-                @error('region')
-                    <small style="color: red">*{{ $message }}</small>
+                @error('landmark_id')
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="mb-3">
                 <label for="description">Description</label>
                 <textarea name="description" class="form-control" id="description">{{ $activity->description }}</textarea>
+                @error('description')
+                    <small class="text-danger">*{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="mb-3 form-check">

@@ -22,7 +22,7 @@
                     @endforeach
                 </select>
                 @error('landmark_id')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 
@@ -30,7 +30,7 @@
                 <label for="description">Description</label>
                 <textarea name="description" class="form-control" id="description">{{ old('description') }}</textarea>
                 @error('description')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 

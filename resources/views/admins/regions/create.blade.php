@@ -24,14 +24,14 @@
             </div>
 
             @error('type')
-                <small style="color: red">*{{ $message }}</small>
+                <small class="text-danger">*{{ $message }}</small>
             @enderror
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input name="name" type="text" value="{{ old('name') }}" class="form-control" id="name">
                 @error('name')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 
@@ -39,7 +39,7 @@
                 <label for="main_description">Main description</label>
                 <textarea name="main_description" class="form-control" id="main_description">{{ old('main_description') }}</textarea>
                 @error('main_description')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 
@@ -48,7 +48,7 @@
                 <label for="weather_description">Weather description</label>
                 <textarea name="weather_description" class="form-control" id="weather_description">{{ old('weather_description') }}</textarea>
                 @error('weather_description')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 
@@ -58,7 +58,7 @@
                 <input name="card_description" type="text" value="{{ old('card_description') }}" class="form-control"
                     id="card_description" aria-describedby="emailHelp">
                     @error('card_description')
-                        <small style="color: red">*{{ $message }}</small>
+                        <small class="text-danger">*{{ $message }}</small>
                     @enderror
             </div>
 
@@ -67,7 +67,7 @@
                 <label for="card_photo" class="form-label">Card photo</label>
                 <input class="form-control" name="card_photo" type="file" id="card_photo" accept="image/png">
                 @error('card_photo')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
 

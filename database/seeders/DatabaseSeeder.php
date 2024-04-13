@@ -19,8 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(LaratrustSeeder::class);
-
+        // $this->call([RolesAndPermissionsSeeder::class]);
         User::factory(100)->create();
         Profile::factory(100)->create();
         Region::factory(20)->create();

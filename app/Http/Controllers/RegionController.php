@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Landmark;
 use App\Models\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class RegionController extends Controller
@@ -61,7 +62,7 @@ class RegionController extends Controller
         }
 
         Region::create([
-            'admin_id' => 1,
+            'admin_id' => Auth::user()->id,
             'type' => $request->type,
             'name' => $request->name,
             'main_description' => $request->main_description,
@@ -97,6 +98,7 @@ class RegionController extends Controller
     {
 
         request()->validate([
+            'admin_id' => Auth::user()->id,
             'type' => ['required', 'string', 'in:City,Island'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'main_description' => ['required', 'string', 'min:30'],

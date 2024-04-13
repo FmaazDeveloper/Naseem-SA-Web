@@ -16,14 +16,14 @@
                     @endforeach
                 </select>
                 @error('region')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input name="name" type="text" value="{{ $landmark->name }}" class="form-control" id="name">
                 @error('name')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
             <div class="mb-3">
@@ -34,7 +34,7 @@
                 <label for="location" class="form-label">Location</label>
                 <input name="location" type="text" value="{{ $landmark->location }}" class="form-control" id="location">
                 @error('location')
-                    <small style="color: red">*{{ $message }}</small>
+                    <small class="text-danger">*{{ $message }}</small>
                 @enderror
             </div>
             <div class="row">
@@ -43,7 +43,7 @@
                         <label for="photo" class="form-label">Photo</label>
                         <input class="form-control" name="photo" type="file" id="photo" accept="image/png">
                         @error('photo')
-                            <small style="color: red">*{{ $message }}</small>
+                            <small class="text-danger">*{{ $message }}</small>
                         @enderror
                     </div>
                 </div>

@@ -2,51 +2,40 @@
 
 @section('content')
     <div class="text-center">
-        <a href="{{ route('landmarks.create', $region->id) }}" class="btn btn-success m-3">Create landmark</a>
+        <a href="{{ route('users.create') }}" class="btn btn-success m-3">Add user</a>
     </div>
-
     <table class="table table-hover table-bordered text-center table-light shadow p-3 mb-5 bg-body-tertiary rounded">
-        <caption>
-            Number of landmarks is : {{ $landmarks->count() }} | Number of activities is : {{ $activities }}
-        </caption>
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Region</th>
                 <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Photo</th>
-                <th scope="col">Activity</th>
+                <th scope="col">Email</th>
+                <th scope="col">Permissions</th>
                 <th scope="col">Active</th>
                 <th scope="col">Time</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($landmarks as $landmark)
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $landmark->id }}</td>
-                    <td>{{ $landmark->region->name }}</td>
-                    <td>{{ $landmark->name }}</td>
-                    <td>{{ $landmark->location }}</td>
-                    <td><img src="{{ asset($landmark->photo) }}" class="rounded w-auto" alt="{{ $landmark->photo }}"
-                            width="75" height="75"></td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
                     <td>
-                        <ol>
-                            @foreach ($landmark->activities as $activity)
-                                <li>{{ $activity->description }}</li>
-                            @endforeach
-                        </ol>
+                        @foreach ($user->getDirectPermissions() as $permission)
+                            <span class="badge bg-info text-dark">{{ $permission->name }}</span>
+                        @endforeach
                     </td>
-                    <td>{{ $landmark->is_active ? "True" : "False" }}</td>
+                    <td>{{ $user->is_active ? "True" : "False" }}</td>
                     <td>
                         <small>
-                            <p>{{ 'Created : ' . $landmark->created_at }}</p>
-                            <p>{{ 'Updated : ' . $landmark->updated_at }}</p>
+                            <p>{{ 'Created : ' . $user->created_at }}</p>
+                            <p>{{ 'Updated : ' . $user->updated_at }}</p>
                         </small>
                     </td>
                     <td>
-                        <a href="{{ route('activities.index', $landmark->id) }}" class="btn btn-info m-1">
+                        {{-- <a href="{{ route('landmarks.index', $user->id) }}" class="btn btn-info">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-eye" viewBox="0 0 16 16">
                                 <path
@@ -54,7 +43,7 @@
                                 <path
                                     d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                             </svg>
-                        </a>
+                        </a> --}}
                         {{-- <a href="{{ route('landmarks.create', $region->id) }}" class="btn btn-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -64,7 +53,7 @@
                                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                 </svg>
                             </a> --}}
-                        <a href="{{ route('landmarks.edit', $landmark->id) }}" class="btn btn-warning m-1">
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path
@@ -73,10 +62,10 @@
                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg>
                         </a>
-                        <form method="post" action="{{ route('landmarks.destroy', $landmark->id) }}">
+                        <form style="display: inline" method="post" action="{{ route('users.destroy', $user->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Are you sure to delete Landmark ID # {{ $landmark->id }}?')" class="btn btn-danger m-1">
+                            <button type="submit" onclick="return confirm('Are you sure to delete {{ $user->email }}?')" class="btn btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
