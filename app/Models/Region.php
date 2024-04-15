@@ -22,6 +22,7 @@ class Region extends Model
         'is_active',
     ];
 
+    //admin
     public function admin(){
         return $this->belongsTo(User::class);
     }
@@ -39,7 +40,7 @@ class Region extends Model
     public function activity(){
         return $this->hasOne(Activity::class);
     }
-
+    //order
     public function orders(){
         return $this->hasMany(Order::class);
     }

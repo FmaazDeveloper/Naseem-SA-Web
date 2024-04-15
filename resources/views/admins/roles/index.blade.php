@@ -4,14 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col m-3">
-                <div class="card h-100">
+                <div class="card">
                     @if (session('msg'))
                         <div class="text-center alert alert-success">{{ session('msg') }}</div>
                     @endif
                     <div class="card-header">
                         <h4>
-                            Regions
-                            <a href="{{ route('regions.create') }}" class="btn btn-success float-end">Add Region</a>
+                            Roles
+                            <a href="{{ route('roles.create') }}" class="btn btn-success float-end">Add Role</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -20,50 +20,33 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Type</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Card photo</th>
-                                    <th scope="col">Landmarks</th>
-                                    <th scope="col">Active</th>
                                     <th scope="col">Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="table-group-divider">
-                                @foreach ($regions as $region)
+                            <tbody>
+                                @foreach ($roles as $role)
                                     <tr>
-                                        <td>{{ $region->id }}</td>
-                                        <td>{{ $region->admin->name }}</td>
-                                        <td>{{ $region->type }}</td>
-                                        <td>{{ $region->name }}</td>
-                                        <td><img src="{{ asset($region->card_photo) }}" class="rounded w-auto"
-                                                alt="{{ $region->card_photo }}" width="75" height="75"></td>
-                                        <td>
-                                            <ol>
-                                                @foreach ($region->landmarks as $landmark)
-                                                    <li>{{ $landmark->name }}</li>
-                                                @endforeach
-                                            </ol>
-                                        </td>
-                                        <td>{{ $region->is_active ? 'True' : 'False' }}</td>
+                                        <td>{{ $role->id }}</td>
+                                        <td>{{ $role->name }}</td>
                                         <td>
                                             <small>
-                                                <p>{{ 'Created : ' . $region->created_at }}</p>
-                                                <p>{{ 'Updated : ' . $region->updated_at }}</p>
+                                                <span>{{ 'Created : ' . $role->created_at }} |
+                                                    {{ 'Updated : ' . $role->updated_at }}</span>
                                             </small>
                                         </td>
                                         <td>
-                                            <a href="{{ route('landmarks.index', $region->id) }}" class="btn btn-info">
+                                            <a href="{{ route('roles.editPermissionToRole', $role->id) }}" class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    fill="currentColor" class="bi bi-exposure" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                                        d="M8.5 4a.5.5 0 0 0-1 0v2h-2a.5.5 0 0 0 0 1h2v2a.5.5 0 0 0 1 0V7h2a.5.5 0 0 0 0-1h-2zm-3 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" />
                                                     <path
-                                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8" />
                                                 </svg>
                                             </a>
-                                            <a href="{{ route('regions.edit', $region->id) }}" class="btn btn-warning">
+                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -73,11 +56,11 @@
                                                 </svg>
                                             </a>
                                             <form style="display: inline" method="post"
-                                                action="{{ route('regions.destroy', $region->id) }}">
+                                                action="{{ route('roles.destroy', $role->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    onclick="return confirm('Are you sure to delete Region ID #  {{ $region->id }}?')"
+                                                    onclick="return confirm('Are you sure to delete {{ $role->name }}?')"
                                                     class="btn btn-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -96,8 +79,8 @@
                     </div>
                     <div class="card-footer text-body-secondary">
                         <b>
-                            Regions : {{ $regions->count() }} | Landmarks : {{ $landmarks->count() }}
-                            | Activities : {{ $activities->count() }}
+                            Roles : {{ $roles->count() }}
+                            {{-- | Admins : {{ $admin->count() }} | Guides : {{ $guide->count() }} | Tourists : {{ $tourist->count() }} --}}
                         </b>
                     </div>
                 </div>

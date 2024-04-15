@@ -21,7 +21,7 @@ class LandmarkFactory extends Factory
             'region_id' => Region::all()->random(),
             'name' => fake()->name(),
             'description' => fake()->paragraph(2),
-            'photo' => fake()->randomElement(['zxv.png','log1.png','add.png','ad1.png']),
+            'photo' => fake()->randomElement(['images/landmarks/zxv.png','images/landmarks/log1.png','images/landmarks/add.png','images/landmarks/ad1.png']),
             'location' => fake()->city(),
             'is_active' => fake()->randomElement(['0','1']),
         ];

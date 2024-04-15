@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tourist_id')->constrained('users');
-            $table->foreignId('guide_id')->constrained('users')->nullable();
-            $table->foreignId('admin_id')->constrained('users')->nullable();
+            $table->integer('tourist_id');
+            $table->integer('guide_id');
+            $table->integer('admin_id');
             $table->integer('region_id');
             $table->integer('number_of_people');
             $table->integer('number_of_days');

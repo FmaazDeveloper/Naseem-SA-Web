@@ -21,14 +21,10 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'add user']);
         Permission::create(['name' => 'update user']);
         Permission::create(['name' => 'delete user']);
-        Permission::create(['name' => 'publish user']);
 
-        Permission::create(['name' => 'add region']);
-        Permission::create(['name' => 'update region']);
-        Permission::create(['name' => 'delete region']);
-        Permission::create(['name' => 'publish region']);
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'guide']);
+        Role::create(['name' => 'tourist']);
 
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
     }
 }

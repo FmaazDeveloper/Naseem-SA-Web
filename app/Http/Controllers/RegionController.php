@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\File;
 
 class RegionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index_edit()
     {
         $regions = Region::all();
@@ -28,20 +27,17 @@ class RegionController extends Controller
         return view('regions.index', ['regions' => $regions]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('admins.regions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
+            'admin_id' => ['exists:users,id'],
             'type' => ['required', 'string'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'main_description' => ['required', 'string', 'min:30'],
@@ -72,33 +68,27 @@ class RegionController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('regions.index_edit');
+        return to_route('regions.index_edit')->with('msg', 'Region has created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Region $region)
     {
         return view('regions.show', ['region' => $region]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Region $region)
     {
         return view('admins.regions.edit', ['region' => $region]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Region $region)
     {
 
-        request()->validate([
-            'admin_id' => Auth::user()->id,
+        $request->validate([
+            'admin_id' => ['exists:users,id'],
             'type' => ['required', 'string', 'in:City,Island'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'main_description' => ['required', 'string', 'min:30'],
@@ -126,6 +116,7 @@ class RegionController extends Controller
         }
 
         $region->update([
+            'admin_id' => Auth::user()->id,
             'type' => $request->type,
             'name' => $request->name,
             'main_description' => $request->main_description,
@@ -135,20 +126,19 @@ class RegionController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('regions.index_edit');
+        return to_route('regions.index_edit')->with('msg', 'Region has updated successfully');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(String $region_id)
+
+    public function destroy(String $id)
     {
-        $region = Region::findOrFail($region_id);
+        $region = Region::findOrFail($id);
         if (File::exists($region->card_photo)) {
             File::delete($region->card_photo);
         }
         $region->delete();
-        return to_route('regions.index_edit');
+        return to_route('regions.index_edit')->with('msg', 'Region has deleted successfully');
     }
 }
+

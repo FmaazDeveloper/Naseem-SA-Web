@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\File;
 
 class LandmarkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index(Region $region)
     {
         $landmarks = Landmark::where('region_id', '=' ,$region->id)->get();
@@ -20,21 +19,17 @@ class LandmarkController extends Controller
         return view('admins.landmarks.index', ['landmarks' => $landmarks, 'region' => $region, 'activities' => $activities]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create(Region $region_id)
     {
         $regions = Region::all();
         return view('admins.landmarks.create', ['regions' => $regions, 'region_landmark' => $region_id]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'region_id' => ['required', 'exists:regions,id'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
@@ -62,32 +57,26 @@ class LandmarkController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('landmarks.index', $request->region_id);
+        return to_route('landmarks.index', $request->region_id)->with('msg', 'Landmark has created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     // public function show(Landmark $landmark)
     // {
     //     return view('landmarks.show', ['landmark' => $landmark]);
     // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Landmark $landmark)
     {
         $regions = Region::all();
         return view('admins.landmarks.edit', ['landmark' => $landmark, 'regions' => $regions]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Landmark $landmark)
     {
-        request()->validate([
+        $request->validate([
             'region_id' => ['required', 'exists:regions,id'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
@@ -123,12 +112,10 @@ class LandmarkController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('landmarks.index', $request->region_id);
+        return to_route('landmarks.index', $request->region_id)->with('msg', 'Landmark has updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(String $landmark_id)
     {
         $landmark = Landmark::findOrFail($landmark_id);
@@ -137,6 +124,7 @@ class LandmarkController extends Controller
         }
         $landmark->delete();
         $region = $landmark->region_id;
-        return to_route('landmarks.index',['region'=>$region]);
+        return to_route('landmarks.index',['region'=>$region])->with('msg', 'Landmark has deleted successfully');
     }
 }
+

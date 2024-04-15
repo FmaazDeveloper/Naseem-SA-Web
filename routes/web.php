@@ -4,7 +4,9 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandmarkController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -25,19 +27,24 @@ Route::group(
         'middleware' => 'auth',
     ],
     function () {
-        Route::get('/profile', [HomeController::class, 'index'])->name('profile.index');
+        Route::get('/profile', [HomeController::class, 'index'])->name('profile.index')->middleware('verified');
     }
 );
 
 Route::group(
     [
-        'prefix' => 'admin/dashboard',
+        'prefix' => 'admin/',
         'middleware' => 'role:admin',
     ],
     function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-        Route::resource('users',UserController::class,);
+        Route::resource('users',UserController::class);
+
+        Route::resource('permissions',PermissionController::class);
+        Route::resource('roles',RoleController::class);
+        Route::get('roles/{role}/edit-permissions',[RoleController::class,'editPermissionToRole'])->name('roles.editPermissionToRole');
+        Route::put('roles/{role}/edit-permissions',[RoleController::class,'updatePermissionToRole'])->name('roles.updatePermissionToRole');
 
         //regions
         Route::get('/regions', [RegionController::class, 'index_edit'])->name('regions.index_edit');

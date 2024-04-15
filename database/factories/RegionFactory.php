@@ -24,7 +24,7 @@ class RegionFactory extends Factory
             'main_description' => fake()->paragraph(4),
             'weather_description' => fake()->paragraph(2),
             'card_description' => fake()->paragraph(2),
-            'card_photo' => fake()->randomElement(['zxv.png','log1.png','add.png','ad1.png']),
+            'card_photo' => fake()->randomElement(['images/regions/zxv.png','images/regions/log1.png','images/regions/add.png','images/regions/ad1.png']),
             'is_active' => fake()->randomElement(['0','1']),
         ];
     }

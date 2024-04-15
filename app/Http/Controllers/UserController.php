@@ -6,35 +6,39 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index()
     {
         $users = User::all();
-        return view('admins.dashboards.users.index',['users' => $users]);
+        $admin = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'admin')->toArray())->count();
+        $guide = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'guide')->toArray())->count();
+        $tourist = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'tourist')->toArray())->count();
+        return view('admins.users.index',['users' => $users, 'admin' => $admin, 'guide' => $guide, 'tourist' => $tourist]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
+        $roles = Role::all();
         $permissions = Permission::all();
-        return view('admins.dashboards.users.create',['permissions' => $permissions]);
+        return view('admins.users.create',['roles' => $roles, 'permissions' => $permissions]);
     }
+
 
     public function store(Request $request)
     {
 
-        request()->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'is_active' => ['nullable', 'in:1,0'],
+            'role' => ['required', 'exists:roles,name'],
         ]);
         try{
 
@@ -44,7 +48,8 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'is_active' => $request->is_active ? $request->is_active : 0,
             ]);
-            $user->syncPermissions($request->permissions,[]);
+            $user->assignRole($request->role);
+            $user->givePermissionTo($user->getPermissionsViaRoles());
             return to_route('users.index')->with('msg', 'User has created successfully');
         }
         catch (\Exception $e){
@@ -52,64 +57,64 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
+        $roles = Role::all();
         $user = User::findOrFail($id);
         $permissions = Permission::all();
-        return view('admins.dashboards.users.edit',['user' => $user, 'permissions' => $permissions]);
+        return view('admins.users.edit',['user' => $user, 'roles' => $roles , 'permissions' => $permissions]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        request()->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'is_active' => ['nullable', 'in:1,0'],
+            'role' => ['required', 'exists:roles,name'],
         ]);
         try{
 
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
                 'is_active' => $request->is_active ? $request->is_active : 0,
             ]);
-            $user->syncPermissions($request->permissions,[]);
+
+            $user->syncRoles($request->role);
+            $user->syncPermissions($user->getPermissionsViaRoles());
+
             return to_route('users.index')->with('msg', 'User has updated successfully');
         }
         catch (\Exception $e){
-            return redirect()->back()->with('msg', 'User not updated!\nError:'.$e->getMessage());
+            return redirect()->back()->with('msg', 'User not updated! | Error:'.$e->getMessage());
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         try{
+
             $user = User::findOrFail($id);
             $user->delete();
             $user->revokePermissionTo($user->permissions);
+            $user->syncRoles([]);
+
             return to_route('users.index')->with('msg', 'User has deleted successfully');
+
         }catch (\Exception $e){
-            return redirect()->back()->with('msg', 'User not deleted!\nError:'.$e->getMessage());
+            return redirect()->back()->with('msg', 'User not deleted! | Error:'.$e->getMessage());
         }
     }
 }
+

@@ -8,32 +8,26 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Landmark $landmark)
     {
         $activities = Activity::all();
         return view('admins.activities.index', ['activities' => $activities,'landmark'=>$landmark]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create(Landmark $landmark_id)
     {
         $landmarks = Landmark::all();
         return view('admins.activities.create', ['landmarks' => $landmarks, 'landmark_activity' => $landmark_id]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $landmark = Landmark::findOrFail($request->landmark_id);
 
-        request()->validate([
+        $request->validate([
             // 'region_id' => ['required', 'exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
@@ -47,34 +41,28 @@ class ActivityController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('activities.index',$request->landmark_id);
+        return to_route('activities.index',$request->landmark_id)->with('msg', 'Activity has created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     // public function show(Activity $activity)
     // {
     //     return view('activities.show', ['activity' => $activity]);
     // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Activity $activity)
     {
         $landmarks = Landmark::all();
         return view('admins.activities.edit', ['activity' => $activity, 'landmarks' => $landmarks]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Activity $activity)
     {
         $landmark = Landmark::findOrFail($request->landmark_id);
 
-        request()->validate([
+        $request->validate([
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
             'is_active' => ['nullable', 'in:1,0'],
@@ -87,17 +75,15 @@ class ActivityController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('activities.index',$request->landmark_id);
+        return to_route('activities.index',$request->landmark_id)->with('msg', 'Activity has updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(String $activity_id)
     {
         $activity = Activity::findOrFail($activity_id);
         $landmark = $activity->landmark_id;
         $activity->delete();
-        return to_route('activities.index', ['landmark' => $landmark]);
+        return to_route('activities.index', ['landmark' => $landmark])->with('msg', 'Activity has deleted successfully');
     }
 }
