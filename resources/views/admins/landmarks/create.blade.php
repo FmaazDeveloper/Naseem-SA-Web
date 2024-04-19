@@ -5,31 +5,42 @@
         <div class="row">
             <div class="col m-3">
                 <div class="card h-100">
+                    @if (session('msg'))
+                        <div class="text-center alert alert-success">{{ session('msg') }}</div>
+                    @endif
                     <div class="card-header">
                         <h4>
                             Create Landmark
-                            <a href="{{ route('landmarks.index',$landmark->region->id) }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('landmarks.index', $administrative_region->region->id) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('landmarks.store') }}">
+                        <form method="post" action="{{ route('landmarks.store') }}" enctype="multipart/form-data">
 
                             @csrf
 
                             <div class="mb-3">
-                                <label for="region" class="form-label">Select region</label>
+                                <label for="administrative_region_id" class="form-label">Administrative region</label>
+                                <input type="text" name="administrative_region_id"
+                                    value="{{ $administrative_region->id . ' - ' . $administrative_region->name }}"
+                                    class="form-control" id="administrative_region_id" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="region_id" class="form-label">Select region</label>
                                 <select class="form-select" name="region_id" aria-label="Default select example"
                                     id="region">
                                     <option selected disabled>Select region</option>
-                                    @foreach ($regions as $region)
-                                        <option value="{{ $region->id }}" @selected($region->id == $region_landmark->id)>
+                                    @foreach ($administrative_region->regions as $region)
+                                        <option value="{{ $region->id }}">
                                             {{ $region->id . ' - ' . $region->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('region')
+                                @error('region_id')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
                             </div>
+
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input name="name" type="text" value="{{ old('name') }}" class="form-control"

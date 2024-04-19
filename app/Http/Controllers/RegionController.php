@@ -3,41 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\AdministrativeRegion;
 use App\Models\Landmark;
 use App\Models\Region;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class RegionController extends Controller
 {
 
 
-    public function index_edit()
+    public function index(AdministrativeRegion $administrative_region)
     {
-        $regions = Region::all();
-        $landmarks = Landmark::all();
-        $activities = Activity::all();
-        return view('admins.regions.index', ['regions' => $regions, 'landmarks' => $landmarks, 'activities' => $activities]);
-    }
-    public function index()
-    {
-        $regions = Region::all();
-        // return view('admins.regions.index', ['regions' => $regions]);
-        return view('regions.index', ['regions' => $regions]);
+        $regions = Region::where('administrative_region_id', '=' ,$administrative_region->id)->get();
+        $landmarks = Landmark::where('administrative_region_id', '=' ,$administrative_region->id)->get();
+        $activities = Activity::where('administrative_region_id', '=' ,$administrative_region->id)->get();
+        return view('admins.regions.index', ['administrative_region' => $administrative_region, 'regions' => $regions, 'landmarks' => $landmarks, 'activities' => $activities]);
     }
 
 
-    public function create()
+    public function create(AdministrativeRegion $administrative_region_id)
     {
-        return view('admins.regions.create');
+        $administrative_regions = AdministrativeRegion::all();
+        return view('admins.regions.create', ['administrative_regions' => $administrative_regions, 'administrative_region_region' => $administrative_region_id]);
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'admin_id' => ['exists:users,id'],
+            'administrative_region_id' => ['required', 'exists:administrative_regions,id'],
             'type' => ['required', 'string'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'main_description' => ['required', 'string', 'min:30'],
@@ -51,14 +46,14 @@ class RegionController extends Controller
             $file = $request->file('card_photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . time() .'.' . $extension;
+            $file_name = $request->name . time() . '.' . $extension;
 
             $path = 'images/regions/';
             $file->move($path, $file_name);
         }
 
         Region::create([
-            'admin_id' => Auth::user()->id,
+            'administrative_region_id' => $request->administrative_region_id,
             'type' => $request->type,
             'name' => $request->name,
             'main_description' => $request->main_description,
@@ -68,7 +63,7 @@ class RegionController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('regions.index_edit')->with('msg', 'Region has created successfully');
+        return to_route('regions.index',$request->administrative_region_id)->with('msg', 'Region has created successfully');
     }
 
 
@@ -80,7 +75,8 @@ class RegionController extends Controller
 
     public function edit(Region $region)
     {
-        return view('admins.regions.edit', ['region' => $region]);
+        $administrative_regions = AdministrativeRegion::all();
+        return view('admins.regions.edit', ['region' => $region, 'administrative_regions' => $administrative_regions]);
     }
 
 
@@ -88,7 +84,7 @@ class RegionController extends Controller
     {
 
         $request->validate([
-            'admin_id' => ['exists:users,id'],
+            'administrative_region_id' => ['required', 'exists:administrative_regions,id'],
             'type' => ['required', 'string', 'in:City,Island'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'main_description' => ['required', 'string', 'min:30'],
@@ -104,7 +100,7 @@ class RegionController extends Controller
             $file = $request->file('card_photo');
             $extension = $file->getClientOriginalExtension();
 
-            $file_name = $request->name . time() .'.' . $extension;
+            $file_name = $request->name . time() . '.' . $extension;
 
             $path = 'images/regions/';
             $file->move($path, $file_name);
@@ -116,7 +112,7 @@ class RegionController extends Controller
         }
 
         $region->update([
-            'admin_id' => Auth::user()->id,
+            'administrative_region_id' => $request->administrative_region_id,
             'type' => $request->type,
             'name' => $request->name,
             'main_description' => $request->main_description,
@@ -126,8 +122,7 @@ class RegionController extends Controller
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
-        return to_route('regions.index_edit')->with('msg', 'Region has updated successfully');
-
+        return to_route('regions.index',$request->administrative_region_id)->with('msg', 'Region has updated successfully');
     }
 
 
@@ -138,7 +133,6 @@ class RegionController extends Controller
             File::delete($region->card_photo);
         }
         $region->delete();
-        return to_route('regions.index_edit')->with('msg', 'Region has deleted successfully');
+        return to_route('regions.index',$region->administrative_region->id)->with('msg', 'Region has deleted successfully');
     }
 }
-

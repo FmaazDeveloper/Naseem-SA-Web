@@ -22,10 +22,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([RolesAndPermissionsSeeder::class]);
         $this->call([UserSeeder::class]);
+        $this->call([AdministrativeRegionSeeder::class]);
 
         User::factory(10)->create();
         Profile::factory(10)->create();
-        Region::factory(20)->create();
+        Region::factory(50)->create();
         Landmark::factory(100)->create();
         Activity::factory(150)->create();
         Order::factory(30)->create();

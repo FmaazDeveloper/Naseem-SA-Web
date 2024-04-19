@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\AdministrativeRegion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,7 @@ class RegionFactory extends Factory
     public function definition(): array
     {
         return [
-            'admin_id' => User::all()->random(),
+            'administrative_region_id' => AdministrativeRegion::all()->random(),
             'type' => fake()->randomElement(['City','Island']),
             'name' => fake()->city(),
             'main_description' => fake()->paragraph(4),

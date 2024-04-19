@@ -67,8 +67,8 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item"
-                                        href="{{ Auth::user()->hasRole('admin') ? route('dashboard.index') : route('profile.index') }}">
-                                        {{ Auth::user()->hasRole('admin') ? __('Dashboard') : __('Profile') }}
+                                        href="{{ Auth::user()->hasRole('manager|super-admin|admin') ? route('dashboard.index') : route('profile.index') }}">
+                                        {{ Auth::user()->hasRole('manager|super-admin|admin') ? __('Dashboard') : __('Profile') }}
                                     </a>
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item text-body-danger" href="{{ route('logout') }}"

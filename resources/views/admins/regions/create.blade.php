@@ -8,13 +8,28 @@
                     <div class="card-header">
                         <h4>
                             Create Region
-                            <a href="{{ route('regions.index_edit') }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('regions.index',$administrative_region_region) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('regions.store') }}">
+                        <form method="post" action="{{ route('regions.store') }}" enctype="multipart/form-data">
 
                             @csrf
+
+                            <div class="mb-3">
+                                <label for="administrative_region_id" class="form-label">Select administrative region</label>
+                                <select class="form-select" name="administrative_region_id" aria-label="Default select example"
+                                    id="administrative_region_id">
+                                    <option selected disabled>Select administrative_region</option>
+                                    @foreach ($administrative_regions as $administrative_region)
+                                        <option value="{{ $administrative_region->id }}" @selected($administrative_region->id == $administrative_region_region->id)>
+                                            {{ $administrative_region->id . ' - ' . $administrative_region->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('administrative_region_id')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
+                            </div>
 
                             <div class="row">
                                 <div class="col">
@@ -80,8 +95,7 @@
 
                             <div class="mb-3">
                                 <label for="card_photo" class="form-label">Card photo</label>
-                                <input class="form-control" name="card_photo" type="file" id="card_photo"
-                                    accept="image/png">
+                                <input class="form-control" name="card_photo" type="file" id="card_photo" accept="image/png">
                                 @error('card_photo')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror

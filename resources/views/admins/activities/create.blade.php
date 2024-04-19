@@ -18,6 +18,13 @@
                             @csrf
 
                             <div class="mb-3">
+                                <label for="administrative_region_id" class="form-label">Administrative region</label>
+                                <input type="text"
+                                    value="{{ $landmark_activity->region->administrative_region->id . ' - ' . $landmark_activity->region->administrative_region->name }}"
+                                    class="form-control" id="administrative_region_id" disabled>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="region_id" class="form-label">Region</label>
                                 <input type="text"
                                     value="{{ $landmark_activity->region->id . ' - ' . $landmark_activity->region->name }}"

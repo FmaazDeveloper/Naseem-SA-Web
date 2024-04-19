@@ -12,7 +12,7 @@ class Region extends Model
     protected $table ='regions';
 
     protected $fillable = [
-        'admin_id',
+        'administrative_region_id',
         'type',
         'name',
         'main_description',
@@ -22,9 +22,9 @@ class Region extends Model
         'is_active',
     ];
 
-    //admin
-    public function admin(){
-        return $this->belongsTo(User::class);
+    //administrative_region
+    public function administrative_region(){
+        return $this->belongsTo(AdministrativeRegion::class);
     }
     //landmark
     public function landmarks(){
@@ -41,6 +41,9 @@ class Region extends Model
         return $this->hasOne(Activity::class);
     }
     //order
+    public function order(){
+        return $this->hasOne(Order::class);
+    }
     public function orders(){
         return $this->hasMany(Order::class);
     }

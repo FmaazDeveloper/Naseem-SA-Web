@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="{{ route('regions.index_edit') }}">
+                        <a href="{{ route('administrative_regions.index') }}">
                             <div class="card text-bg-secondary m-3">
                                 <div class="card-header">Managing content</div>
                                 <div class="card-body">

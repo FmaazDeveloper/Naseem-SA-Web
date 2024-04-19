@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('landmarks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('administrative_region_id')->constrained('administrative_regions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('region_id')->constrained('regions')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->text('description');

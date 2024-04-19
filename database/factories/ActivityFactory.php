@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\AdministrativeRegion;
 use App\Models\Region;
 use App\Models\Landmark;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,6 +20,7 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
+            'administrative_region_id' => AdministrativeRegion::all()->random(),
             'region_id' => Region::all()->random(),
             'landmark_id' => Landmark::all()->random(),
             'description' => fake()->paragraph(2),

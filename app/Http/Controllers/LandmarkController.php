@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\AdministrativeRegion;
 use App\Models\Landmark;
 use App\Models\Region;
 use Illuminate\Http\Request;
@@ -14,22 +15,24 @@ class LandmarkController extends Controller
 
     public function index(Region $region)
     {
-        $landmarks = Landmark::where('region_id', '=' ,$region->id)->get();
-        $activities = Activity::where('region_id', '=' ,$region->id)->count();
-        return view('admins.landmarks.index', ['landmarks' => $landmarks, 'region' => $region, 'activities' => $activities]);
+        $activities = Activity::where('region_id', '=' ,$region->id)->get();
+        return view('admins.landmarks.index', ['region' => $region, 'activities' => $activities]);
     }
 
 
-    public function create(Region $region_id)
+    public function create(String $administrative_region_id)
     {
-        $regions = Region::all();
-        return view('admins.landmarks.create', ['regions' => $regions, 'region_landmark' => $region_id]);
+        $administrative_region = AdministrativeRegion::find($administrative_region_id);
+        return view('admins.landmarks.create', ['administrative_region' => $administrative_region]);
     }
 
 
     public function store(Request $request)
     {
+        $region = Region::findOrFail($request->region_id);
+
         $request->validate([
+            'administrative_region_id' => ['exists:administrative_regions,id'],
             'region_id' => ['required', 'exists:regions,id'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
@@ -49,6 +52,7 @@ class LandmarkController extends Controller
         }
 
         Landmark::create([
+            'administrative_region_id' => $region->administrative_region_id,
             'region_id' => $request->region_id,
             'name' => $request->name,
             'description' => $request->description,
@@ -76,7 +80,10 @@ class LandmarkController extends Controller
 
     public function update(Request $request, Landmark $landmark)
     {
+        $region = Region::findOrFail($request->region_id);
+
         $request->validate([
+            'administrative_region_id' => ['exists:administrative_regions,id'],
             'region_id' => ['required', 'exists:regions,id'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
@@ -104,6 +111,7 @@ class LandmarkController extends Controller
         }
 
         $landmark->update([
+            'administrative_region_id' => $region->administrative_region_id,
             'region_id' => $request->region_id,
             'name' => $request->name,
             'description' => $request->description,

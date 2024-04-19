@@ -19,6 +19,13 @@
                             @method('PUT')
 
                             <div class="mb-3">
+                                <label for="administrative_region_id" class="form-label">Administrative region</label>
+                                <input type="text"
+                                    value="{{ $activity->region->administrative_region->id . ' - ' . $activity->region->administrative_region->name }}"
+                                    class="form-control" id="administrative_region_id" disabled>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="region_id" class="form-label">Region</label>
                                 <input type="text"
                                     value="{{ $activity->landmark->region->id . ' - ' . $activity->landmark->region->name }}"

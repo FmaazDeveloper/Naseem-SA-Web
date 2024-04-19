@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('users')->nullable()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('administrative_region_id')->constrained('administrative_regions')->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type', ['City', 'Island']);
             $table->string('name');
             $table->text('main_description');

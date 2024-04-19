@@ -12,6 +12,7 @@ class Landmark extends Model
     protected $table = 'landmarks';
 
     protected $fillable = [
+        'administrative_region_id',
         'region_id',
         'name',
         'description',
@@ -19,7 +20,10 @@ class Landmark extends Model
         'location',
         'is_active',
     ];
-
+    
+    public function administrative_region(){
+        return $this->belongsTo(AdministrativeRegion::class);
+    }
     public function region(){
         return $this->belongsTo(Region::class);
     }

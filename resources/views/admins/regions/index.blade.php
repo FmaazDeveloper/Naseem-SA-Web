@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <h4>
                             Regions
-                            <a href="{{ route('regions.create') }}" class="btn btn-success float-end">Add Region</a>
+                            <a href="{{ route('regions.create',$administrative_region->id) }}" class="btn btn-success float-end">Add Region</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Creator</th>
+                                    <th scope="col">Administrative region</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Card photo</th>
@@ -34,7 +34,7 @@
                                 @foreach ($regions as $region)
                                     <tr>
                                         <td>{{ $region->id }}</td>
-                                        <td>{{ $region->admin->name }}</td>
+                                        <td>{{ $region->administrative_region->name }}</td>
                                         <td>{{ $region->type }}</td>
                                         <td>{{ $region->name }}</td>
                                         <td><img src="{{ asset($region->card_photo) }}" class="rounded w-auto"

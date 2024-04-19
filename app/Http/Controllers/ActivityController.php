@@ -28,13 +28,15 @@ class ActivityController extends Controller
         $landmark = Landmark::findOrFail($request->landmark_id);
 
         $request->validate([
-            // 'region_id' => ['required', 'exists:regions,id'],
+            'administrative_region_id' => ['exists:administrative_regions,id'],
+            'region_id' => ['exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         Activity::create([
+            'administrative_region_id' => $landmark->region->administrative_region_id,
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
@@ -63,12 +65,15 @@ class ActivityController extends Controller
         $landmark = Landmark::findOrFail($request->landmark_id);
 
         $request->validate([
+            'administrative_region_id' => ['exists:administrative_regions,id'],
+            'region_id' => ['exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 
         $activity->update([
+            'administrative_region_id' => $landmark->region->administrative_region_id,
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,

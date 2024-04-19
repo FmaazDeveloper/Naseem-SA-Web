@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <h4>
                             Landmarks
-                            <a href="{{ route('landmarks.create', $region->id) }}" class="btn btn-success float-end">Add
+                            <a href="{{ route('landmarks.create',[$region->administrative_region->id, $region->id]) }}" class="btn btn-success float-end">Add
                                 Landmark</a>
                         </h4>
                     </div>
@@ -32,7 +32,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                @foreach ($landmarks as $landmark)
+                                @foreach ($region->landmarks as $landmark)
                                     <tr>
                                         <td>{{ $landmark->id }}</td>
                                         <td>{{ $landmark->region->name }}</td>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="card-footer text-body-secondary">
                         <b>
-                            Landmarks : {{ $landmarks->count() }} | Activities : {{ $activities }}
+                            Landmarks : {{ $region->landmarks->count() }} | Activities : {{ $activities->count() }}
                         </b>
                     </div>
                 </div>

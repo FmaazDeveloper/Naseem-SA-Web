@@ -10,14 +10,29 @@
                     <div class="card-header">
                         <h4>
                             Edit Region
-                            <a href="{{ route('regions.index_edit') }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('regions.index',$region->administrative_region->id) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('regions.update', $region->id) }}">
+                        <form method="post" action="{{ route('regions.update', $region->id) }}" enctype="multipart/form-data">
 
                             @csrf
                             @method('PUT')
+
+                            <div class="mb-3">
+                                <label for="administrative_region_id" class="form-label">Select administrative region</label>
+                                <select class="form-select" name="administrative_region_id" aria-label="Default select example"
+                                    id="administrative_region_id">
+                                    <option selected disabled>Select administrative_region</option>
+                                    @foreach ($administrative_regions as $administrative_region)
+                                        <option value="{{ $administrative_region->id }}" @selected($administrative_region->id == $region->administrative_region->id)>
+                                            {{ $administrative_region->id . ' - ' . $administrative_region->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('administrative_region_id')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
+                            </div>
 
                             <div class="row">
                                 <div class="col">
