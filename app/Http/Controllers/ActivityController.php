@@ -11,7 +11,7 @@ class ActivityController extends Controller
 
     public function index(Landmark $landmark)
     {
-        $activities = Activity::all();
+        $activities = Activity::where('landmark_id', '=' , $landmark)->paginate(10);
         return view('admins.activities.index', ['activities' => $activities,'landmark'=>$landmark]);
     }
 

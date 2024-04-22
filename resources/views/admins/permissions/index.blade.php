@@ -66,6 +66,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination justify-content-center">
+                            {{ $permissions->links() }}
+                        </div>
                     </div>
                     <div class="card-footer text-body-secondary">
                         <b>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,11 +15,11 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         $admin = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'admin')->toArray())->count();
         $guide = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'guide')->toArray())->count();
         $tourist = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'tourist')->toArray())->count();
-        return view('admins.users.index',['users' => $users, 'admin' => $admin, 'guide' => $guide, 'tourist' => $tourist]);
+        return view('admins.users.index', ['users' => $users, 'admin' => $admin, 'guide' => $guide, 'tourist' => $tourist]);
     }
 
 
@@ -26,7 +27,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('admins.users.create',['roles' => $roles, 'permissions' => $permissions]);
+        return view('admins.users.create', ['roles' => $roles, 'permissions' => $permissions]);
     }
 
 
@@ -40,7 +41,7 @@ class UserController extends Controller
             'is_active' => ['nullable', 'in:1,0'],
             'role' => ['required', 'exists:roles,name'],
         ]);
-        try{
+        try {
 
             $user = User::create([
                 'name' => $request->name,
@@ -50,10 +51,10 @@ class UserController extends Controller
             ]);
             $user->assignRole($request->role);
             $user->givePermissionTo($user->getPermissionsViaRoles());
+
             return to_route('users.index')->with('msg', 'User has created successfully');
-        }
-        catch (\Exception $e){
-            return redirect()->back()->with('msg', 'User not registered!\nError:'.$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('msg', 'User not registered!\nError:' . $e->getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ class UserController extends Controller
         $roles = Role::all();
         $user = User::findOrFail($id);
         $permissions = Permission::all();
-        return view('admins.users.edit',['user' => $user, 'roles' => $roles , 'permissions' => $permissions]);
+        return view('admins.users.edit', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions]);
     }
 
 
@@ -82,7 +83,7 @@ class UserController extends Controller
             'is_active' => ['nullable', 'in:1,0'],
             'role' => ['required', 'exists:roles,name'],
         ]);
-        try{
+        try {
 
             $user->update([
                 'name' => $request->name,
@@ -94,16 +95,15 @@ class UserController extends Controller
             $user->syncPermissions($user->getPermissionsViaRoles());
 
             return to_route('users.index')->with('msg', 'User has updated successfully');
-        }
-        catch (\Exception $e){
-            return redirect()->back()->with('msg', 'User not updated! | Error:'.$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('msg', 'User not updated! | Error:' . $e->getMessage());
         }
     }
 
 
     public function destroy(string $id)
     {
-        try{
+        try {
 
             $user = User::findOrFail($id);
             $user->delete();
@@ -111,10 +111,8 @@ class UserController extends Controller
             $user->syncRoles([]);
 
             return to_route('users.index')->with('msg', 'User has deleted successfully');
-
-        }catch (\Exception $e){
-            return redirect()->back()->with('msg', 'User not deleted! | Error:'.$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('msg', 'User not deleted! | Error:' . $e->getMessage());
         }
     }
 }
-

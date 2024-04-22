@@ -32,7 +32,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                @foreach ($region->landmarks as $landmark)
+                                @foreach ($landmarks as $landmark)
                                     <tr>
                                         <td>{{ $landmark->id }}</td>
                                         <td>{{ $landmark->region->name }}</td>
@@ -95,10 +95,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination justify-content-center">
+                            {{ $landmarks->links() }}
+                        </div>
                     </div>
                     <div class="card-footer text-body-secondary">
                         <b>
-                            Landmarks : {{ $region->landmarks->count() }} | Activities : {{ $activities->count() }}
+                            Landmarks : {{ $landmarks->count() }} | Activities : {{ $activities->count() }}
                         </b>
                     </div>
                 </div>

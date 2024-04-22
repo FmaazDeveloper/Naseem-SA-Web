@@ -4,9 +4,9 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdministrativeRegionController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandmarkController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -19,7 +19,8 @@ Auth::routes();
 
 //contents
 Route::get('/{administrative_region_id?}', [ContentController::class, 'index'])->name('contents.index');
-Route::get('/home/regions/{administrative_region_id?}', [ContentController::class, 'show'])->name('contents.show');
+Route::get('/home/regions/{administrative_region_id?}', [ContentController::class, 'regions'])->name('contents.regions');
+Route::get('/home/landmarks/{region_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');
 
 
 //profile routes
@@ -29,7 +30,11 @@ Route::group(
         'middleware' => 'auth',
     ],
     function () {
-        Route::get('/profile', [HomeController::class, 'index'])->name('profile.index');
+        Route::get('/profile/{user_id}', [ProfileController::class, 'index'])->name('profiles.index');
+        Route::get('/profile/create/{user_id}', [ProfileController::class, 'create'])->name('profiles.create');
+        Route::post('/profile', [ProfileController::class, 'store'])->name('profiles.store');
+        Route::get('/profiles/{user_id}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
+        Route::put('/profiles/{user_id}', [ProfileController::class, 'update'])->name('profiles.update');
     }
 );
 //admin routes
@@ -40,7 +45,7 @@ Route::group(
     ],
     function () {
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
 
         Route::group([
             'middleware' => ['role:manager|super-admin'],
@@ -113,5 +118,3 @@ Route::group(
         //end activities routes
     }
 );
-
-

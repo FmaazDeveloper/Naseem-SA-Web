@@ -41,7 +41,7 @@
         }
     </style>
 
-    <div class="container">
+    <div class="container p-3">
         <div class="row">
             <div class="col">
                 <div class="font-sans antialiased dark:bg-black dark:text-white/50">
@@ -204,33 +204,48 @@
                 </div>
             </div>
 
-            <div class="col text-center">
+            <div class="col text-center m-3 p-3">
                 @if ($regions)
+                    @if ($administrative_region_id)
+                        <h4 class="p-1">{{ $administrative_region_id->name }}</h4>
+                    @endif
                     <ol>
                         @foreach ($regions as $region)
-                            @if ($region->is_active)
-                                <li>
-                                    <h6>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="{{ asset($region->card_photo) }}" class="rounded"
-                                                    alt="{{ $region->card_photo }}" width="50" height="50"
-                                                    !important>
+                            <a class="link-dark link-offset-2 link-underline-opacity-100-hover link-underline-primary"
+                                href="{{ route('contents.regions', $region->id) }}">
+                                @if ($region->is_active)
+                                    <li>
+                                        <h6>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <img src="{{ asset($region->card_photo) }}" class="rounded"
+                                                        alt="{{ $region->card_photo }}" width="50" height="50"
+                                                        !important>
+                                                </div>
+                                                <div class="col-9">
+                                                    {{ $region->name }}
+                                                </div>
                                             </div>
-                                            <div class="col-8">
-                                                {{ $region->name }}
-                                            </div>
-                                        </div>
-                                    </h6>
-                                </li>
-                            @endif
+                                        </h6>
+                                    </li>
+                                @endif
+                            </a>
                         @endforeach
-                    </ol>
-                    @if ($regions->count() > 0)
-                        <a href="{{ route('contents.show', $administrative_region_id) }}">
-                            <h6>View more -></h6>
+                @endif
+                </ol>
+                @if ($regions->count() > 0)
+                    <h6>
+                        <a class="icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;"
+                            href="{{ route('contents.regions', $administrative_region_id) }}">
+                            View more
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                                <use xlink:href="#arrow-right"></use>
+                            </svg>
                         </a>
-                    @endif
+                    </h6>
                 @endif
 
             </div>

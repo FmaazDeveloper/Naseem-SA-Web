@@ -15,8 +15,9 @@ class LandmarkController extends Controller
 
     public function index(Region $region)
     {
+        $landmarks = Landmark::where('region_id', '=' ,$region->id)->paginate(10);
         $activities = Activity::where('region_id', '=' ,$region->id)->get();
-        return view('admins.landmarks.index', ['region' => $region, 'activities' => $activities]);
+        return view('admins.landmarks.index', ['region' => $region, 'landmarks' => $landmarks , 'activities' => $activities]);
     }
 
 

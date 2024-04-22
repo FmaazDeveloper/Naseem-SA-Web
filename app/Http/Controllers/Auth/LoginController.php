@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/profile';
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasRole(['manager', 'super-admin', 'admin'])) {
+            return redirect()->route('dashboards.index');
+        } else {
+            return redirect()->route('profiles.index',$user->id);
+        }
+    }
 
     /**
      * Create a new controller instance.

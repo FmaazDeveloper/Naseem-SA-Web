@@ -19,10 +19,11 @@ class ProfileFactory extends Factory
     {
         return [
             'user_id' => User::all()->random(),
-            'nationality' => fake()->country(),
+            'photo' => fake()->randomElement(['images/profiles/Al-Baha.png', 'images/profiles/Riyadh.png', 'images/profiles/Makkah.png', 'images/profiles/Jazan.png',]),
             'phone_number' => fake()->unique()->phoneNumber(),
             'age' => fake()->numberBetween(18,100),
             'gender' => fake()->randomElement(['Male', 'Female']),
+            'nationality' => fake()->country(),
             'language' => fake()->languageCode(),
         ];
     }

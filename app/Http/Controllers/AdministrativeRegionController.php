@@ -16,7 +16,7 @@ class AdministrativeRegionController extends Controller
 
     public function index()
     {
-        $administrative_regions = AdministrativeRegion::all();
+        $administrative_regions = AdministrativeRegion::paginate(10);
         $regions = Region::all();
         $landmarks = Landmark::all();
         $activities = Activity::all();

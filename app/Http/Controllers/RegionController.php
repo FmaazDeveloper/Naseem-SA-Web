@@ -15,7 +15,7 @@ class RegionController extends Controller
 
     public function index(AdministrativeRegion $administrative_region)
     {
-        $regions = Region::where('administrative_region_id', '=' ,$administrative_region->id)->get();
+        $regions = Region::where('administrative_region_id', '=' ,$administrative_region->id)->paginate(10);
         $landmarks = Landmark::where('administrative_region_id', '=' ,$administrative_region->id)->get();
         $activities = Activity::where('administrative_region_id', '=' ,$administrative_region->id)->get();
         return view('admins.regions.index', ['administrative_region' => $administrative_region, 'regions' => $regions, 'landmarks' => $landmarks, 'activities' => $activities]);
