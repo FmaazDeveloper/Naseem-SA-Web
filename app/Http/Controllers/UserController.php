@@ -38,8 +38,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_active' => ['nullable', 'in:1,0'],
             'role' => ['required', 'exists:roles,name'],
+            'is_active' => ['nullable', 'in:1,0'],
         ]);
         try {
 
@@ -47,8 +47,14 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role' => $request->role,
                 'is_active' => $request->is_active ? $request->is_active : 0,
             ]);
+
+            $user->profile()->create([
+                'user_id' => $user->id,
+            ]);
+
             $user->assignRole($request->role);
             $user->givePermissionTo($user->getPermissionsViaRoles());
 
@@ -88,6 +94,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'role' => $request->role,
                 'is_active' => $request->is_active ? $request->is_active : 0,
             ]);
 

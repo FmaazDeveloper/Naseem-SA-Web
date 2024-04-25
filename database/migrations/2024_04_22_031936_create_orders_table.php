@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('tourist_id');
-            $table->integer('guide_id');
-            $table->integer('admin_id');
-            $table->integer('region_id');
-            $table->integer('number_of_people');
-            $table->integer('number_of_days');
-            $table->enum('status', ['Active', 'Pending', 'Completed', 'Canceled']);
+            $table->foreignId('tourist_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('guide_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('region_id')->constrained('regions')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('status_id')->constrained('status_types')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });

@@ -18,9 +18,14 @@ class Profile extends Model
         'gender',
         'nationality',
         'language',
+        'region_id',
+        'certificate',
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function region(){
+        return $this->belongsTo(AdministrativeRegion::class,'region_id');
     }
 }

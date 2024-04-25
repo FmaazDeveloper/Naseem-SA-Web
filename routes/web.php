@@ -5,10 +5,12 @@ use App\Http\Controllers\AdministrativeRegionController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandmarkController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -23,18 +25,29 @@ Route::get('/home/regions/{administrative_region_id?}', [ContentController::clas
 Route::get('/home/landmarks/{region_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');
 
 
-//profile routes
+//user routes
 Route::group(
     [
         'prefix' => 'user',
         'middleware' => 'auth',
     ],
     function () {
+        //profile routes
         Route::get('/profile/{user_id}', [ProfileController::class, 'index'])->name('profiles.index');
-        Route::get('/profile/create/{user_id}', [ProfileController::class, 'create'])->name('profiles.create');
-        Route::post('/profile', [ProfileController::class, 'store'])->name('profiles.store');
+        // Route::get('/profile/create/{user_id}', [ProfileController::class, 'create'])->name('profiles.create');
+        // Route::post('/profile', [ProfileController::class, 'store'])->name('profiles.store');
         Route::get('/profiles/{user_id}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
         Route::put('/profiles/{user_id}', [ProfileController::class, 'update'])->name('profiles.update');
+
+        //ticket routes
+        Route::get('/tickets/create/', [TicketController::class, 'create'])->name('tickets.create');
+        Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
+        //order routes
+        Route::get('/orders/create/{region_id?}', [OrderController::class, 'create'])->name('orders.create')->middleware('role:tourist');
+        Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')->middleware('role:tourist');
+        // Route::get('/orders/{order_id}/edit', [OrderController::class, 'edit'])->name('orders.edit')->middleware('role:tourist');
+        Route::put('/orders/{order_id}', [OrderController::class, 'update'])->name('orders.update')->middleware('role:tourist');
     }
 );
 //admin routes
@@ -116,5 +129,14 @@ Route::group(
         Route::put('/activities/{activity}', [ActivityController::class, 'update'])->name('activities.update');
         Route::delete('/activities/{activity}', [ActivityController::class, 'destroy'])->name('activities.destroy');
         //end activities routes
+
+        //start tickets routes
+        Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+        Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+        Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
+        Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy');
+        //end tickets routes
+
+
     }
 );

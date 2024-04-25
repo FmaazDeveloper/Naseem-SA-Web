@@ -5,33 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Ticket extends Model
 {
     use HasFactory;
 
-    protected $table = 'orders';
+    protected $table = 'tickets';
 
     protected $fillable = [
-        'tourist_id',
-        'guide_id',
+        'user_id',
         'admin_id',
-        'region_id',
+        'contact_reason_id',
         'status_id',
-        'closed_at',
+        'title',
+        'message',
+        'file',
+        'answer',
     ];
 
-    public function tourist(){
-        return $this->belongsTo(User::class,'tourist_id');
-    }
-    public function guide(){
-        return $this->belongsTo(User::class,'guide_id');
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
     }
     public function admin(){
         return $this->belongsTo(User::class,'admin_id');
     }
-
-    public function region(){
-        return $this->belongsTo(AdministrativeRegion::class,'region_id');
+    public function contact_reason(){
+        return $this->belongsTo(ContactReasons::class);
     }
     public function status_type(){
         return $this->belongsTo(StatusType::class,'status_id');

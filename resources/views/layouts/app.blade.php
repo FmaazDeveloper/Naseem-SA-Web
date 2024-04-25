@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
 </head>
 
 <body>
@@ -73,10 +74,18 @@
                         </li> --}}
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                href="#">
+                                href="{{ route('tickets.create') }}">
                                 <img src="/images/navbar_icons/contact_us.png" class="rounded" alt="contact_us"
                                     width="22" height="22" !important>
                                 {{ __('Contact Us') }}
+                            </a>
+                        </li>
+                        <li class="nav-item pt-1 m-3">
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                href="{{ route('orders.create') }}">
+                                <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="contact_us"
+                                    width="22" height="22" !important>
+                                {{ __('Request Tour Guide') }}
                             </a>
                         </li>
                     </ul>
@@ -128,7 +137,7 @@
             </div>
         </nav>
 
-        <main class="py-lg-5 min-vh-100">
+        <main class="min-vh-100">
             @yield('content')
         </main>
 

@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'type' => ['required', 'string', 'in:tourist,guide'],
+            'role' => ['required', 'exists:roles,name'],
         ]);
     }
 
@@ -76,10 +76,15 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'is_active' => $data['type'] == 'guide' ? false : true,
+            'role' => $data['role'],
+            'is_active' => $data['role'] == 'guide' ? false : true,
+        ]);
+        $user->profile()->create([
+            'user_id' => $user->id,
         ]);
 
-        $user->assignRole($data['type']);
+
+        $user->assignRole($data['role']);
 
         return $user;
     }

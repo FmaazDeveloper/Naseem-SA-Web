@@ -37,19 +37,85 @@
                             </div>
                             </p>
 
-                            @foreach ($keys as $key)
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/phone_number.png') }}" alt=""
+                                    width="33" height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->phone_number ?? 'No data found' }}
+                            </div>
+                            </p>
+
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/age.png') }}" alt="" width="33"
+                                    height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->age ?? 'No data found' }}
+                            </div>
+                            </p>
+
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/gender.png') }}" alt="" width="33"
+                                    height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->gender ?? 'No data found' }}
+                            </div>
+                            </p>
+
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/nationality.png') }}" alt=""
+                                    width="33" height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->nationality ?? 'No data found' }}
+                            </div>
+                            </p>
+
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/language.png') }}" alt="" width="33"
+                                    height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->language ?? 'No data found' }}
+                            </div>
+                            </p>
+
+                            @if ($profile->user->role == 'guide')
                                 <p>
                                 <div class="col-3">
-                                    <img src="{{ asset('images/profile_icons/' . $key . '.png') }}" alt=""
+                                    <img src="{{ asset('images/profile_icons/region.png') }}" alt=""
                                         width="33" height="33" !important>
                                 </div>
                                 <div class="col-9 text-start">
-                                    {{ $profile->$key ? $profile->$key : 'No data found' }}
+                                    {{ $profile->region->name ?? 'No data found' }}
                                 </div>
                                 </p>
-                            @endforeach
+
+                                <p>
+                                <div class="col-3">
+                                    <img src="{{ asset('images/profile_icons/certificate.png') }}" alt=""
+                                        width="33" height="33" !important>
+                                </div>
+                                <div class="col-9 text-start">
+                                    @if (!is_null($profile->certificate))
+                                        <a href="{{ url($profile->certificate) }}" target="_blank">View</a>
+                                    @else
+                                        No data found
+                                    @endif
+                                </div>
+                                </p>
+                            @endif
+
                         </div>
-                        <a href="{{ route('profiles.edit', $profile->user->id) }}" class="btn btn-success">Update Profile</a>
+                        <a href="{{ route('profiles.edit', Auth::user()->id) }}" class="btn btn-success">Update
+                            Profile</a>
                     </div>
 
                 </div>

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'is_active',
     ];
 
@@ -46,5 +47,11 @@ class User extends Authenticatable
     }
     public function order(){
         return $this->hasOne(Order::class);
+    }
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
+    public function ticket(){
+        return $this->hasOne(Ticket::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\AdministrativeRegion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,12 +19,13 @@ class ProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random(),
+            'user_id' => fake()->unique()->numberBetween(1, 10),
             'photo' => fake()->randomElement(['images/profiles/Al-Baha.png', 'images/profiles/Riyadh.png', 'images/profiles/Makkah.png', 'images/profiles/Jazan.png',]),
             'phone_number' => fake()->unique()->phoneNumber(),
             'age' => fake()->numberBetween(18,100),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'nationality' => fake()->country(),
+            'region_id' => AdministrativeRegion::all()->random(),
             'language' => fake()->languageCode(),
         ];
     }

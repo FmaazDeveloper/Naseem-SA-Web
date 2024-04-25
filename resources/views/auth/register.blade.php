@@ -13,14 +13,14 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-4 col-form-label text-md-end">
-                                    <input class="form-check-input" name="type" value="tourist" type="radio" id="city" checked>
-                                    <label class="form-check-label" for="city">
+                                    <input class="form-check-input" name="role" value="tourist" type="radio" id="tourist" checked>
+                                    <label class="form-check-label" for="tourist">
                                         {{ __('Tourist') }}
                                     </label>
                                 </div>
                                 <div class="col-md-4 col-form-label text-md-end">
-                                    <input class="form-check-input" name="type" value="guide" type="radio" id="island">
-                                    <label class="form-check-label" for="island">
+                                    <input class="form-check-input" name="role" value="guide" type="radio" id="guide">
+                                    <label class="form-check-label" for="guide">
                                         {{ __('Guide') }}
                                     </label>
                                 </div>
