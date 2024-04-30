@@ -88,15 +88,17 @@ class OrderController extends Controller
     public function tourist(String $user_id)
     {
         $guide = Profile::where('user_id', '=', $user_id)->first();
-        $tourist = Order::where('tourist_id', '=', Auth::user()->id)->where('status_id', '=', 3)->orWhere('status_id', '=', 4)->first();
-        return view('orders.tourist', ['guide' => $guide, 'tourist' => $tourist]);
+        $actived_order = Order::where('tourist_id', '=', Auth::user()->id)->where('status_id', '=', 3)->first();
+        $pending_order = Order::where('tourist_id', '=', Auth::user()->id)->where('status_id', '=', 4)->first();
+        return view('orders.tourist', ['guide' => $guide, 'actived_order' => $actived_order, 'pending_order' => $pending_order]);
     }
 
 
     public function guide()
     {
-        $orders = Order::where('guide_id', '=', Auth::user()->id)->where('status_id', '=', 3)->orWhere('status_id', '=', 4)->get();
-        return view('orders.guide', ['orders' => $orders]);
+        $actived_orders = Order::where('guide_id', '=', Auth::user()->id)->where('status_id', '=', 3)->get();
+        $pending_orders = Order::where('guide_id', '=', Auth::user()->id)->where('status_id', '=', 4)->get();
+        return view('orders.guide', ['actived_orders' => $actived_orders, 'pending_orders' => $pending_orders]);
     }
 
 
