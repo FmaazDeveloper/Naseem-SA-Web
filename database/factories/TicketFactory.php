@@ -28,6 +28,7 @@ class TicketFactory extends Factory
             'message' => fake()->paragraph(3),
             'file' => fake()->file(),
             'answer' => fake()->paragraph(3),
+            'closed_at' => now(),
         ];
     }
 }

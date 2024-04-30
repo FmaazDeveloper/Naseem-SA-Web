@@ -13,7 +13,7 @@
                             Request Tour Guide
                         </h4>
                     </div>
-                    @if (is_null($tourist) || $tourist->status_id != 4)
+                    @if (is_null($tourist))
 
                         <div class="card-body">
                             <form method="post" action="{{ route('orders.store', $region_id) }}"
@@ -82,7 +82,7 @@
 
                             </form>
                         </div>
-                    @else
+                    @elseif($tourist->status_id == 4)
                         <div class="card-body">
                             <div class="text-center">
                                 <h4>Your Guide information</h4>
@@ -127,12 +127,65 @@
                             </div>
                         </div>
                         <div class="text-center m-2">
-                            <form action="{{ route('orders.update', $tourist->id) }}" method="post">
+                            <form method="post" action="{{ route('orders.update', $tourist->id) }}">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" name="status_id" value="6" class="btn btn-danger">Cancel</button>
+                                <button type="submit" name="status_id" value="6"
+                                    class="btn btn-danger">Cancel</button>
                             </form>
                         </div>
+                    @elseif($tourist->status_id == 3)
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h4>Your Guide information</h4>
+                            <table class="table table-success">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Nationality</th>
+                                        <th scope="col">Language</th>
+                                        <th scope="col">Phone number</th>
+                                        <th scope="col">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{ $tourist->id }}</th>
+                                        <td>{{ $tourist->guide->name }}</td>
+                                        <td>{{ $tourist->guide->profile->age }}</td>
+                                        <td>{{ $tourist->guide->profile->gender }}</td>
+                                        <td>{{ $tourist->guide->profile->nationality }}</td>
+                                        <td>{{ $tourist->guide->profile->language }}</td>
+                                        <td>
+                                            <a href="https://wa.me/+966{{ $tourist->guide->profile->phone_number }}"
+                                                target="_blanck">
+                                                {{ $tourist->guide->profile->phone_number }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="mailto:{{ $tourist->guide->email }}" target="_blanck">
+                                                {{ $tourist->guide->email }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {{-- <p>Witing for the guide...</p>
+                            <div class="spinner-border text-success" role="status"></div> --}}
+
+                        </div>
+                    </div>
+                    <div class="text-center m-2">
+                        <form method="post" action="{{ route('orders.update', $tourist->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" name="status_id" value="5"
+                                class="btn btn-danger">End the trip</button>
+                        </form>
+                    </div>
                     @endif
                 </div>
             </div>

@@ -8,7 +8,8 @@
                     <div class="card-header">
                         <h4>
                             Update your profile information
-                            <a href="{{ route('profiles.index', Auth::user()->id) }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('profiles.index', Auth::user()->id) }}"
+                                class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -25,7 +26,8 @@
                                         id="region">
                                         @foreach ($regions as $region)
                                             <option value="{{ $region->id }}" @selected($profile->region_id == $region->id)>
-                                                {{ $region->id . ' - ' . $region->name }}</option>
+                                                {{ $loop->index + 1 . ' - ' . $region->administrative_region->name . ' / ' . $region->type . ' / ' . $region->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('region')
@@ -46,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <a href="{{ url($profile->certificate) }}" target="_blank">View</a>
+                                        <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">View</a>
                                     </div>
                                 </div>
                             @endif
@@ -77,8 +79,8 @@
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input name="name" type="text" value="{{ $profile->user->name }}"
-                                    class="form-control" id="name">
+                                <input name="name" type="text" value="{{ $profile->user->name }}" class="form-control"
+                                    id="name">
                                 @error('name')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
@@ -87,8 +89,8 @@
                             <div class="mb-3">
                                 <label for="phone_number" class="form-label">Phone number</label>
                                 <input name="phone_number" type="text"
-                                    value="{{ $profile->phone_number ? $profile->phone_number : old('phone_number') }}"
-                                    class="form-control" id="phone_number">
+                                    value="{{ $profile->phone_number ?? old('phone_number') }}"
+                                    class="form-control" id="phone_number" placeholder="5xxxxxxxx">
                                 @error('phone_number')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
@@ -97,7 +99,7 @@
                             <div class="mb-3">
                                 <label for="age" class="form-label">Age</label>
                                 <input name="age" type="text"
-                                    value="{{ $profile->age ? $profile->age : old('age') }}" class="form-control"
+                                    value="{{ $profile->age ?? old('age') }}" class="form-control"
                                     id="age">
                                 @error('age')
                                     <small class="text-danger">*{{ $message }}</small>
@@ -107,7 +109,7 @@
                             <div class="mb-3">
                                 <label for="nationality" class="form-label">Nationality</label>
                                 <input name="nationality" type="text"
-                                    value="{{ $profile->nationality ? $profile->nationality : old('nationality') }}"
+                                    value="{{ $profile->nationality ?? old('nationality') }}"
                                     class="form-control" id="nationality">
                                 @error('nationality')
                                     <small class="text-danger">*{{ $message }}</small>
@@ -117,9 +119,17 @@
                             <div class="mb-3">
                                 <label for="language" class="form-label">Language</label>
                                 <input name="language" type="text"
-                                    value="{{ $profile->language ? $profile->language : old('language') }}"
+                                    value="{{ $profile->language ?? old('language') }}"
                                     class="form-control" id="language">
                                 @error('language')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="overview">Overview</label>
+                                <textarea name="overview" class="form-control" id="overview">{{ $profile->overview ?? old('overview') }}</textarea>
+                                @error('overview')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
                             </div>

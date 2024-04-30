@@ -18,42 +18,42 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Riyadh',
-            'photo' => 'images/administrative_regions/Riyadh.png',
+            'photo' => '/images/administrative_regions/Riyadh.png',
         ]);
 
         //Makkah
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Makkah',
-            'photo' => 'images/administrative_regions/Makkah.png',
+            'photo' => '/images/administrative_regions/Makkah.png',
         ]);
 
         //AL Madinah AL Munawwarah
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'AL Madinah AL Munawwarah',
-            'photo' => 'images/administrative_regions/AL Madinah AL Munawwarah.png',
+            'photo' => '/images/administrative_regions/AL Madinah AL Munawwarah.png',
         ]);
 
         //Al-Qassim
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Al-Qassim',
-            'photo' => 'images/administrative_regions/Al-Qassim.png',
+            'photo' => '/images/administrative_regions/Al-Qassim.png',
         ]);
 
         //Alsharqia
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Alsharqia',
-            'photo' => 'images/administrative_regions/Alsharqia.png',
+            'photo' => '/images/administrative_regions/Alsharqia.png',
         ]);
 
         //Asir
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Asir',
-            'photo' => 'images/administrative_regions/Asir.png',
+            'photo' => '/images/administrative_regions/Asir.png',
         ]);
 
 
@@ -61,7 +61,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Tabuk',
-            'photo' => 'images/administrative_regions/Tabuk.png',
+            'photo' => '/images/administrative_regions/Tabuk.png',
         ]);
 
 
@@ -69,7 +69,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Hail',
-            'photo' => 'images/administrative_regions/Hail.png',
+            'photo' => '/images/administrative_regions/Hail.png',
         ]);
 
 
@@ -77,7 +77,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Alhudud Alshamalia',
-            'photo' => 'images/administrative_regions/Alhudud Alshamalia.png',
+            'photo' => '/images/administrative_regions/Alhudud Alshamalia.png',
         ]);
 
 
@@ -85,7 +85,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Jazan',
-            'photo' => 'images/administrative_regions/Jazan.png',
+            'photo' => '/images/administrative_regions/Jazan.png',
         ]);
 
 
@@ -93,7 +93,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Najran',
-            'photo' => 'images/administrative_regions/Najran.png',
+            'photo' => '/images/administrative_regions/Najran.png',
         ]);
 
 
@@ -101,7 +101,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Al-Baha',
-            'photo' => 'images/administrative_regions/Al-Baha.png',
+            'photo' => '/images/administrative_regions/Al-Baha.png',
         ]);
 
 
@@ -109,7 +109,7 @@ class AdministrativeRegionSeeder extends Seeder
         AdministrativeRegion::create([
             'admin_id' => 1,
             'name' => 'Aljawf',
-            'photo' => 'images/administrative_regions/Aljawf.png',
+            'photo' => '/images/administrative_regions/Aljawf.png',
         ]);
 
     }

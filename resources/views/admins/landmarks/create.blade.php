@@ -29,7 +29,7 @@
                             <div class="mb-3">
                                 <label for="region_id" class="form-label">Select region</label>
                                 <select class="form-select" name="region_id" aria-label="Default select example"
-                                    id="region">
+                                    id="region_id">
                                     <option selected disabled>Select region</option>
                                     @foreach ($administrative_region->regions as $region)
                                         <option value="{{ $region->id }}">

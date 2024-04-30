@@ -48,7 +48,7 @@ class LandmarkController extends Controller
 
             $file_name = $request->name . time() .'.' . $extension;
 
-            $path = 'images/landmarks/';
+            $path = '/images/landmarks/';
             $file->move($path, $file_name);
         }
 
@@ -101,7 +101,7 @@ class LandmarkController extends Controller
 
             $file_name = $request->name . time() .'.' . $extension;
 
-            $path = 'images/landmarks/';
+            $path = '/images/landmarks/';
             $file->move($path, $file_name);
 
             if (File::exists($landmark->photo)) {

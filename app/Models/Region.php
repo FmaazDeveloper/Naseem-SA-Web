@@ -23,6 +23,13 @@ class Region extends Model
     ];
 
     //administrative_region
+    //guide
+    public function guides(){
+        return $this->hasMany(Profile::class,'region_id');
+    }
+    public function guide(){
+        return $this->hasOne(Profile::class,'region_id');
+    }
     public function administrative_region(){
         return $this->belongsTo(AdministrativeRegion::class);
     }

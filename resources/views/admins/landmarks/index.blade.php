@@ -11,8 +11,8 @@
                     <div class="card-header">
                         <h4>
                             Landmarks
-                            <a href="{{ route('landmarks.create',[$region->administrative_region->id, $region->id]) }}" class="btn btn-success float-end">Add
-                                Landmark</a>
+                            <a href="{{ route('landmarks.create',[$region->administrative_region->id, $region->id]) }}" class="btn btn-success float-end">Add Landmark</a>
+                            <a href="{{ route('regions.index',[$region->administrative_region->id, $region->id]) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">

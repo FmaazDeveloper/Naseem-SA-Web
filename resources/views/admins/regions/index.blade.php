@@ -12,6 +12,7 @@
                         <h4>
                             Regions
                             <a href="{{ route('regions.create',$administrative_region->id) }}" class="btn btn-success float-end">Add Region</a>
+                            <a href="{{ route('administrative_regions.index',$administrative_region->id) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdministrativeRegion;
+use App\Models\Order;
 use App\Models\Profile;
-use App\Models\User;
+use App\Models\Region;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -21,7 +22,9 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
-        return view('profiles.index', ['profile' => $profile,]);
+        $tickets = Ticket::where('user_id', '=', Auth::user()->id)->get();
+        $orders = Order::where('tourist_id', '=', Auth::user()->id)->orWhere('guide_id', '=', Auth::user()->id)->get();
+        return view('profiles.index', ['profile' => $profile, 'tickets' => $tickets, 'orders' => $orders]);
     }
 
 
@@ -77,7 +80,7 @@ class ProfileController extends Controller
     public function edit()
     {
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
-        $regions = AdministrativeRegion::where('is_active',true)->get();
+        $regions = Region::where('is_active', true)->get();
         return view('profiles.edit', ['profile' => $profile, 'regions' => $regions]);
     }
 
@@ -87,15 +90,16 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
 
         $request->validate([
-            'region_id' => ['nullable', 'exists:administrative_regions,id'],
+            'region_id' => ['nullable', 'exists:regions,id'],
             'name' => ['nullable', 'string', 'max:255'],
             'photo' => ['nullable', 'mimes:png,jpeg'],
             'certificate' => ['nullable', 'mimes:pdf'],
-            'phone_number' => ['nullable', 'string', 'max:9', 'min:9',],
+            'phone_number' => ['nullable', 'numeric', 'digits:9', 'regex:/^5[1-9]\d*$/', 'unique:profiles,phone_number,' . Auth::user()->id . ',user_id'],
             'age' => ['nullable', 'Integer', 'max:99', 'min:18'],
             'gender' => ['nullable', 'in:Male,Female'],
             'nationality' => ['nullable', 'String'],
             'language' => ['nullable', 'String'],
+            'overview' => ['nullable', 'String', 'min:10', 'max:255'],
         ]);
 
         $update_photo = null;
@@ -141,6 +145,7 @@ class ProfileController extends Controller
             'gender' => $request->gender,
             'nationality' => $request->nationality,
             'language' => $request->language,
+            'overview' => $request->overview,
         ]);
 
         $profile->user->update([

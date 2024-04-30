@@ -80,14 +80,6 @@
                                 {{ __('Contact Us') }}
                             </a>
                         </li>
-                        <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                href="{{ route('orders.create') }}">
-                                <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="contact_us"
-                                    width="22" height="22" !important>
-                                {{ __('Request Tour Guide') }}
-                            </a>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -115,16 +107,25 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item"
-                                        href="{{ Auth::user()->hasRole('manager|super-admin|admin') ? route('dashboards.index') : route('profiles.index',Auth::user()->id) }}">
+                                        href="{{ Auth::user()->hasRole('manager|super-admin|admin') ? route('dashboards.index') : route('profiles.index', Auth::user()->id) }}">
                                         {{ Auth::user()->hasRole('manager|super-admin|admin') ? __('Dashboard') : __('Profile') }}
                                     </a>
+
+                                    @if (Auth::user()->hasRole('tourist'))
+                                        <a class="dropdown-item" href="{{ route('orders.index') }}">
+                                            {{ __('Order guide') }} </a>
+                                    @elseif(Auth::user()->hasRole('guide'))
+                                        <a class="dropdown-item" href="{{ route('orders.guide') }}">
+                                            {{ __('View orders') }} </a>
+                                    @endif
+
                                     <hr class="dropdown-divider">
+
                                     <a class="dropdown-item text-body-danger" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

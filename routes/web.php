@@ -44,10 +44,13 @@ Route::group(
         Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
         //order routes
+        Route::get('/orders/tourist', [OrderController::class, 'guide'])->name('orders.guide')->middleware('role:guide');
+        Route::get('/orders/{region_id?}', [OrderController::class, 'index'])->name('orders.index')->middleware('role:tourist');
         Route::get('/orders/create/{region_id?}', [OrderController::class, 'create'])->name('orders.create')->middleware('role:tourist');
-        Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')->middleware('role:tourist');
+        Route::get('/orders/guide/{user_id}', [OrderController::class, 'tourist'])->name('orders.tourist')->middleware('role:tourist');
+        Route::post('/orders/{profile_id}', [OrderController::class, 'store'])->name('orders.store')->middleware('role:tourist');
         // Route::get('/orders/{order_id}/edit', [OrderController::class, 'edit'])->name('orders.edit')->middleware('role:tourist');
-        Route::put('/orders/{order_id}', [OrderController::class, 'update'])->name('orders.update')->middleware('role:tourist');
+        Route::put('/orders/{order_id}', [OrderController::class, 'update'])->name('orders.update');
     }
 );
 //admin routes

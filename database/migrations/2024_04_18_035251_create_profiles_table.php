@@ -22,6 +22,7 @@ return new class extends Migration
             $table->String('language')->nullable();
             $table->foreignId('region_id')->nullable()->constrained('regions')->onUpdate('cascade')->onDelete('cascade');
             $table->String('certificate')->nullable();
+            $table->String('overview')->nullable();
             $table->timestamps();
         });
     }

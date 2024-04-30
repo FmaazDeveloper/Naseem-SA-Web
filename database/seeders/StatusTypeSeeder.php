@@ -49,5 +49,11 @@ class StatusTypeSeeder extends Seeder
             'admin_id' => 1,
             'name' => 'Canceled',
         ]);
+
+        //Rejected
+        StatusType::create([
+            'admin_id' => 1,
+            'name' => 'Rejected',
+        ]);
     }
 }

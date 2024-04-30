@@ -41,6 +41,7 @@ class TicketController extends Controller
         $request->validate([
             'user_id' => ['exists:users,id'],
             'contact_reason_id' => ['required', 'exists:contact_reasons,id'],
+            'status_id' => ['required', 'exists:status_types,id'],
             'title' => ['required', 'string', 'min:3', 'max:50'],
             'message' => ['required', 'string', 'min:10', 'max:255'],
             'file' => ['nullable', 'mimes:png,jpeg,pdf'],
@@ -63,7 +64,7 @@ class TicketController extends Controller
         Ticket::create([
             'user_id' => $user->id,
             'contact_reason_id' => $request->contact_reason_id,
-            'status_id' => 1,
+            'status_id' => $request->status_id,
             'title' => $request->title,
             'message' => $request->message,
             'file' => $add_file ? $add_file : null,
@@ -82,7 +83,7 @@ class TicketController extends Controller
 
     public function edit(Ticket $ticket)
     {
-        return view('admins.tickets.edit',['ticket' => $ticket]);
+        return view('admins.tickets.edit', ['ticket' => $ticket]);
     }
 
 
@@ -91,7 +92,7 @@ class TicketController extends Controller
     {
         $request->validate([
             'admin_id' => ['exists:users,id'],
-            'answer' => ['required','string','min:3','max:255'],
+            'answer' => ['required', 'string', 'min:3', 'max:255'],
         ]);
 
         $ticket->update([

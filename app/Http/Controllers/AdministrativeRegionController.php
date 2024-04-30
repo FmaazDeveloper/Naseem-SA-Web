@@ -79,7 +79,7 @@ class AdministrativeRegionController extends Controller
 
             $file_name = $request->name . time() . '.' . $extension;
 
-            $path = 'images/administrative_regions/';
+            $path = '/images/administrative_regions/';
             $file->move($path, $file_name);
 
             if (File::exists($administrativeRegion->photo)) {

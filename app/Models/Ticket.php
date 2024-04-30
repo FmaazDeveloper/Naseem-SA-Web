@@ -20,6 +20,7 @@ class Ticket extends Model
         'message',
         'file',
         'answer',
+        'closed_at',
     ];
 
     public function user(){
@@ -32,6 +33,6 @@ class Ticket extends Model
         return $this->belongsTo(ContactReasons::class);
     }
     public function status_type(){
-        return $this->belongsTo(StatusType::class,'status_id');
+        return $this->belongsTo(StatusType::class,'status_type_name');
     }
 }

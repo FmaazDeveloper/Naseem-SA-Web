@@ -71,7 +71,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="submit" name="status_id" value="1" class="btn btn-primary">Send</button>
 
                         </form>
                     </div>

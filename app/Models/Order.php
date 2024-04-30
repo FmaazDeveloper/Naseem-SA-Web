@@ -17,6 +17,9 @@ class Order extends Model
         'admin_id',
         'region_id',
         'status_id',
+        'number_of_people',
+        'start_date',
+        'end_date',
         'closed_at',
     ];
 
@@ -31,7 +34,7 @@ class Order extends Model
     }
 
     public function region(){
-        return $this->belongsTo(AdministrativeRegion::class,'region_id');
+        return $this->belongsTo(Region::class,'region_id');
     }
     public function status_type(){
         return $this->belongsTo(StatusType::class,'status_id');

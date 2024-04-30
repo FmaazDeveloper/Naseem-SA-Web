@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('message');
             $table->string('file')->nullable();
             $table->string('answer')->nullable();
+            $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });
     }

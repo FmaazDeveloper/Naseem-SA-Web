@@ -48,7 +48,7 @@ class RegionController extends Controller
 
             $file_name = $request->name . time() . '.' . $extension;
 
-            $path = 'images/regions/';
+            $path = '/images/regions/';
             $file->move($path, $file_name);
         }
 
@@ -102,7 +102,7 @@ class RegionController extends Controller
 
             $file_name = $request->name . time() . '.' . $extension;
 
-            $path = 'images/regions/';
+            $path = '/images/regions/';
             $file->move($path, $file_name);
 
             if (File::exists($region->card_photo)) {
