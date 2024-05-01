@@ -35,13 +35,13 @@
                                             <tr>
                                                 <th scope="row">{{ $order->id }}</th>
                                                 <td>{{ $order->tourist->name }}</td>
-                                                <td>{{ $order->age }}</td>
-                                                <td>{{ $order->gender }}</td>
-                                                <td>{{ $order->nationality }}</td>
-                                                <td>{{ $order->language }}</td>
+                                                <td>{{ $order->tourist->profile->age }}</td>
+                                                <td>{{ $order->tourist->profile->gender }}</td>
+                                                <td>{{ $order->tourist->profile->nationality }}</td>
+                                                <td>{{ $order->tourist->profile->language }}</td>
                                                 <td>
-                                                    <a href="https://wa.me/+966{{ $order->phone_number }}" target="_blanck">
-                                                        {{ $order->phone_number }}
+                                                    <a href="https://wa.me/+966{{ $order->tourist->profile->phone_number }}" target="_blanck">
+                                                        {{ $order->tourist->profile->phone_number }}
                                                     </a>
                                                 </td>
                                                 <td>

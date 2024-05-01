@@ -13,17 +13,13 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
-
-//auth
-Auth::routes();
+require __DIR__.'/auth.php';
 
 //contents
 Route::get('/{administrative_region_id?}', [ContentController::class, 'index'])->name('contents.index');
 Route::get('/home/regions/{administrative_region_id?}', [ContentController::class, 'regions'])->name('contents.regions');
 Route::get('/home/landmarks/{region_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');
-
 
 //user routes
 Route::group(

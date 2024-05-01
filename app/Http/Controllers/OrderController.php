@@ -18,22 +18,25 @@ class OrderController extends Controller
     public function index(String $region_id = null)
     {
         if (is_null($region_id)) {
-            // $guides = Profile::whereIn('user_id', User::where('is_active', true)->where('role', '=', 'guide')->pluck('id'))
-            // ->whereIn('region_id', Region::where('is_active', true)->pluck('id'))
-            // ->orWhereIn('user_id', Order::where('status_id', '!=', 3)->pluck('guide_id'))
-            // ->get();
             $regions = Region::where('is_active', true)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::whereNotNull('region_id')->pluck('region_id'))
+                ->whereIn('id', Profile::whereNotNull('region_id')
+                    ->whereIn('user_id', User::where('is_active', true)
+                        ->where('role', '=', 'guide')
+                        ->pluck('id'))
+                    ->pluck('region_id'))
                 ->paginate(5);
+
+            // $regions = Profile::whereIn('user_id', User::where('is_active', true)->where('role', '=', 'guide')->pluck('id'))
+            //     ->whereIn('region_id', Region::where('is_active', true)
+            //         ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))->pluck('id'))
+            //     ->paginate(5);
         } else {
-            // $guides = Profile::whereIn('user_id', User::where('is_active', true)->where('role', '=', 'guide')->pluck('id'))
-            // ->whereIn('region_id', Region::where('is_active', true)->where('id', '=', $region_id)->pluck('id'))
-            // ->orWhereIn('user_id', Order::where('status_id', '!=', 3)->pluck('guide_id'))
-            // ->get();
             $regions = Region::where('is_active', true)->where('id', '=', $region_id)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::where('region_id', '=', $region_id)->pluck('region_id'))
+                ->whereIn('id', Profile::where('region_id', '=', $region_id)
+                    ->whereIn('region_id', User::where('is_active', true)
+                        ->where('role', '=', 'guide')->pluck('id'))->pluck('region_id'))
                 ->paginate(5);
         }
         return view('orders.index', ['regions' => $regions]);

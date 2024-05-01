@@ -43,7 +43,7 @@
                                                                         <div class="col-3">
                                                                             <img src="{{ $guide->photo ?? 'images/profile_icons/profile_image.png' }}"
                                                                                 class="rounded-circle"
-                                                                                alt="{{ $guide->user->name }}"
+                                                                                alt=""
                                                                                 width="50" height="50">
                                                                         </div>
                                                                         <div class="col-9">
