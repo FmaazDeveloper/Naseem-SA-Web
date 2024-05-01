@@ -38,11 +38,11 @@ class DatabaseSeeder extends Seeder
         //status type
         $this->call([StatusTypeSeeder::class]);
 
-        User::factory(10)->create();
+        // User::factory(10)->create();
         Region::factory(50)->create();
         Landmark::factory(100)->create();
         Activity::factory(150)->create();
-        Profile::factory(10)->create();
+        // Profile::factory(10)->create();
         // Order::factory(30)->create();
     }
 }

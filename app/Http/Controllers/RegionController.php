@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\File;
 class RegionController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:view region',['only'=> ['index']]);
+        $this->middleware('permission:add region',['only'=> ['create','store']]);
+        $this->middleware('permission:update region',['only'=> ['update','edit']]);
+        $this->middleware('permission:delete region',['only'=> ['destroy']]);
+    }
+
 
     public function index(AdministrativeRegion $administrative_region)
     {
@@ -48,7 +56,7 @@ class RegionController extends Controller
 
             $file_name = $request->name . time() . '.' . $extension;
 
-            $path = '/images/regions/';
+            $path = 'images/regions/';
             $file->move($path, $file_name);
         }
 
@@ -102,7 +110,7 @@ class RegionController extends Controller
 
             $file_name = $request->name . time() . '.' . $extension;
 
-            $path = '/images/regions/';
+            $path = 'images/regions/';
             $file->move($path, $file_name);
 
             if (File::exists($region->card_photo)) {

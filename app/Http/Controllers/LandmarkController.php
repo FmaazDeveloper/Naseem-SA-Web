@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\File;
 class LandmarkController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:view landmark',['only'=> ['index']]);
+        $this->middleware('permission:add landmark',['only'=> ['create','store']]);
+        $this->middleware('permission:update landmark',['only'=> ['update','edit']]);
+        $this->middleware('permission:delete landmark',['only'=> ['destroy']]);
+    }
 
     public function index(Region $region)
     {
@@ -48,7 +55,7 @@ class LandmarkController extends Controller
 
             $file_name = $request->name . time() .'.' . $extension;
 
-            $path = '/images/landmarks/';
+            $path = 'images/landmarks/';
             $file->move($path, $file_name);
         }
 
@@ -101,7 +108,7 @@ class LandmarkController extends Controller
 
             $file_name = $request->name . time() .'.' . $extension;
 
-            $path = '/images/landmarks/';
+            $path = 'images/landmarks/';
             $file->move($path, $file_name);
 
             if (File::exists($landmark->photo)) {

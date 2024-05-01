@@ -62,7 +62,7 @@
                         @foreach ($guides as $guide)
                             <a href="{{ route('orders.tourist', $guide->user_id) }}"
                                 class="link-success link-offset-2 link-underline link-underline-opacity-0">
-                                <div class="row rounded-2 m-2 p-1 border border-2 border-secondary">
+                                <div class="row rounded-2 m-2 p-1 border-2 border-secondary">
                                     <div class="col-3">
                                         <img src="{{ $guide->photo }}" class="rounded-circle"
                                             alt="{{ $guide->user->name }}" width="50" height="50">

@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 class AdministrativeRegionController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:view administrative region',['only'=> ['index']]);
+        $this->middleware('permission:add administrative region',['only'=> ['create','store']]);
+        $this->middleware('permission:update administrative region',['only'=> ['update','edit']]);
+        $this->middleware('permission:delete administrative region',['only'=> ['destroy']]);
+    }
 
     public function index()
     {

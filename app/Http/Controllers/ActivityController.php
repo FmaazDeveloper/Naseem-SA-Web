@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class ActivityController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:view activity',['only'=> ['index']]);
+        $this->middleware('permission:add activity',['only'=> ['create','store']]);
+        $this->middleware('permission:update activity',['only'=> ['update','edit']]);
+        $this->middleware('permission:delete activity',['only'=> ['destroy']]);
+    }
     public function index(Landmark $landmark)
     {
         $activities = Activity::where('landmark_id', '=' , $landmark)->paginate(10);
