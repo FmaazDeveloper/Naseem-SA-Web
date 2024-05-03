@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandmarkController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RequestOrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
@@ -40,13 +41,12 @@ Route::group(
         Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
         //order routes
-        Route::get('/orders/tourist', [OrderController::class, 'guide'])->name('orders.guide')->middleware('role:guide');
-        Route::get('/orders/{region_id?}', [OrderController::class, 'index'])->name('orders.index')->middleware('role:tourist');
-        Route::get('/orders/create/{region_id?}', [OrderController::class, 'create'])->name('orders.create')->middleware('role:tourist');
-        Route::get('/orders/guide/{user_id}', [OrderController::class, 'tourist'])->name('orders.tourist')->middleware('role:tourist');
-        Route::post('/orders/{profile_id}', [OrderController::class, 'store'])->name('orders.store')->middleware('role:tourist');
-        // Route::get('/orders/{order_id}/edit', [OrderController::class, 'edit'])->name('orders.edit')->middleware('role:tourist');
-        Route::put('/orders/{order_id}', [OrderController::class, 'update'])->name('orders.update');
+        Route::get('/orders/tourist', [RequestOrderController::class, 'show'])->name('request_orders.show')->middleware('role:guide');
+        Route::get('/orders/{region_id?}', [RequestOrderController::class, 'index'])->name('request_orders.index')->middleware('role:tourist');
+        Route::get('/orders/guide/{user_id}', [RequestOrderController::class, 'create'])->name('request_orders.create')->middleware('role:tourist');
+        Route::post('/orders/{profile_id}', [RequestOrderController::class, 'store'])->name('request_orders.store')->middleware('role:tourist');
+        // Route::get('/orders/{order_id}/edit', [RequestOrderController::class, 'edit'])->name('request_orders.edit')->middleware('role:tourist');
+        Route::put('/orders/{order_id}', [RequestOrderController::class, 'update'])->name('request_orders.update');
     }
 );
 //admin routes
@@ -136,6 +136,12 @@ Route::group(
         Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy');
         //end tickets routes
 
+        //start orders routes
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+        Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+        Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+        //end orders routes
 
     }
 );

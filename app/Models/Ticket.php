@@ -15,11 +15,12 @@ class Ticket extends Model
         'user_id',
         'admin_id',
         'contact_reason_id',
-        'status_id',
+        'status',
         'title',
         'message',
-        'file',
+        'ticket_file',
         'answer',
+        'answer_file',
         'closed_at',
     ];
 
@@ -32,7 +33,7 @@ class Ticket extends Model
     public function contact_reason(){
         return $this->belongsTo(ContactReasons::class);
     }
-    public function status_type(){
-        return $this->belongsTo(StatusType::class,'status_type_name');
-    }
+    // public function status_type(){
+    //     return $this->belongsTo(StatusType::class,'status_id');
+    // }
 }

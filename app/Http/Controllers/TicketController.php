@@ -41,21 +41,21 @@ class TicketController extends Controller
         $request->validate([
             'user_id' => ['exists:users,id'],
             'contact_reason_id' => ['required', 'exists:contact_reasons,id'],
-            'status_id' => ['required', 'exists:status_types,id'],
+            'status' => ['required', 'in:New'],
             'title' => ['required', 'string', 'min:3', 'max:50'],
             'message' => ['required', 'string', 'min:10', 'max:255'],
-            'file' => ['nullable', 'mimes:png,jpeg,pdf'],
+            'ticket_file' => ['nullable', 'mimes:png,jpeg,pdf'],
         ]);
 
         $add_file = null;
 
-        if ($request->has('file')) {
-            $file = $request->file('file');
+        if ($request->has('ticket_file')) {
+            $file = $request->file('ticket_file');
             $extension = $file->getClientOriginalExtension();
 
             $file_name = $user->name . time() . '.' . $extension;
 
-            $path = 'files/tickets/';
+            $path = 'files/tickets/requests/';
             $file->move($path, $file_name);
 
             $add_file = $path . $file_name;
@@ -64,10 +64,10 @@ class TicketController extends Controller
         Ticket::create([
             'user_id' => $user->id,
             'contact_reason_id' => $request->contact_reason_id,
-            'status_id' => $request->status_id,
+            'status' => $request->status,
             'title' => $request->title,
             'message' => $request->message,
-            'file' => $add_file ? $add_file : null,
+            'ticket_file' => $add_file ? $add_file : null,
         ]);
 
         return to_route('tickets.create')->with('msg', 'Ticket has sent successfully');
@@ -93,12 +93,30 @@ class TicketController extends Controller
         $request->validate([
             'admin_id' => ['exists:users,id'],
             'answer' => ['required', 'string', 'min:3', 'max:255'],
+            'answer_file' => ['nullable', 'mimes:png,jpeg,pdf'],
+            'status' => ['required', 'in:Closed'],
         ]);
+
+        $add_file = null;
+
+        if ($request->has('answer_file')) {
+            $file = $request->file('answer_file');
+            $extension = $file->getClientOriginalExtension();
+
+            $file_name = $ticket->user->name . time() . '.' . $extension;
+
+            $path = 'files/tickets/answers/';
+            $file->move($path, $file_name);
+
+            $add_file = $path . $file_name;
+        }
 
         $ticket->update([
             'admin_id' => Auth::user()->id,
             'answer' => $request->answer,
-            'status_id' =>  2,
+            'answer_file' => $add_file ? $add_file : null,
+            'status' => $request->status,
+            'closed_at' =>  now(),
         ]);
 
         return to_route('tickets.index')->with('msg', 'Ticket has updated successfully');

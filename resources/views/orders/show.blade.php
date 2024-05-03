@@ -78,12 +78,12 @@
                                                 <td>{{ $order->start_date }}</td>
                                                 <td>{{ $order->end_date }}</td>
                                                 <td>
-                                                    <form method="post" action="{{ route('orders.update', $order->id) }}">
+                                                    <form method="post" action="{{ route('request_orders.update', $order->id) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" name="status_id" value="3"
+                                                        <button type="submit" name="status" value="Actived"
                                                             class="btn btn-success">Accept</button>
-                                                        <button type="submit" name="status_id" value="7"
+                                                        <button type="submit" name="status" value="Rejected"
                                                             class="btn btn-danger">Reject</button>
 
                                                     </form>

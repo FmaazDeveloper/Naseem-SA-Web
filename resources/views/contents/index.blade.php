@@ -40,10 +40,14 @@
             background-color: green;
         }
 
-        body{
-                /* background-image: url("images/pages/main_page.jpg");
-                background-repeat: no-repeat; */
-            }
+        body {
+
+
+            /* background-image: url("images/pages/main_page.jpg");
+                        background-repeat: no-repeat; */
+        }
+
+
     </style>
 
     {{-- <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
@@ -63,7 +67,7 @@
             </div>
         </div>
     </div> --}}
-    <div style="background-image: url(images/pages/main_page.jpg); background-size: cover; ">
+    <div style=" background-image: url(images/pages/main_page.jpg); background-size: cover;">
         <div class="container p-3">
             <div class="row text-center">
                 {{-- <div class="col"> --}}
@@ -75,12 +79,12 @@
                         <g id="features">
 
                             {{-- Riyadh --}}
-                            <a href="{{ route('contents.regions', 1) }}">
-                                <path
-                                    d="M495 265.8l0.5 0.3 3.7 2.7 1.8 1.7 0.7 1 0.6 1.2 1.2 4.2 0.5 1.3 1.1 1.3 0.9 0.9 12.3 7.1 2 0.6 3.1 0.3 1 0.2 0.9 0.5 0.9 0.8 2.7 3.3 4.1 3.9 1.8 1.3 1 0.4 1.8 0.4 7.2 0.2 1.9 0.4 1.9 0.7 2.7 1.5 10.6 7.7 1 0.5 1.1 0.3 1 0.2 1 0 6.4-1.2 1.1 0.1 0.9 0.3 1 0.6 7.1 7 1.2 1.8 0.8 0.9 0.9 0.6 13.8 5.5 0.5 0.4 0.6 0.6 0.6 0.9 0.4 0.9 0.3 0.9 0.2 1.5 1 64.1 0.4 2.2 0.3 0.7 0.6 0.9 0.7 0.9 15.3 11.1 10.9 11 1.8 2.2 1.8 3 1.8 4.2 1 3.4 0.7 5.7-0.3 10.5-12.3 100.7-11.6 90.8-5.6 1.6-101.1 10.9-11.1-0.7-4.1-1-2.3-0.9-3.1-1.5-12-7.6-0.7-0.5-17-15.7-4.2-7-2.4-2.9-0.7-1.1-0.3-1.5 0-1.1 1.7-7.9 0.8-1.7 2.5-4.1 0.4-0.8 0.3-0.9 0-0.2 0.1-0.9-0.1-0.8-0.3-1-0.6-1.1-3.5-4-2.6-3.4-1.4-2.2-2.3-2.8-6.3-5.7-11.3-16.9-0.5-0.9-0.3-1 0-1 0-0.9 1.8-6.7 0.3-2-0.6-7.8 0.1-0.9 0.4-0.9 0.5-0.9 1.3-1.7 0.5-0.9 0.4-1 0.3-0.9 0.2-1 0-0.9-2.2-15.6 0-1.9 1.2-6.9 0-0.2-0.7-0.7-0.8-0.5-0.9-0.2-5.1-1-1-0.1-0.9 0.2-5.1 1.4-1 0.1-1-0.1-1.9-0.7-1-0.6-0.9-0.8-0.9-1.8-0.3-1.2-0.1-1.1 0.3-4.8 0.6-2 0.2-0.8-0.2-1-0.6-1-1.2-1-1-0.5-1.1-0.4-1.9-0.4-9.4-0.8-6.7 0.1-1.6-0.3-0.9-0.3-1-0.4-0.9-0.6-0.8-0.7-0.6-0.7-0.5-0.6-5.5-13.3-1.3-6.7-0.4-1.2-1.1-2.5-2.3-7.4-0.8-1.5-0.9-0.9-0.9-0.7-1.6-1-0.5-0.4-0.5-0.7-0.3-0.9-0.1-3 0.4-4.5-0.1-4.3 0.5-8.1 0.8-3.6 0.1-1.8 0-1.1-0.6-1.6-0.1-0.3 0-0.7 0.3-0.8 0.7-1.1 2-2.6 0.1-0.2 0.5-1.4 0.6-2.1-0.1-1.6 0.9-1.8 2.8-4.4 0.6-0.6 1.2-0.9 1-0.4 1-0.2 0.9 0.2 4.6 2.3 1.9 0.7 3.1 0.8 7.8 0.8 2.1 0 6.2-0.9 2 0.1 3.4 0.9 0.8 0 0.9-0.2 1-0.5 1.1-0.9 0.8-1.2 0.7-1.7 0.1-1.3-0.3-1.1-1.2-2-0.4-0.9-0.2-1 0.2-1.2 0.6-1.3 4.2-5.5 4.1-4.2 1.1-0.7 1-0.5 14.4-3.5 1.7-0.8 1.1-0.7 2.3-2.2 3.1-2 0.9-1 0.8-1.3 1.6-3.2 1.2-1.6 0.7-0.7 0.5-0.5 0.7-0.5 0.9-0.4 0.9-0.3 1-0.2 2 0 9.2 1.2 10.3-0.7 3.9 0.3 0.9-0.1 0.8-0.3 0.5-0.7 0.3-0.9 0.2-1 0.1-1.4 0-1.7-0.4-2.8-0.5-1.7-0.6-1.4-1.2-2.2-0.3-1.1 0.2-1.4 0.5-2.2-0.2-1.5-0.1-0.2-3.3-4.5-3.8-6.4-1.1-1.3-3.4-3.4-0.7-1-0.5-0.9-0.2-1 0-1 0.9-6.3 0-2.1-0.3-2.2 0.1-1.1 0.8-1.1 1-0.6 1-0.3 1.7-0.4 0.5-0.2 0.7-0.7 3.2-4.6 1.6-1.8 1.9-1.8 1.1-0.8 1.1-0.6 2.1-0.7 1-0.5 0.8-0.7 0.6-0.8 0.3-0.8 0.2-0.6 0-0.1 0-0.7-0.1-0.9-0.3-1-0.4-1.1-0.5-1-0.7-1-0.9-0.9-1.8-1.5-1.9-1.4-2.8-1.2-0.3-0.6-0.4-1.7-0.1-1.1 0.1-1 0.1-0.9 0.5-1.5 0.6-1.6 1.2-1.9 1.1-1.5 1.4-1.2 0.6-0.5 0.1 0 2.5-1 0.8 0.7 0.2 0.3 0.1 0.1 0.6 0.8 0.8 0.6 0.9 0.4 1 0.1 1.1-0.5 0.9-0.5 1.8-2.6z"
-                                    id="SA01" name="Ar Riyad">
-                                </path>
-                            </a>
+                            {{-- <a href="{{ route('contents.regions', 1) }}"> --}}
+                            <path
+                                d="M495 265.8l0.5 0.3 3.7 2.7 1.8 1.7 0.7 1 0.6 1.2 1.2 4.2 0.5 1.3 1.1 1.3 0.9 0.9 12.3 7.1 2 0.6 3.1 0.3 1 0.2 0.9 0.5 0.9 0.8 2.7 3.3 4.1 3.9 1.8 1.3 1 0.4 1.8 0.4 7.2 0.2 1.9 0.4 1.9 0.7 2.7 1.5 10.6 7.7 1 0.5 1.1 0.3 1 0.2 1 0 6.4-1.2 1.1 0.1 0.9 0.3 1 0.6 7.1 7 1.2 1.8 0.8 0.9 0.9 0.6 13.8 5.5 0.5 0.4 0.6 0.6 0.6 0.9 0.4 0.9 0.3 0.9 0.2 1.5 1 64.1 0.4 2.2 0.3 0.7 0.6 0.9 0.7 0.9 15.3 11.1 10.9 11 1.8 2.2 1.8 3 1.8 4.2 1 3.4 0.7 5.7-0.3 10.5-12.3 100.7-11.6 90.8-5.6 1.6-101.1 10.9-11.1-0.7-4.1-1-2.3-0.9-3.1-1.5-12-7.6-0.7-0.5-17-15.7-4.2-7-2.4-2.9-0.7-1.1-0.3-1.5 0-1.1 1.7-7.9 0.8-1.7 2.5-4.1 0.4-0.8 0.3-0.9 0-0.2 0.1-0.9-0.1-0.8-0.3-1-0.6-1.1-3.5-4-2.6-3.4-1.4-2.2-2.3-2.8-6.3-5.7-11.3-16.9-0.5-0.9-0.3-1 0-1 0-0.9 1.8-6.7 0.3-2-0.6-7.8 0.1-0.9 0.4-0.9 0.5-0.9 1.3-1.7 0.5-0.9 0.4-1 0.3-0.9 0.2-1 0-0.9-2.2-15.6 0-1.9 1.2-6.9 0-0.2-0.7-0.7-0.8-0.5-0.9-0.2-5.1-1-1-0.1-0.9 0.2-5.1 1.4-1 0.1-1-0.1-1.9-0.7-1-0.6-0.9-0.8-0.9-1.8-0.3-1.2-0.1-1.1 0.3-4.8 0.6-2 0.2-0.8-0.2-1-0.6-1-1.2-1-1-0.5-1.1-0.4-1.9-0.4-9.4-0.8-6.7 0.1-1.6-0.3-0.9-0.3-1-0.4-0.9-0.6-0.8-0.7-0.6-0.7-0.5-0.6-5.5-13.3-1.3-6.7-0.4-1.2-1.1-2.5-2.3-7.4-0.8-1.5-0.9-0.9-0.9-0.7-1.6-1-0.5-0.4-0.5-0.7-0.3-0.9-0.1-3 0.4-4.5-0.1-4.3 0.5-8.1 0.8-3.6 0.1-1.8 0-1.1-0.6-1.6-0.1-0.3 0-0.7 0.3-0.8 0.7-1.1 2-2.6 0.1-0.2 0.5-1.4 0.6-2.1-0.1-1.6 0.9-1.8 2.8-4.4 0.6-0.6 1.2-0.9 1-0.4 1-0.2 0.9 0.2 4.6 2.3 1.9 0.7 3.1 0.8 7.8 0.8 2.1 0 6.2-0.9 2 0.1 3.4 0.9 0.8 0 0.9-0.2 1-0.5 1.1-0.9 0.8-1.2 0.7-1.7 0.1-1.3-0.3-1.1-1.2-2-0.4-0.9-0.2-1 0.2-1.2 0.6-1.3 4.2-5.5 4.1-4.2 1.1-0.7 1-0.5 14.4-3.5 1.7-0.8 1.1-0.7 2.3-2.2 3.1-2 0.9-1 0.8-1.3 1.6-3.2 1.2-1.6 0.7-0.7 0.5-0.5 0.7-0.5 0.9-0.4 0.9-0.3 1-0.2 2 0 9.2 1.2 10.3-0.7 3.9 0.3 0.9-0.1 0.8-0.3 0.5-0.7 0.3-0.9 0.2-1 0.1-1.4 0-1.7-0.4-2.8-0.5-1.7-0.6-1.4-1.2-2.2-0.3-1.1 0.2-1.4 0.5-2.2-0.2-1.5-0.1-0.2-3.3-4.5-3.8-6.4-1.1-1.3-3.4-3.4-0.7-1-0.5-0.9-0.2-1 0-1 0.9-6.3 0-2.1-0.3-2.2 0.1-1.1 0.8-1.1 1-0.6 1-0.3 1.7-0.4 0.5-0.2 0.7-0.7 3.2-4.6 1.6-1.8 1.9-1.8 1.1-0.8 1.1-0.6 2.1-0.7 1-0.5 0.8-0.7 0.6-0.8 0.3-0.8 0.2-0.6 0-0.1 0-0.7-0.1-0.9-0.3-1-0.4-1.1-0.5-1-0.7-1-0.9-0.9-1.8-1.5-1.9-1.4-2.8-1.2-0.3-0.6-0.4-1.7-0.1-1.1 0.1-1 0.1-0.9 0.5-1.5 0.6-1.6 1.2-1.9 1.1-1.5 1.4-1.2 0.6-0.5 0.1 0 2.5-1 0.8 0.7 0.2 0.3 0.1 0.1 0.6 0.8 0.8 0.6 0.9 0.4 1 0.1 1.1-0.5 0.9-0.5 1.8-2.6z"
+                                id="1" name="Ar Riyad">
+                            </path>
+                            {{-- </a> --}}
                             {{-- Makkah --}}
                             <a href="{{ route('contents.regions', 2) }}">
                                 <path
@@ -225,6 +229,8 @@
                         </g>
                     </svg>
                 </div>
+
+
                 {{-- </div> --}}
 
                 {{-- <div class="col text-center m-3 p-3">
@@ -279,89 +285,342 @@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script>
-        const regions = [{
-                id: "SA01",
+        const
+        regions = [
+            {
+                id: "1",
                 name: "الرياض",
                 cx: 500,
-                cy: 500
+                cy: 500,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA02",
                 name: "مكة المكرمة",
                 cx: 300,
-                cy: 560
+                cy: 560,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 305,
+                        y: 570,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 310,
+                        y: 580,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 330,
+                        y: 590,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA03",
                 name: "المدينة المنورة",
                 cx: 225,
-                cy: 430
+                cy: 430,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA04",
                 name: "القصيم",
                 cx: 400,
-                cy: 360
+                cy: 360,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA05",
                 name: "الشرقية",
                 cx: 700,
-                cy: 520
+                cy: 520,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA06",
                 name: "عسير",
                 cx: 400,
-                cy: 665
+                cy: 665,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA07",
                 name: "تبوك",
                 cx: 143,
-                cy: 275
+                cy: 275,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA08",
                 name: "حائل",
                 cx: 347.2,
-                cy: 268.7
+                cy: 268.7,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA09",
                 name: "الحدود الشمالية",
                 cx: 350,
-                cy: 200
+                cy: 200,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA10",
                 name: "جازان",
                 cx: 383,
-                cy: 765
+                cy: 765,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA11",
                 name: "نجران",
                 cx: 510,
-                cy: 720
+                cy: 720,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA12",
                 name: "الباحة",
                 cx: 326,
-                cy: 640
+                cy: 640,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
             {
                 id: "SA13",
                 name: "الجوف",
                 cx: 227.6,
-                cy: 180
+                cy: 180,
+                historicalPlaces: [{
+                        name: "Place 1",
+                        x: 560,
+                        y: 480,
+                        id: 22
+                    },
+                    {
+                        name: "Place 2",
+                        x: 570,
+                        y: 500,
+                        id: 29
+                    },
+                    {
+                        name: "Place 3",
+                        x: 580,
+                        y: 520,
+                        id: 30
+                    }
+                ]
             },
         ];
 
         const labelPoints = document.getElementById("label_points");
 
-        for (const region of regions) {
+
+        // Add circles and labels for each region
+        for (const region of regions)
+        {
+
             const circle = document.getElementById(region.id);
             const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
 
@@ -375,9 +634,115 @@
             label.setAttribute("x", textX);
             label.setAttribute("y", textY);
 
+            // Add pin
+            const pin = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            pin.setAttribute("cx", region.cx);
+            pin.setAttribute("cy", region.cy);
+            pin.setAttribute("r", 5); // Adjust size as needed
+            pin.setAttribute("fill", "white"); // Adjust color as needed
+            pin.setAttribute("class", "pin");
+            pin.addEventListener("click", function()
+            {
+                openregion(region);
+            });
+
+            labelPoints.appendChild(pin);
+
             labelPoints.appendChild(label);
 
+            addhistoricalplacespin(region);
+            // Add event listener for click on circle
+            /*circle.addEventListener("click", function() {
+                addhistoricalplacespin(region);
+            });*/
+        }
 
+        function openregion(region) {
+
+
+             window.location.href="home/regions/"+region.id;
+
+
+        }
+
+
+        function addhistoricalplacespin(region) {
+            /*const pinsToRemove1 = document.querySelectorAll(".pinmapcircle");
+            pinsToRemove1.forEach(pin => {
+                pin.parentNode.removeChild(pin);
+            });
+            const pinsToRemove2 = document.querySelectorAll(".pinmapimage");
+            pinsToRemove2.forEach(pin => {
+                pin.parentNode.removeChild(pin);
+            });*/
+
+            // Add pins for historical places
+            region.historicalPlaces.forEach(place => {
+                const pin = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", place.x);
+                circle.setAttribute("class", "pinmapcircle");
+                circle.setAttribute("cy", place.y);
+                circle.setAttribute("r", 1); // Adjust size as needed
+                circle.setAttribute("fill", "none"); // Adjust color as needed
+                pin.appendChild(circle);
+
+                const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
+                image.setAttribute("x", place.x - 5); // Adjust position to center image
+                image.setAttribute("y", place.y - 5); // Adjust position to center image
+                image.setAttribute("class", "pinmapimage");
+                image.setAttribute("width", 20); // Adjust size as needed
+                image.setAttribute("height", 20); // Adjust size as needed
+                image.setAttribute("href",
+                "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"); // URL of the image
+                pin.appendChild(image);
+
+
+                pin.addEventListener("click", function() {
+                    openPlacePopup(place);
+                });
+
+                // Mouse hover listener to display place name
+                pin.addEventListener("mouseenter", function() {
+                    displayPlaceName(pin, place);
+                });
+
+                // Remove place name when mouse leaves the pin
+                pin.addEventListener("mouseleave", function() {
+                    removePlaceName(pin);
+                });
+
+                labelPoints.appendChild(pin);
+            });
+        }
+
+        function displayPlaceName(pin, place) {
+            // Create SVG text element
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", parseInt(place.x) - 5); // Adjust position
+            text.setAttribute("y", parseInt(place.y) - 15); // Adjust position
+            text.setAttribute("fill", "black"); // Adjust color as needed
+            text.textContent = place.name;
+            pin.appendChild(text);
+        }
+
+        function removePlaceName(pin) {
+            // Remove the text element
+            const text = pin.querySelector("text");
+            if (text) {
+                pin.removeChild(text);
+            }
+        }
+
+        function openPlacePopup(place) {
+            // Show popup for the historical place
+            window.location.href="home/landmarks/"+place.id;
+
+        }
+
+        function closePopup() {
+            const popupContainer = document.getElementById("popupContainer");
+            popupContainer.style.display = "none";
         }
     </script>
 @endsection

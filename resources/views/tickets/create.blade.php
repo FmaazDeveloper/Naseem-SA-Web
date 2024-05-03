@@ -64,14 +64,14 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="file" class="form-label">File</label>
-                                <input class="form-control" name="file" type="file" id="file" accept="image/png,jpeg,pdf">
-                                @error('file')
+                                <label for="ticket_file" class="form-label">File</label>
+                                <input class="form-control" name="ticket_file" type="file" id="ticket_file" accept="image/png,jpeg,pdf">
+                                @error('ticket_file')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
                             </div>
 
-                            <button type="submit" name="status_id" value="1" class="btn btn-primary">Send</button>
+                            <button type="submit" name="status" value="New" class="btn btn-primary">Send</button>
 
                         </form>
                     </div>

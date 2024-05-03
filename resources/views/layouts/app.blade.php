@@ -112,10 +112,10 @@
                                     </a>
 
                                     @if (Auth::user()->hasRole('tourist'))
-                                        <a class="dropdown-item" href="{{ route('orders.index') }}">
+                                        <a class="dropdown-item" href="{{ route('request_orders.index') }}">
                                             {{ __('Order guide') }} </a>
                                     @elseif(Auth::user()->hasRole('guide'))
-                                        <a class="dropdown-item" href="{{ route('orders.guide') }}">
+                                        <a class="dropdown-item" href="{{ route('request_orders.show') }}">
                                             {{ __('View orders') }} </a>
                                     @endif
 

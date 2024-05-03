@@ -50,7 +50,7 @@
         <div class="col-2 text-center">
             <div class="position-fixed m-2 p-1">
                 @if (is_null($guides))
-                    <a class="btn btn-outline-success" href="{{ route('orders.index') }}">
+                    <a class="btn btn-outline-success" href="{{ route('request_orders.index') }}">
                         <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="contact_us" width="22"
                             height="22" !important>
                         {{ __('Request Tour Guide') }}
@@ -59,7 +59,7 @@
                     @if ($guides->count() > 0)
                         <h5>{{ __('Request Tour Guide') }}</h5>
                         @foreach ($guides as $guide)
-                            <a href="{{ route('orders.tourist', $guide->user_id) }}"
+                            <a href="{{ route('request_orders.create', $guide->user_id) }}"
                                 class="link-success link-offset-2 link-underline link-underline-opacity-0">
                                 <div class="row rounded-2 m-2 p-1 border-2 border-secondary">
                                     <div class="col-3">

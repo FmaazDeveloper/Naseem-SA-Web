@@ -17,8 +17,8 @@
                     <div class="card-body">
                         <div class="row row-cols-1 row-cols-md-1 rounded">
                             @foreach ($regions as $region)
-                            @if ($region->guides->count() > 0)
-                                <div class="card mb-3">
+                                @if ($region->guides->count() > 0)
+                                    <div class="card mb-3">
                                         <div class="row">
                                             <div class="row">
                                                 <div class="col">
@@ -34,16 +34,15 @@
                                                 <div class="card-body">
                                                     <div class="row row-cols-1 row-cols-md-4 rounded">
 
-                                                        @foreach ($region->guides as $guide)
+                                                        @foreach ($guides as $guide)
                                                             <div class="col">
-                                                                <a href="{{ route('orders.tourist', $guide->user_id) }}"
+                                                                <a href="{{ route('request_orders.create', $guide->user_id) }}"
                                                                     class="link-success link-offset-2 link-underline link-underline-opacity-0">
                                                                     <div
-                                                                        class="row rounded-2 m-2 p-1 border border-2 border-secondary">
+                                                                        class="row rounded-2 m-2 p-1 border-2 border-secondary">
                                                                         <div class="col-3">
                                                                             <img src="{{ $guide->photo ?? 'images/profile_icons/profile_image.png' }}"
-                                                                                class="rounded-circle"
-                                                                                alt=""
+                                                                                class="rounded-circle" alt=""
                                                                                 width="50" height="50">
                                                                         </div>
                                                                         <div class="col-9">
@@ -62,7 +61,7 @@
                                     </div>
                                     {{-- @else
                                         <h3 class="text-center">Not found</h3> --}}
-                                    @endif
+                                @endif
                             @endforeach
                         </div>
                         <div class="pagination justify-content-center">

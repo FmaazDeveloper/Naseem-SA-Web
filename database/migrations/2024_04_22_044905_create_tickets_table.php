@@ -16,11 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('admin_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('contact_reason_id')->constrained('contact_reasons')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('status_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->String('status');
             $table->string('title');
             $table->string('message');
-            $table->string('file')->nullable();
+            $table->string('ticket_file')->nullable();
             $table->string('answer')->nullable();
+            $table->string('answer_file')->nullable();
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });

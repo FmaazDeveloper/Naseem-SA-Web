@@ -24,7 +24,7 @@ class OrderFactory extends Factory
             'guide_id' => User::all()->random(),
             'admin_id' => User::all()->random(),
             'region_id' => Region::all()->random(),
-            'status_id' => StatusType::all()->random(),
+            'status' => fake()->randomElement(['Actived','Pending','Completed','Cancelled','Rejected']),
             'closed_at' => fake()->dateTime(),
         ];
     }

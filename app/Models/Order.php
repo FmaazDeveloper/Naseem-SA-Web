@@ -16,7 +16,7 @@ class Order extends Model
         'guide_id',
         'admin_id',
         'region_id',
-        'status_id',
+        'status',
         'number_of_people',
         'start_date',
         'end_date',
@@ -36,7 +36,7 @@ class Order extends Model
     public function region(){
         return $this->belongsTo(Region::class,'region_id');
     }
-    public function status_type(){
-        return $this->belongsTo(StatusType::class,'status_id');
-    }
+    // public function status_type(){
+    //     return $this->belongsTo(StatusType::class,'status_id');
+    // }
 }

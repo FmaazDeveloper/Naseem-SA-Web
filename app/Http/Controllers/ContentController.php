@@ -28,18 +28,18 @@ class ContentController extends Controller
     public function regions(String $administrative_region_id = null)
     {
         if (is_null($administrative_region_id)) {
-            $regions = Region::where('is_active', true)->paginate(5);
             $administrative_regions = AdministrativeRegion::all();
+            $regions = Region::where('is_active', true)->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))->paginate(5);
             $guides = null;
         } else {
+            $administrative_regions = AdministrativeRegion::where('id', '=', $administrative_region_id)->get();
             $regions = Region::where('administrative_region_id', '=', $administrative_region_id)->where('is_active', true)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
                 ->paginate(5);
-            $administrative_regions = AdministrativeRegion::where('id', '=', $administrative_region_id)->get();
             $guides = Profile::whereIn('region_id', Region::where('administrative_region_id', '=', $administrative_region_id)
                 ->where('is_active', true)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Activity::where('is_active', true)->pluck('region_id'))
+                // ->whereIn('id', Activity::where('is_active', true)->pluck('region_id'))
                 ->pluck('id'))->get();
         }
         return view('contents.regions', ['administrative_regions' => $administrative_regions, 'regions' => $regions, 'guides' => $guides]);

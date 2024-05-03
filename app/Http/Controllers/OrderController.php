@@ -2,141 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdministrativeRegion;
-use App\Models\Landmark;
 use App\Models\Order;
-use App\Models\Profile;
-use App\Models\Region;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-
-
-    public function index(String $region_id = null)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        if (is_null($region_id)) {
-            $regions = Region::where('is_active', true)
-                ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::whereNotNull('region_id')
-                    ->whereIn('user_id', User::where('is_active', true)
-                        ->where('role', '=', 'guide')
-                        ->pluck('id'))
-                    ->pluck('region_id'))
-                ->paginate(5);
-
-            // $regions = Profile::whereIn('user_id', User::where('is_active', true)->where('role', '=', 'guide')->pluck('id'))
-            //     ->whereIn('region_id', Region::where('is_active', true)
-            //         ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))->pluck('id'))
-            //     ->paginate(5);
-        } else {
-            $regions = Region::where('is_active', true)->where('id', '=', $region_id)
-                ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::where('region_id', '=', $region_id)
-                    ->whereIn('region_id', User::where('is_active', true)
-                        ->where('role', '=', 'guide')->pluck('id'))->pluck('region_id'))
-                ->paginate(5);
-        }
-        return view('orders.index', ['regions' => $regions]);
+        $orders = Order::paginate(10);
+        return view('admins.orders.index', ['orders' => $orders]);
     }
 
-
-    public function create(AdministrativeRegion $region_id = null)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        if (is_null($region_id)) {
-            $regions = AdministrativeRegion::where('is_active', true)->get();
-            $guides = null;
-        } else {
-            $guides = Profile::whereIn('user_id', User::where('is_active', true)->where('role', '=', 'guide')->pluck('id'))
-                ->whereIn('region_id', AdministrativeRegion::where('is_active', true)->where('id', '=', $region_id->id)->pluck('id'))
-                ->orWhereIn('user_id', Order::where('status_id', '!=', 3)->pluck('guide_id'))
-                ->get();
-        }
-        $tourist = Order::where('tourist_id', '=', Auth::user()->id)->whereIn('status_id', [4, 3])->first();
-        $regions = AdministrativeRegion::where('is_active', true)->get();
-
-        return view('orders.create', ['regions' => $regions, 'guides' => $guides, 'region_id' => $region_id, 'tourist' => $tourist]);
+        //
     }
 
-
-    public function store(Request $request, String $profile_id)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        $profile = Profile::findOrFail($profile_id);
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Order $order)
+    {
+        return view('admins.orders.edit', ['order' => $order]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Order $order)
+    {
         $request->validate([
-            'tourist_id' => ['exists:users,id'],
-            'guide_id' => ['exists:users,id'],
-            'region_id' => ['exists:administrative_regions,id'],
-            'status_id' => ['exists:status_types,id'],
+            'status' => ['required', 'in:Actived,Pending,Completed,Canceled,Rejected'],
             'number_of_people' => ['required', 'numeric', 'min:1'],
             'start_date' => ['required', 'date', 'after_or_equal:today'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
         ]);
 
-        Order::create([
-            'tourist_id' => Auth::user()->id,
-            'guide_id' => $profile->user_id,
-            'region_id' => $profile->region_id,
-            'status_id' => 4,
+        $order->update([
+            'admin_id' => Auth::user()->id,
+            'status' => $request->status,
             'number_of_people' => $request->number_of_people,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
 
-        return to_route('orders.tourist', $profile->user_id)->with('msg', 'Order has sent successfully');
+        return to_route('orders.index')->with('msg', 'Order has updated successfully');
+
     }
 
-
-    public function tourist(String $user_id)
-    {
-        $guide = Profile::where('user_id', '=', $user_id)->first();
-        $actived_order = Order::where('tourist_id', '=', Auth::user()->id)->where('status_id', '=', 3)->first();
-        $pending_order = Order::where('tourist_id', '=', Auth::user()->id)->where('status_id', '=', 4)->first();
-        return view('orders.tourist', ['guide' => $guide, 'actived_order' => $actived_order, 'pending_order' => $pending_order]);
-    }
-
-
-    public function guide()
-    {
-        $actived_orders = Order::where('guide_id', '=', Auth::user()->id)->where('status_id', '=', 3)->get();
-        $pending_orders = Order::where('guide_id', '=', Auth::user()->id)->where('status_id', '=', 4)->get();
-        return view('orders.guide', ['actived_orders' => $actived_orders, 'pending_orders' => $pending_orders]);
-    }
-
-
-    public function edit(Order $order)
-    {
-        //
-    }
-
-
-    public function update(Request $request, Order $order_id)
-    {
-        $request->validate([
-            'status_id' => ['required', 'exists:status_types,id'],
-        ]);
-
-        $order_id->update([
-            'status_id' => $request->status_id,
-            'closed_at' => now(),
-        ]);
-
-        if ($request->status_id == 6) {
-            return to_route('orders.tourist', $order_id->guide_id)->with('msg', 'Order has canceled successfully');
-        } elseif ($request->status_id == 5) {
-            return to_route('orders.tourist', $order_id->guide_id)->with('msg', 'Trip has complated successfully');
-        } elseif ($request->status_id == 3) {
-            return to_route('orders.guide', $order_id->guide_id)->with('msg', 'Trip has actived successfully');
-        } elseif ($request->status_id == 7) {
-            return to_route('orders.guide', $order_id->guide_id)->with('msg', 'Trip has rejected successfully');
-        } else {
-            return to_route('orders.tourist', $order_id->guide_id)->with('msg', 'Order has updated successfully');
-        }
-    }
-
-
-    public function destroy(Order $order)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         //
     }

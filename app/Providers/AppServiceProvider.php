@@ -26,16 +26,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
-        view()->composer(
-            'layouts.app',
-            function ($view) {
-                $view
-                    ->with('ContactInformation', ContactInformation::find(1))
-                    ->with('AdministrativeRegion', AdministrativeRegion::where('is_active', true)->count())
-                    ->with('Region', Region::where('is_active', true)->count())
-                    ->with('Landmark', Landmark::where('is_active', true)->count())
-                    ->with('Activity', Activity::where('is_active', true)->count());
-            }
-        );
+        // view()->composer(
+        //     'layouts.app',
+        //     function ($view) {
+        //         $view
+        //             ->with('ContactInformation', ContactInformation::find(1))
+        //             ->with('AdministrativeRegion', AdministrativeRegion::where('is_active', true)->count())
+        //             ->with('Region', Region::where('is_active', true)->count())
+        //             ->with('Landmark', Landmark::where('is_active', true)->count())
+        //             ->with('Activity', Activity::where('is_active', true)->count());
+        //     }
+        // );
     }
 }

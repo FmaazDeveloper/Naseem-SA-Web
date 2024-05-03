@@ -30,13 +30,13 @@ class DatabaseSeeder extends Seeder
         $this->call([AdministrativeRegionSeeder::class]);
 
         //contact information
-        $this->call([ContactInformationSeeder::class]);
+        // $this->call([ContactInformationSeeder::class]);
 
         //contact reasons
         $this->call([ContactReasonsSeeder::class]);
 
         //status type
-        $this->call([StatusTypeSeeder::class]);
+        // $this->call([StatusTypeSeeder::class]);
 
         // User::factory(10)->create();
         Region::factory(50)->create();

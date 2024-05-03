@@ -23,12 +23,13 @@ class TicketFactory extends Factory
             'user_id' => User::all()->random(),
             'admin_id' => User::all()->random(),
             'contact_reason_id' => ContactReasons::all()->random(),
-            'status_id' => StatusType::all()->random(),
+            'status' => fake()->randomElement(['New','Closed']),
             'title' => fake()->paragraph(1),
             'message' => fake()->paragraph(3),
-            'file' => fake()->file(),
+            'ticket_file' => fake()->file(),
             'answer' => fake()->paragraph(3),
-            'closed_at' => now(),
+            'answer_file' => fake()->file(),
+            'closed_at' => fake()->randomElement([null,now()]),
         ];
     }
 }

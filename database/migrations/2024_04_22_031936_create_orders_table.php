@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('guide_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('admin_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('region_id')->constrained('regions')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('status_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->String('status');
             $table->string('number_of_people');
             $table->date('start_date');
             $table->date('end_date');
