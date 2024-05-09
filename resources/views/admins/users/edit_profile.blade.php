@@ -8,50 +8,47 @@
                     <div class="card-header">
                         <h4>
                             Update your profile information
-                            <a href="{{ route('profiles.index', Auth::user()->id) }}"
-                                class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('users.index') }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('profiles.update', Auth::user()->id) }}"
+                        <form method="post" action="{{ route('users.update_profile', $profile->user_id) }}"
                             enctype="multipart/form-data">
 
                             @csrf
                             @method('PUT')
 
-                            @if ($profile->user->role == 'guide')
-                                <div class="mb-3">
-                                    <label for="region" class="form-label">Select your region</label>
-                                    <select class="form-select" name="region_id" aria-label="Default select example"
-                                        id="region">
-                                        @foreach ($regions as $region)
-                                            <option value="{{ $region->id }}" @selected($profile->region_id == $region->id)>
-                                                {{ $loop->index + 1 . ' - ' . $region->administrative_region->name . ' / ' . $region->type . ' / ' . $region->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('region')
-                                        <small class="text-danger">*{{ $message }}</small>
-                                    @enderror
-                                </div>
+                            <div class="mb-3">
+                                <label for="region" class="form-label">Select your region</label>
+                                <select class="form-select" name="region_id" aria-label="Default select example"
+                                    id="region">
+                                    <option value="">None</option>
+                                    @foreach ($regions as $region)
+                                        <option value="{{ $region->id }}" @selected($profile->region_id == $region->id)>
+                                            {{ $loop->index + 1 . ' - ' . $region->administrative_region->name . ' / ' . $region->type . ' / ' . $region->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('region')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
+                            </div>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="certificate" class="form-label">Guide certificate</label>
-                                            <input class="form-control" name="certificate"
-                                                value="{{ $profile->certificate }}" type="file" id="certificate"
-                                                accept=".pdf">
-                                            @error('certificate')
-                                                <small class="text-danger">*{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">View</a>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="certificate" class="form-label">Guide certificate</label>
+                                        <input class="form-control" name="certificate" value="{{ $profile->certificate }}"
+                                            type="file" id="certificate" accept=".pdf">
+                                        @error('certificate')
+                                            <small class="text-danger">*{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
-                            @endif
+                                <div class="col">
+                                    <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">View</a>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col">
@@ -78,19 +75,10 @@
                             @enderror
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input name="name" type="text" value="{{ $profile->user->name }}" class="form-control"
-                                    id="name">
-                                @error('name')
-                                    <small class="text-danger">*{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="phone_number" class="form-label">Phone number</label>
                                 <input name="phone_number" type="text"
-                                    value="{{ $profile->phone_number ?? old('phone_number') }}"
-                                    class="form-control" id="phone_number" placeholder="5xxxxxxxx">
+                                    value="{{ $profile->phone_number ?? old('phone_number') }}" class="form-control"
+                                    id="phone_number" placeholder="5xxxxxxxx">
                                 @error('phone_number')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
@@ -98,9 +86,8 @@
 
                             <div class="mb-3">
                                 <label for="age" class="form-label">Age</label>
-                                <input name="age" type="text"
-                                    value="{{ $profile->age ?? old('age') }}" class="form-control"
-                                    id="age">
+                                <input name="age" type="text" value="{{ $profile->age ?? old('age') }}"
+                                    class="form-control" id="age">
                                 @error('age')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
@@ -109,8 +96,8 @@
                             <div class="mb-3">
                                 <label for="nationality" class="form-label">Nationality</label>
                                 <input name="nationality" type="text"
-                                    value="{{ $profile->nationality ?? old('nationality') }}"
-                                    class="form-control" id="nationality">
+                                    value="{{ $profile->nationality ?? old('nationality') }}" class="form-control"
+                                    id="nationality">
                                 @error('nationality')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
@@ -118,8 +105,7 @@
 
                             <div class="mb-3">
                                 <label for="language" class="form-label">Language</label>
-                                <input name="language" type="text"
-                                    value="{{ $profile->language ?? old('language') }}"
+                                <input name="language" type="text" value="{{ $profile->language ?? old('language') }}"
                                     class="form-control" id="language">
                                 @error('language')
                                     <small class="text-danger">*{{ $message }}</small>

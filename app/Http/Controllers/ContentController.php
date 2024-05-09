@@ -7,6 +7,7 @@ use App\Models\AdministrativeRegion;
 use App\Models\Landmark;
 use App\Models\Profile;
 use App\Models\Region;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -37,10 +38,11 @@ class ContentController extends Controller
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
                 ->paginate(5);
             $guides = Profile::whereIn('region_id', Region::where('administrative_region_id', '=', $administrative_region_id)
-                ->where('is_active', true)
-                ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
+                ->where('is_active', true)->pluck('id'))
+                ->whereIn('user_id', User::where('role','=','guide')->where('is_active', true)->pluck('id'))
+                ->get();
+                // ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
                 // ->whereIn('id', Activity::where('is_active', true)->pluck('region_id'))
-                ->pluck('id'))->get();
         }
         return view('contents.regions', ['administrative_regions' => $administrative_regions, 'regions' => $regions, 'guides' => $guides]);
     }

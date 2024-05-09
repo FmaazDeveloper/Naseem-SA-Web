@@ -7,7 +7,7 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <h4>
-                            Create User
+                            Edit User
                             <a href="{{ route('users.index') }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>

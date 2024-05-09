@@ -51,16 +51,16 @@ class AdministrativeRegionController extends Controller
     // }
 
 
-    public function show(String $administrativeRegion = null)
-    {
-        if(is_null($administrativeRegion)){
-            $regions = Region::all();
-        }else{
-            $regions = Region::where('administrative_region_id', '=' ,$administrativeRegion)->get();
-        }
-        // return view('map',['regions' => $regions]);
-        return view('admins.administrative_regions.show', ['administrativeRegions' => $administrativeRegion]);
-    }
+    // public function show(String $administrativeRegion = null)
+    // {
+    //     if(is_null($administrativeRegion)){
+    //         $regions = Region::all();
+    //     }else{
+    //         $regions = Region::where('administrative_region_id', '=' ,$administrativeRegion)->get();
+    //     }
+    //     // return view('map',['regions' => $regions]);
+    //     return view('admins.administrative_regions.show', ['administrativeRegions' => $administrativeRegion]);
+    // }
 
 
     public function edit(AdministrativeRegion $administrativeRegion)
@@ -74,7 +74,7 @@ class AdministrativeRegionController extends Controller
         $request->validate([
             'admin_id' => ['exists:users,id'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'photo' => ['nullable', 'mimes:png'],
+            'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 

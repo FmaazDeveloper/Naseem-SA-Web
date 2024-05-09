@@ -14,7 +14,7 @@
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('tickets.update',$ticket->id) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('tickets.update', $ticket->id) }}" enctype="multipart/form-data">
 
                             @csrf
                             @method('PUT')
@@ -22,20 +22,23 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" value="{{ $ticket->user->name }}" id="name" disabled>
+                                        <input type="text" class="form-control" value="{{ $ticket->user->name }}"
+                                            id="name" disabled>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" value="{{ $ticket->user->email }}" id="email" disabled>
+                                        <input type="text" class="form-control" value="{{ $ticket->user->email }}"
+                                            id="email" disabled>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title</label>
-                                <input type="text" value="{{ $ticket->title }}" class="form-control" id="title" disabled>
+                                <input type="text" value="{{ $ticket->title }}" class="form-control" id="title"
+                                    disabled>
                             </div>
 
                             <div class="mb-3">
@@ -53,13 +56,15 @@
 
                             <div class="mb-3">
                                 <label for="answer_file" class="form-label">File</label>
-                                <input class="form-control" name="answer_file" type="file" id="answer_file" accept="image/png,jpeg,pdf">
+                                <input class="form-control" name="answer_file" type="file" id="answer_file"
+                                    accept="image/png,jpeg,pdf">
                                 @error('answer_file')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <button type="submit" name="status" value="Closed" class="btn btn-primary">Send</button>
+                            @if ($ticket->status !== 'Closed')
+                                <button type="submit" name="status" value="Closed" class="btn btn-primary">Send</button>
+                            @endif
 
                         </form>
                     </div>

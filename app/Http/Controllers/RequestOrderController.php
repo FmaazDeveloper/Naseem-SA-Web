@@ -38,7 +38,7 @@ class RequestOrderController extends Controller
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
                 ->paginate(5);
             $guides = Profile::where('region_id', '=', $region_id)
-                ->whereIn('region_id', User::where('is_active', true)
+                ->whereIn('user_id', User::where('is_active', true)
                     ->where('role', '=', 'guide')->pluck('id'))->get();
         }
         return view('orders.index', ['regions' => $regions, 'guides' => $guides]);

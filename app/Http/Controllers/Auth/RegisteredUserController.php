@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'exists:roles,name'],
-            'is_active' => ['nullable', 'in:1,0'],
+            'is_active' => ['in:1,0'],
         ]);
         try {
 
@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
-                'is_active' => $request->is_active ? $request->is_active : 0,
+                'is_active' => $request->role == 'tourist' ? 1 : 0,
             ]);
 
             $user->profile()->create([

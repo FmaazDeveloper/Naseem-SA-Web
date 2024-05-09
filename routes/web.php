@@ -69,6 +69,11 @@ Route::group(
             Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
             Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
             Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+            //start user profiles routes
+            Route::get('/users/profile/{user_id}', [UserController::class, 'show'])->name('users.show');
+            Route::get('/users/profile/{user_id}/edit', [UserController::class, 'edit_profile'])->name('users.edit_profile');
+            Route::put('/users/profile/{user_id}', [UserController::class, 'update_profile'])->name('users.update_profile');
+            //end user profile routes
             //end users routes
 
             //start roles routes

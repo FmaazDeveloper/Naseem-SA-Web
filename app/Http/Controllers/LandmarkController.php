@@ -45,7 +45,7 @@ class LandmarkController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
             'location' => ['required', 'string', 'min:3', 'max:255'],
-            'photo' => ['required', 'mimes:png'],
+            'photo' => ['required', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 
@@ -96,7 +96,7 @@ class LandmarkController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:255'],
             'location' => ['required', 'string', 'min:3', 'max:255'],
-            'photo' => ['nullable', 'mimes:png'],
+            'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 

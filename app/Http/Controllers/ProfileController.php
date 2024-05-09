@@ -92,7 +92,7 @@ class ProfileController extends Controller
         $request->validate([
             'region_id' => ['nullable', 'exists:regions,id'],
             'name' => ['nullable', 'string', 'max:255'],
-            'photo' => ['nullable', 'mimes:png,jpeg'],
+            'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'certificate' => ['nullable', 'mimes:pdf'],
             'phone_number' => ['nullable', 'numeric', 'digits:9', 'regex:/^5[1-9]\d*$/', 'unique:profiles,phone_number,' . Auth::user()->id . ',user_id'],
             'age' => ['nullable', 'Integer', 'max:99', 'min:18'],

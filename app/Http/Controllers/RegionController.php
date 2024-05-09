@@ -46,7 +46,7 @@ class RegionController extends Controller
             'main_description' => ['required', 'string', 'min:30'],
             'weather_description' => ['required', 'string', 'min:10', 'max:255'],
             'card_description' => ['required', 'string', 'min:10', 'max:255'],
-            'card_photo' => ['required', 'mimes:png'],
+            'card_photo' => ['required', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 
@@ -98,7 +98,7 @@ class RegionController extends Controller
             'main_description' => ['required', 'string', 'min:30'],
             'weather_description' => ['required', 'string', 'min:10', 'max:255'],
             'card_description' => ['required', 'string', 'min:10', 'max:255'],
-            'card_photo' => ['nullable', 'mimes:png'],
+            'card_photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
 
