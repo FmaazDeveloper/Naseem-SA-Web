@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Ticket\TicketRequestMail;
+use App\Mail\Ticket\TicketRespondMail;
 use App\Models\ContactReasons;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -70,6 +73,12 @@ class TicketController extends Controller
             'ticket_file' => $add_file ? $add_file : null,
         ]);
 
+
+        Mail::to($user->email)->send(new TicketRequestMail([
+            'name' => $user->name, 'email' => $user->email, 'contact_reason' => $user->ticket->contact_reason->name,
+            'title' => $request->title, 'message' => $request->message, 'ticket_file' => $add_file
+        ]));
+
         return to_route('tickets.create')->with('msg', 'Ticket has sent successfully');
     }
 
@@ -118,6 +127,11 @@ class TicketController extends Controller
             'status' => $request->status,
             'closed_at' =>  now(),
         ]);
+
+        Mail::to($ticket->user->email)->send(new TicketRespondMail([
+            'name' => $ticket->user->name, 'title' => $ticket->title, 'message' => $ticket->message,
+            'answer' => $request->answer, 'answer_file' => $request->ticket_file
+        ]));
 
         return to_route('tickets.index')->with('msg', 'Ticket has updated successfully');
     }

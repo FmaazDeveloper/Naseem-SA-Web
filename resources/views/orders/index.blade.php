@@ -35,13 +35,13 @@
                                                     <div class="row row-cols-1 row-cols-md-4 rounded">
 
                                                         @foreach ($guides as $guide)
-                                                            <div class="col">
+                                                            <div class="col border border-secondary rounded-pill">
                                                                 <a href="{{ route('request_orders.create', $guide->user_id) }}"
                                                                     class="link-success link-offset-2 link-underline link-underline-opacity-0">
                                                                     <div
                                                                         class="row rounded-2 m-2 p-1 border-2 border-secondary">
                                                                         <div class="col-3">
-                                                                            <img src="{{ $guide->photo ?? 'images/profile_icons/profile_image.png' }}"
+                                                                            <img src="{{ '/'.$guide->photo ?? '/images/profile_icons/profile_image.png' }}"
                                                                                 class="rounded-circle" alt=""
                                                                                 width="50" height="50">
                                                                         </div>

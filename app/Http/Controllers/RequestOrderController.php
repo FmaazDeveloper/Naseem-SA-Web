@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Order\OrderAcceptMail;
+use App\Mail\Order\OrderCancelMail;
+use App\Mail\Order\OrderCompleteMail;
+use App\Mail\Order\OrderRejectMail;
+use App\Mail\Order\OrderRequestMail;
 use App\Models\AdministrativeRegion;
 use App\Models\Landmark;
 use App\Models\Order;
@@ -10,6 +15,7 @@ use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RequestOrderController extends Controller
 {
@@ -67,7 +73,7 @@ class RequestOrderController extends Controller
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
         ]);
 
-        Order::create([
+        $order = Order::create([
             'tourist_id' => Auth::user()->id,
             'guide_id' => $profile->user_id,
             'region_id' => $profile->region_id,
@@ -77,6 +83,14 @@ class RequestOrderController extends Controller
             'end_date' => $request->end_date,
         ]);
 
+        Mail::to($order->tourist->email)->send(new OrderRequestMail([
+            'id' => $order->id, 'name' => $order->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+            'region' => $order->region->name, 'number_of_people' => $request->number_of_people,'role' => 'tourist',
+        ]));
+        Mail::to($order->guide->email)->send(new OrderRequestMail([
+            'id' => $order->id, 'name' => $order->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+            'region' => $order->region->name, 'number_of_people' => $request->number_of_people,'role' => 'guide',
+        ]));
         return to_route('request_orders.create', $profile->user_id)->with('msg', 'Order has sent successfully');
     }
 
@@ -108,17 +122,48 @@ class RequestOrderController extends Controller
 
         switch ($request->status) {
             case 'Canceled':
+                Mail::to($order_id->tourist->email)->send(new OrderCancelMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'tourist',
+                ]));
+                Mail::to($order_id->guide->email)->send(new OrderCancelMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'guide',
+                ]));
                 return to_route('request_orders.create', $order_id->guide_id)->with('msg', 'Order has canceled successfully');
             case 'Completed':
+                Mail::to($order_id->tourist->email)->send(new OrderCompleteMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'tourist', 'guide_name' => $order_id->guide->name,
+                ]));
+                Mail::to($order_id->guide->email)->send(new OrderCompleteMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'guide',
+                ]));
                 return to_route('request_orders.create', $order_id->guide_id)->with('msg', 'Trip has complated successfully');
             case 'Actived':
+                Mail::to($order_id->tourist->email)->send(new OrderAcceptMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'tourist',
+                ]));
+                Mail::to($order_id->guide->email)->send(new OrderAcceptMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'guide',
+                ]));
                 return to_route('request_orders.show', $order_id->guide_id)->with('msg', 'Trip has actived successfully');
             case 'Rejected':
+                Mail::to($order_id->tourist->email)->send(new OrderRejectMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'tourist',
+                ]));
+                Mail::to($order_id->guide->email)->send(new OrderRejectMail([
+                    'id' => $order_id->id, 'name' => $order_id->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+                    'region' => $order_id->region->name, 'number_of_people' => $request->number_of_people,'role' => 'guide',
+                ]));
                 return to_route('request_orders.show', $order_id->guide_id)->with('msg', 'Trip has rejected successfully');
             default:
                 return to_route('request_orders.create', $order_id->guide_id)->with('msg', 'Order has updated successfully');
         }
-
     }
 
 

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Welcome\WelcomeGuideMail;
+use App\Mail\Welcome\WelcomeTouristMail;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -52,6 +52,12 @@ class RegisteredUserController extends Controller
 
             $user->assignRole($request->role);
             $user->givePermissionTo($user->getPermissionsViaRoles());
+
+            if ($user->role == 'tourist') {
+                Mail::to($user->email)->send(new WelcomeTouristMail(['name' => $request->name]));
+            } elseif ($user->role == 'guide') {
+                Mail::to($user->email)->send(new WelcomeGuideMail(['name' => $request->name]));
+            }
 
             return to_route('contents.index')->with('msg', 'User has created successfully');
         } catch (\Exception $e) {

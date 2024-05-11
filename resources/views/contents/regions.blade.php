@@ -107,6 +107,7 @@
                                             alt="{{ $landmark->photo }}" height="150" width="150">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $landmark->name }}</h5>
+                                            <p class="card-text">{{ $landmark->region->card_description }}</p>
                                             <hr>
                                             <a class="icon-link icon-link-hover"
                                                 style="--bs-link-hover-color-rgb: 25, 135, 84;"
