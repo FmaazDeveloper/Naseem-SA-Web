@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators" data-interval="1000">
-            @if ($regions_sliders)
-                @foreach ($regions_sliders as $region)
+            @if ($administrative_regions)
+                @foreach ($administrative_regions as $administrative_region)
                     @if ($loop->first)
                         <a data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
                             aria-label="Slide 1"></a>
@@ -18,18 +17,18 @@
             @endif
         </div>
         <div class="carousel-inner">
-            @if ($regions_sliders)
-                @foreach ($regions_sliders as $region)
+            @if ($administrative_regions)
+                @foreach ($administrative_regions as $administrative_region)
                     <div class="carousel-item @if ($loop->first) active @endif">
-                        <img src="{{ asset($region->card_photo) }}" class="{{ $loop->index }}-slide"
-                            alt="{{ $region->card_photo }}" width="1700" height="500">
+                        <img src="{{ asset($administrative_region->photo) }}" class="{{ $loop->index }}-slide"
+                            alt="{{ $administrative_region->photo }}" width="100%" height="500">
                         <div class="container">
                             <div class="carousel-caption text-start">
-                                <h1>{{ $region->name }}</h1>
-                                {{-- <p class="opacity-75">Some representative placeholder content for the first slide of the
-                                carousel.</p> --}}
-                                <p><a class="btn btn-primary" href="{{ route('contents.landmarks', $region->id) }}">View
-                                        more</a></p>
+                                <h1>{{ $administrative_region->name }}</h1>
+                                <p>
+                                    <a class="btn btn-primary" href="{{ route('contents.regions', $administrative_region->id) }}">View
+                                        more</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -63,11 +62,11 @@
                             <a href="{{ route('request_orders.create', $guide->user_id) }}"
                                 class="link-success link-offset-2 link-underline link-underline-opacity-0">
                                 <div class="row rounded-2 m-2 p-1 border-2 border-secondary">
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <img src="{{ asset($guide->photo ?? 'images/profile_icons/profile_image.png') }}"
                                             class="rounded-circle" width="50" height="50">
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-9">
                                         <h6 class="fs-6">{{ $guide->user->name }}</h6>
                                     </div>
                                 </div>
@@ -81,30 +80,30 @@
         </div>
 
         <div class="col-10">
-            {{-- @if ($administrative_regions->count() > 0) --}}
-            @foreach ($regions as $region)
+            @foreach ($administrative_regions as $administrative_region)
                 <div class="row p-4">
                     <h5>
-                        {{ $loop->index + 1 }} . {{ $region->name }}
+                        {{ $administrative_region->id }} . {{ $administrative_region->name }}
                         <span class="float-end">
-                            <a class="btn btn-primary rounded-pill" href="{{ route('contents.landmarks', $region->id) }}"
-                                role="button">View all</a>
+                            <a class="btn btn-primary rounded-pill"
+                                href="{{ route('contents.regions', $administrative_region->id) }}" role="button">View
+                                all</a>
                         </span>
                     </h5>
                 </div>
                 <div class="row row-cols-md-4 rounded">
 
-                    @foreach ($region->landmarks as $landmark)
-                        @if ($landmark->is_active)
+                    @foreach ($administrative_region->regions as $region)
+                        @if ($region->is_active)
                             <div class="row">
                                 <div class="col m-3">
 
                                     <div class="card h-100 shadow border-light">
-                                        <img src="{{ asset($landmark->photo) }}" class="card-img"
-                                            alt="{{ $landmark->photo }}" height="150" width="150">
+                                        <img src="{{ asset($region->card_photo) }}" class="card-img"
+                                            alt="{{ $region->card_photo }}" height="150" width="150">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $landmark->name }}</h5>
-                                            <p class="card-text">{{ $landmark->description }}</p>
+                                            <h5 class="card-title">{{ $region->name }}</h5>
+                                            <p class="card-text">{{ $region->card_description }}</p>
                                         </div>
                                         <hr>
                                         <a class="icon-link icon-link-hover p-3"
@@ -126,12 +125,9 @@
                     @endforeach
                 </div>
             @endforeach
-            <div class="pagination justify-content-center">
-                {{ $regions->links() }}
-            </div>
-            {{-- @else
-                <h1 class="text-center">Not found any active landmark</h1>
-            @endif --}}
+            {{-- <div class="pagination justify-content-center">
+                    {{ $administrative_regions->links() }}
+                </div> --}}
         </div>
     </div>
 @endsection

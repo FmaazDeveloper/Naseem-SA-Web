@@ -13,7 +13,7 @@
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('activities.store') }}">
+                        <form method="post" action="{{ route('activities.store') }}" enctype="multipart/form-data">
 
                             @csrf
 
@@ -50,6 +50,14 @@
                                 <label for="description">Description</label>
                                 <textarea name="description" class="form-control" id="description">{{ old('description') }}</textarea>
                                 @error('description')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="photo" class="form-label">Photo</label>
+                                <input class="form-control" name="photo" type="file" id="photo" accept="image/png">
+                                @error('photo')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
                             </div>

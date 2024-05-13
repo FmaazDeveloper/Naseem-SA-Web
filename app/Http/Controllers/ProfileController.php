@@ -22,8 +22,8 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
-        $tickets = Ticket::where('user_id', '=', Auth::user()->id)->get();
-        $orders = Order::where('tourist_id', '=', Auth::user()->id)->orWhere('guide_id', '=', Auth::user()->id)->get();
+        $tickets = Ticket::where('user_id', '=', Auth::user()->id)->paginate(4);
+        $orders = Order::where('tourist_id', '=', Auth::user()->id)->orWhere('guide_id', '=', Auth::user()->id)->paginate(4);
         return view('profiles.index', ['profile' => $profile, 'tickets' => $tickets, 'orders' => $orders]);
     }
 
@@ -90,15 +90,15 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
 
         $request->validate([
-            'region_id' => ['nullable', 'exists:regions,id'],
-            'name' => ['nullable', 'string', 'max:255'],
+            'region_id' => ['required', 'exists:regions,id'],
+            'name' => ['required', 'string', 'max:255'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'certificate' => ['nullable', 'mimes:pdf'],
-            'phone_number' => ['nullable', 'numeric', 'digits:9', 'regex:/^5[1-9]\d*$/', 'unique:profiles,phone_number,' . Auth::user()->id . ',user_id'],
-            'age' => ['nullable', 'Integer', 'max:99', 'min:18'],
-            'gender' => ['nullable', 'in:Male,Female'],
-            'nationality' => ['nullable', 'String'],
-            'language' => ['nullable', 'String'],
+            'phone_number' => ['required', 'numeric', 'digits:9', 'regex:/^5[1-9]\d*$/', 'unique:profiles,phone_number,' . Auth::user()->id . ',user_id'],
+            'age' => ['required', 'Integer', 'max:99', 'min:18'],
+            'gender' => ['required', 'in:Male,Female'],
+            'nationality' => ['required', 'String'],
+            'language' => ['required', 'String'],
             'overview' => ['nullable', 'String', 'min:10', 'max:255'],
         ]);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Landmark;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ActivityController extends Controller
 {
@@ -39,14 +40,26 @@ class ActivityController extends Controller
             'region_id' => ['exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
+            'photo' => ['required', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
+
+        if ($request->has('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+
+            $file_name = $request->name . time() .'.' . $extension;
+
+            $path = 'images/activities/';
+            $file->move($path, $file_name);
+        }
 
         Activity::create([
             'administrative_region_id' => $landmark->region->administrative_region_id,
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
+            'photo' => $path . $file_name,
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
@@ -76,14 +89,34 @@ class ActivityController extends Controller
             'region_id' => ['exists:regions,id'],
             'landmark_id' => ['required', 'exists:landmarks,id'],
             'description' => ['required', 'string', 'min:10'],
+            'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'is_active' => ['nullable', 'in:1,0'],
         ]);
+
+        $update_photo = null;
+
+        if ($request->has('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+
+            $file_name = $request->name . time() .'.' . $extension;
+
+            $path = 'images/activities/';
+            $file->move($path, $file_name);
+
+            if (File::exists($activity->photo)) {
+                File::delete($activity->photo);
+            }
+
+            $update_photo = $path . $file_name;
+        }
 
         $activity->update([
             'administrative_region_id' => $landmark->region->administrative_region_id,
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
+            'photo' => $update_photo ? $update_photo : $landmark->photo,
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
@@ -94,6 +127,9 @@ class ActivityController extends Controller
     public function destroy(String $activity_id)
     {
         $activity = Activity::findOrFail($activity_id);
+        if (File::exists($activity->photo)) {
+            File::delete($activity->photo);
+        }
         $landmark = $activity->landmark_id;
         $activity->delete();
         return to_route('activities.index', ['landmark' => $landmark])->with('msg', 'Activity has deleted successfully');

@@ -19,6 +19,11 @@
                             <form method="post" action="{{ route('request_orders.store', $guide->id) }}">
                                 @csrf
 
+                                <div class="mb-3">
+                                    <label for="region" class="form-label">Region</label>
+                                    <input type="text" value="{{ $guide->region->name }}" class="form-control"
+                                        id="region" disabled>
+                                </div>
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="mb-3">
@@ -53,7 +58,8 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" name="status" value="Pending" class="btn btn-success">Request</button>
+                                <button type="submit" name="status" value="Pending"
+                                    class="btn btn-success">Request</button>
 
                             </form>
                         @elseif (!is_null($actived_order))
@@ -99,7 +105,8 @@
                                 <form method="post" action="{{ route('request_orders.update', $actived_order->id) }}">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" name="status" value="Completed" class="btn btn-danger">End the trip</button>
+                                    <button type="submit" name="status" value="Completed" class="btn btn-danger">End the
+                                        trip</button>
                                 </form>
                             </div>
                         @elseif(!is_null($pending_order))
@@ -147,7 +154,7 @@
 
         <div class="row m-5 p-3 rounded-3" style="background-image: url(/images/pages/guide_page.jpg)">
             @if (!is_null($guide))
-                <div class="col-md-3 mx-auto justify-content-center m-auto text-center opacity-75">
+                <div class="col-md-3 mx-auto justify-content-center m-1 text-center opacity-75">
                     <div class="col p-2">
                         <img src="{{ asset($guide->photo ?? 'images/profile_icons/profile_image.png') }}" alt=""
                             width="100" height="100" class="border border-dark rounded-circle" !important>
@@ -232,20 +239,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 shadow bg-light rounded-5 opacity-75">
-                    <div class="row m-3">
-                        <div class="row row-cols-1 row-cols-md-3 rounded">
-                            <p>
-                            <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/overview.png') }}" alt=""
-                                    width="33" height="33" !important>
-                            </div>
-                            <div class="col-9 text-start">
-                                {{ $profile->overview ?? 'No data found' }}
-                            </div>
-                            </p>
+                <div class="row shadow bg-light rounded-5 opacity-75">
+                        <p>
+                        <div class="col-1">
+                            <img src="{{ asset('images/profile_icons/overview.png') }}" alt="" width="33"
+                                height="33" !important>
                         </div>
-                    </div>
+                        <div class="col-11 text-start">
+                            {{ $profile->overview ?? 'No data found' }}
+                        </div>
+                        </p>
                 </div>
             @else
                 <h4 class="text-center">

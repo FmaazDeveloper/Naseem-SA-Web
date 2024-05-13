@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset(config('app.logo')) }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Naseem-SA') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -51,10 +51,18 @@
                         </li>
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                href="{{ route('contents.regions') }}">
-                                <img src="/images/navbar_icons/regions.png" class="rounded" alt="regions"
+                                href="{{ route('contents.administrative_regions') }}">
+                                <img src="/images/navbar_icons/administrative_regions.png" class="rounded" alt="regions"
                                     width="22" height="22" !important>
                                 {{ __('Regions') }}
+                            </a>
+                        </li>
+                        <li class="nav-item pt-1 m-3">
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                href="{{ route('contents.regions') }}">
+                                <img src="/images/navbar_icons/regions.png" class="rounded" alt="landmarks"
+                                    width="22" height="22" !important>
+                                {{ __('Cities/Islands') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
@@ -65,13 +73,6 @@
                                 {{ __('Landmarks') }}
                             </a>
                         </li>
-                        {{-- <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="#">
-                        <img src="/images/navbar_icons/activities.png" class="rounded" alt="activities"
-                                    width="22" height="22" !important>
-                        {{ __('Activities') }}
-                        </a>
-                        </li> --}}
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                                 href="{{ route('tickets.create') }}">
@@ -151,28 +152,38 @@
                 <div class="row">
                     <div class="col-4">
                         <h5 class="card-title">Contact Us</h5>
-                        <p class="card-text">Phone number </p>
-                        <p class="card-text">Email address</p>
+                        <p class="card-text">Phone number: <a href="https://wa.me/+966123456789" target="_blanck">+966 12 345 6789</a></p>
+                        <p class="card-text">Email address: <a href="mailto:FmaazDeveloper@gmail.com" target="_blanck">FmaazDeveloper@gmail.com</a></p>
                     </div>
                     <div class="col-4">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">Links</h5>
+                        <p><a href="{{ route('contents.index') }}">Home</a></p>
+                        <p><a href="{{ route('contents.regions') }}">Regions</a></p>
+                        <p><a href="{{ route('tickets.create') }}">Contact Us</a></p>
                     </div>
                     <div class="col-4">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="footer-social">
+                            <h5 class="card-title">Follow Us</h5>
+                                <a href="https://web.snapchat.com/" target="_blanck"><img src="images/footer_icons/snapchat.png" width="50" height="50" alt="Snapchat"></a>
+                                <a href="https://www.instagram.com/" target="_blanck"><img src="images/footer_icons/instagram.png" width="40" height="40" alt="Instagram"></a>
+                                <a href="https://twitter.com/home" target="_blanck"><img src="images/footer_icons/x.png" width="40" height="40" alt="X"></a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-body-secondary">
                 <footer class="position-relative">
                     <div class="container">
-                        <a href="{{ url('/') }}">© {{ date('Y') }}
-                            {{ config('app.name', 'Laravel') }}. All rights reserved.</a>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-muted">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
+                            </div>
+                        </div>
                     </div>
                 </footer>
             </div>
         </div>
+
     </div>
 </body>
 

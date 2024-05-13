@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">View</a>
+                                        <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">{{ $profile->certificate ? 'View' : '' }}</a>
                                     </div>
                                 </div>
                             @endif

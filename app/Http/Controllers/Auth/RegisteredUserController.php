@@ -8,6 +8,7 @@ use App\Mail\Welcome\WelcomeTouristMail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -58,7 +59,7 @@ class RegisteredUserController extends Controller
             } elseif ($user->role == 'guide') {
                 Mail::to($user->email)->send(new WelcomeGuideMail(['name' => $request->name]));
             }
-
+            Auth::login($user);
             return to_route('contents.index')->with('msg', 'User has created successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('msg', 'User not registered!\nError:' . $e->getMessage());

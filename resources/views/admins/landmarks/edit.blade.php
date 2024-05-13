@@ -41,6 +41,9 @@
                             <div class="mb-3">
                                 <label for="description">Description</label>
                                 <textarea name="description" class="form-control" id="description">{{ $landmark->description }}</textarea>
+                                @error('description')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="location" class="form-label">Location</label>

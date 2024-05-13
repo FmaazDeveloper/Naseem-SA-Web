@@ -4,8 +4,8 @@
 
     <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
         <div class="carousel-indicators" data-interval="1000">
-            @if ($regions)
-                @foreach ($regions as $region)
+            @if ($landmarks_sliders)
+                @foreach ($landmarks_sliders as $landmark)
                     @if ($loop->first)
                         <a data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
                             aria-label="Slide 1"></a>
@@ -18,17 +18,20 @@
             @endif
         </div>
         <div class="carousel-inner">
-            @if ($regions)
-                @foreach ($regions as $region)
+            @if ($landmarks_sliders)
+                @foreach ($landmarks_sliders as $landmark)
                     <div class="carousel-item @if ($loop->first) active @endif">
-                        <img src="{{ asset($region->card_photo) }}" class="{{ $loop->index }}-slide"
-                            alt="{{ $region->card_photo }}" width="1700" height="500">
+                        <img src="{{ asset($landmark->photo) }}" class="{{ $loop->index }}-slide"
+                            alt="{{ $landmark->photo }}" width="1700" height="500">
                         <div class="container">
                             <div class="carousel-caption text-start">
-                                <h1>{{ $region->name }}</h1>
+                                <h1>{{ $landmark->name }}</h1>
                                 {{-- <p class="opacity-75">Some representative placeholder content for the first slide of the
                                 carousel.</p> --}}
-                                <p><a class="btn btn-primary" href="{{ route('contents.landmarks', $region->id) }}">View
+                                @if ($landmark->activities->count() > 0)
+                                @endif
+                                <p><a class="btn btn-primary"
+                                        href="{{ route('contents.landmarks', [$landmark->region->id, $landmark->id]) }}">View
                                         more</a></p>
                             </div>
                         </div>
@@ -46,13 +49,13 @@
         </button>
     </div>
 
-    <div class="row">
+    <div class="row mb-5">
 
-        <div class="col-2 text-center">
+        <div class="col-2">
             <div class="position-fixed m-2 p-1">
                 @if (is_null($guides))
                     <a class="btn btn-outline-success" href="{{ route('request_orders.index') }}">
-                        <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="contact_us" width="22"
+                        <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="guide" width="22"
                             height="22" !important>
                         {{ __('Request Tour Guide') }}
                     </a>
@@ -63,69 +66,76 @@
                             <a href="{{ route('request_orders.create', $guide->user_id) }}"
                                 class="link-success link-offset-2 link-underline link-underline-opacity-0">
                                 <div class="row rounded-2 m-2 p-1 border-2 border-secondary">
-                                    <div class="col-3">
-                                        <img src="{{ $guide->photo }}" class="rounded-circle"
-                                            alt="{{ $guide->user->name }}" width="50" height="50">
+                                    <div class="col-4">
+                                        <img src="{{ asset($guide->photo ?? 'images/profile_icons/profile_image.png') }}"
+                                            class="rounded-circle" width="50" height="50">
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-8">
                                         <h6 class="fs-6">{{ $guide->user->name }}</h6>
                                     </div>
                                 </div>
                             </a>
                         @endforeach
                     @else
-                    <h5>Not found any available guides !</h5>
+                        <h5>No guiders available !</h5>
                     @endif
                 @endif
             </div>
         </div>
 
         <div class="col-10">
-            <div class="container p-3">
-                @if ($landmarks->count() > 0)
-                    <div class="row">
-                        <div class="col m-3">
+            {{-- @if ($administrative_regions->count() > 0) --}}
+            @foreach ($landmarks as $landmark)
+                <div class="row p-4">
+                    <h5>
+                        {{ $loop->index + 1 }} . {{ $landmark->name }}
+                        <span class="float-end">
+                            <a class="btn btn-primary rounded-pill"
+                                href="{{ route('contents.landmarks', [$landmark->region->id, $landmark->id]) }}"
+                                role="button">View all</a>
+                        </span>
+                    </h5>
+                </div>
+                <div class="row row-cols-md-4 rounded">
 
-                            @foreach ($landmarks as $landmark)
-                                <div class="col p-4">
-                                    <h5>
-                                        {{ ($landmarks->currentPage() - 1) * $landmarks->perPage() + $loop->iteration }} .
-                                        {{ $landmark->name }}
-                                        @if ($landmark->activities->count() > 4)
-                                            <span class="float-end">
-                                                <a class="btn btn-primary rounded-pill" href="#" role="button">View
-                                                    all</a>
-                                            </span>
-                                        @endif
-                                    </h5>
-                                </div>
-                                <div class="row row-cols-1 row-cols-md-1 rounded m-2 p-2">
+                    @foreach ($landmark->activities as $activity)
+                        @if ($activity->is_active)
+                            <div class="row">
+                                <div class="col m-3">
 
-
-                                    <div class="card h-100 border-light">
-                                        <div class="row row-cols-1 row-cols-md-4 shadow rounded m-3">
-                                            @foreach ($landmark->activities->take(4) as $activity)
-                                                <div class="card-body">
-                                                    <h5 class="card-title">
-                                                        {{ $loop->index + 1 }} .
-                                                        {{ $activity->description }}
-                                                    </h5>
-                                                </div>
-                                            @endforeach
+                                    <div class="card h-100 shadow border-light">
+                                        <img src="{{ asset($activity->photo) }}" class="card-img"
+                                            alt="{{ $activity->photo }}" height="150" width="150">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $activity->name }}</h5>
+                                            <p class="card-text">{{ $activity->description }}</p>
                                         </div>
+                                        {{-- <hr>
+                                        <a class="icon-link icon-link-hover p-3"
+                                            style="--bs-link-hover-color-rgb: 25, 135, 84;"
+                                            href="{{ route('contents.landmarks', $activity->id) }}">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                                                <use xlink:href="#arrow-right"></use>
+                                            </svg>
+                                        </a> --}}
                                     </div>
 
                                 </div>
-                            @endforeach
-                            <div class="pagination justify-content-center">
-                                {{ $landmarks->links() }}
                             </div>
-                        </div>
-                    </div>
-                @else
-                    <h1 class="text-center">Not found any activities</h1>
-                @endif
+                        @endif
+                    @endforeach
+                </div>
+            @endforeach
+            <div class="pagination justify-content-center">
+                {{ $landmarks->links() }}
             </div>
+            {{-- @else
+                <h1 class="text-center">Not found any active landmark</h1>
+            @endif --}}
         </div>
     </div>
 @endsection

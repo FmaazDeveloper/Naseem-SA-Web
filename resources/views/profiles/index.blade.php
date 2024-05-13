@@ -9,11 +9,14 @@
             @endif
 
             @if (!is_null($profile))
-                <div class="col-md-3 mx-auto justify-content-center m-auto text-center">
+                <div class="col-md-4 mx-auto justify-content-center m-auto text-center">
                     <div class="col p-2">
                         <img src="{{ asset($profile->photo ? $profile->photo : 'images/profile_icons/profile_image.png') }}"
                             alt="" width="100" height="100" class="border border-dark rounded-circle" !important>
                     </div>
+                    @if (!$profile->user->is_active)
+                        <p class="text-danger">*Your acount unactive</p>
+                    @endif
                     <div class="col shadow bg-light p-3 rounded-5">
                         <div class="row">
 
@@ -32,8 +35,19 @@
                                 <img src="{{ asset('images/profile_icons/email.png') }}" alt="" width="33"
                                     height="33" !important>
                             </div>
-                            <div class="col-9 text-start">
+                            <div class="col-6 text-start">
                                 {{ $profile->user->email }}
+                            </div>
+                            <div class="col-3 text-end">
+                                @if (!is_null($profile->user->email_verified_at))
+                                    <img src="{{ asset('images/profile_icons/verified.png') }}" width="25"
+                                        height="25">
+                                @else
+                                    <a href="{{ route('verification.notice') }}">
+                                        <img src="{{ asset('images/profile_icons/unverified.png') }}" width="25"
+                                            height="25">
+                                    </a>
+                                @endif
                             </div>
                             </p>
 
@@ -129,7 +143,7 @@
                             Number of tickets is : {{ $tickets->count() }}
                             <div class="row row-cols-1 row-cols-md-3 rounded">
                                 @foreach ($tickets as $ticket)
-                                    <div class="col">
+                                    <div class="col m-1">
                                         <div class="card h-100">
                                             @if ($tickets->count() > 0)
                                                 <div class="card-body">
@@ -151,13 +165,16 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="pagination justify-content-center">
+                                {{ $tickets->links() }}
+                            </div>
                         </div>
                         {{-- Orders --}}
                         <div class="row m-3">
                             Number of orders is : {{ $orders->count() }}
                             <div class="row row-cols-1 row-cols-md-3 rounded">
                                 @foreach ($orders as $order)
-                                    <div class="col">
+                                    <div class="col m-1">
                                         <div class="card h-100">
                                             @if ($orders->count() > 0)
                                                 <div class="card-body">
@@ -179,18 +196,23 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="pagination justify-content-center">
+                                {{ $orders->links() }}
+                            </div>
                         </div>
                         @if ($profile->user->role == 'guide')
                             {{-- Overview --}}
                             <div class="row m-3">
-                                <div class="row row-cols-1 row-cols-md-3 rounded">
+                                <div class="row row-cols-1 row-cols-md-1 rounded">
                                     <p>
-                                    <div class="col-3">
-                                        <img src="{{ asset('images/profile_icons/overview.png') }}" alt=""
-                                            width="33" height="33" !important>
-                                    </div>
-                                    <div class="col-9 text-start">
-                                        {{ $profile->overview ?? 'No data found' }}
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <img src="{{ asset('images/profile_icons/overview.png') }}" alt=""
+                                                width="33" height="33" !important>
+                                        </div>
+                                        <div class="col-11 text-start">
+                                            {{ $profile->overview ?? 'No data found' }}
+                                        </div>
                                     </div>
                                     </p>
                                 </div>
@@ -198,7 +220,7 @@
                         @endif
                     </div>
                 </div>
-            {{-- @else
+                {{-- @else
                 <h4 class="text-center">
                     No data found ! Please update your profile information
                     <a href="{{ route('profiles.create', Auth::user()->id) }}" class="btn btn-success">Update Profile</a>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    {{-- <div class="container"> --}}
         <div class="row justify-content-center m-5">
-            <div class="col-md-8">
+            <div class="col-md-8 m-5">
                 <div class="card">
                     <div class="card-header">{{ __('Register') }}</div>
 
@@ -99,5 +99,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 @endsection

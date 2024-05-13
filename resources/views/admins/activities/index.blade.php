@@ -13,6 +13,7 @@
                             Activities
                             <a href="{{ route('activities.create', $landmark->id) }}" class="btn btn-success float-end">Add
                                 Activity</a>
+                            <a href="{{ route('landmarks.index', $landmark->region->id) }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">

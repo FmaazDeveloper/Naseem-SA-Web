@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('region_id')->constrained('regions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('landmark_id')->constrained('landmarks')->onUpdate('cascade')->onDelete('cascade');
             $table->text('description');
+            $table->string('photo');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

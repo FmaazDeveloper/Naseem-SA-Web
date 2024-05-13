@@ -16,6 +16,7 @@ class Activity extends Model
         'region_id',
         'landmark_id',
         'description',
+        'photo',
         'is_active',
     ];
 

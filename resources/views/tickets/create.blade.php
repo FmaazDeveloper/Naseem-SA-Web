@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col m-3">
+        <div class="row m-5">
+            <div class="col m-5">
                 <div class="card h-100">
                     @if (session('msg'))
                         <div class="text-center alert alert-success">{{ session('msg') }}</div>

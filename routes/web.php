@@ -15,12 +15,13 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 //contents
-Route::get('/{administrative_region_id?}', [ContentController::class, 'index'])->name('contents.index');
+Route::get('/', [ContentController::class, 'index'])->name('contents.index');
+Route::get('/home/administrative_regions/{administrative_region_id?}', [ContentController::class, 'administrative_regions'])->name('contents.administrative_regions');
 Route::get('/home/regions/{administrative_region_id?}', [ContentController::class, 'regions'])->name('contents.regions');
-Route::get('/home/landmarks/{region_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');
+Route::get('/home/landmarks/{region_id?}/{landmrk_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');
 
 //user routes
 Route::group(
@@ -36,24 +37,26 @@ Route::group(
         Route::get('/profiles/{user_id}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
         Route::put('/profiles/{user_id}', [ProfileController::class, 'update'])->name('profiles.update');
 
-        //ticket routes
-        Route::get('/tickets/create/', [TicketController::class, 'create'])->name('tickets.create');
-        Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+        Route::group(['middleware' => 'verified',], function () {
+            //ticket routes
+            Route::get('/tickets/create/', [TicketController::class, 'create'])->name('tickets.create');
+            Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-        //order routes
-        Route::get('/orders/tourist', [RequestOrderController::class, 'show'])->name('request_orders.show')->middleware('role:guide');
-        Route::get('/orders/{region_id?}', [RequestOrderController::class, 'index'])->name('request_orders.index')->middleware('role:tourist');
-        Route::get('/orders/guide/{user_id}', [RequestOrderController::class, 'create'])->name('request_orders.create')->middleware('role:tourist');
-        Route::post('/orders/{profile_id}', [RequestOrderController::class, 'store'])->name('request_orders.store')->middleware('role:tourist');
-        // Route::get('/orders/{order_id}/edit', [RequestOrderController::class, 'edit'])->name('request_orders.edit')->middleware('role:tourist');
-        Route::put('/orders/{order_id}', [RequestOrderController::class, 'update'])->name('request_orders.update');
+            //order routes
+            Route::get('/orders/tourist', [RequestOrderController::class, 'show'])->name('request_orders.show')->middleware('role:guide');
+            Route::get('/orders/{region_id?}', [RequestOrderController::class, 'index'])->name('request_orders.index')->middleware('role:tourist');
+            Route::get('/orders/guide/{user_id}', [RequestOrderController::class, 'create'])->name('request_orders.create')->middleware('role:tourist');
+            Route::post('/orders/{profile_id}', [RequestOrderController::class, 'store'])->name('request_orders.store')->middleware('role:tourist');
+            // Route::get('/orders/{order_id}/edit', [RequestOrderController::class, 'edit'])->name('request_orders.edit')->middleware('role:tourist');
+            Route::put('/orders/{order_id}', [RequestOrderController::class, 'update'])->name('request_orders.update');
+        });
     }
 );
 //admin routes
 Route::group(
     [
         'prefix' => 'admin/',
-        'middleware' => ['role:manager|super-admin|admin'],
+        'middleware' => ['role:manager|super-admin|admin','verified'],
     ],
     function () {
 

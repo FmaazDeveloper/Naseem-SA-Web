@@ -44,7 +44,7 @@
 
 
             /* background-image: url("images/pages/main_page.jpg");
-                                            background-repeat: no-repeat; */
+                                                    background-repeat: no-repeat; */
         }
     </style>
 
@@ -79,7 +79,7 @@
                             {{-- Riyadh --}}
                             <path
                                 d="M495 265.8l0.5 0.3 3.7 2.7 1.8 1.7 0.7 1 0.6 1.2 1.2 4.2 0.5 1.3 1.1 1.3 0.9 0.9 12.3 7.1 2 0.6 3.1 0.3 1 0.2 0.9 0.5 0.9 0.8 2.7 3.3 4.1 3.9 1.8 1.3 1 0.4 1.8 0.4 7.2 0.2 1.9 0.4 1.9 0.7 2.7 1.5 10.6 7.7 1 0.5 1.1 0.3 1 0.2 1 0 6.4-1.2 1.1 0.1 0.9 0.3 1 0.6 7.1 7 1.2 1.8 0.8 0.9 0.9 0.6 13.8 5.5 0.5 0.4 0.6 0.6 0.6 0.9 0.4 0.9 0.3 0.9 0.2 1.5 1 64.1 0.4 2.2 0.3 0.7 0.6 0.9 0.7 0.9 15.3 11.1 10.9 11 1.8 2.2 1.8 3 1.8 4.2 1 3.4 0.7 5.7-0.3 10.5-12.3 100.7-11.6 90.8-5.6 1.6-101.1 10.9-11.1-0.7-4.1-1-2.3-0.9-3.1-1.5-12-7.6-0.7-0.5-17-15.7-4.2-7-2.4-2.9-0.7-1.1-0.3-1.5 0-1.1 1.7-7.9 0.8-1.7 2.5-4.1 0.4-0.8 0.3-0.9 0-0.2 0.1-0.9-0.1-0.8-0.3-1-0.6-1.1-3.5-4-2.6-3.4-1.4-2.2-2.3-2.8-6.3-5.7-11.3-16.9-0.5-0.9-0.3-1 0-1 0-0.9 1.8-6.7 0.3-2-0.6-7.8 0.1-0.9 0.4-0.9 0.5-0.9 1.3-1.7 0.5-0.9 0.4-1 0.3-0.9 0.2-1 0-0.9-2.2-15.6 0-1.9 1.2-6.9 0-0.2-0.7-0.7-0.8-0.5-0.9-0.2-5.1-1-1-0.1-0.9 0.2-5.1 1.4-1 0.1-1-0.1-1.9-0.7-1-0.6-0.9-0.8-0.9-1.8-0.3-1.2-0.1-1.1 0.3-4.8 0.6-2 0.2-0.8-0.2-1-0.6-1-1.2-1-1-0.5-1.1-0.4-1.9-0.4-9.4-0.8-6.7 0.1-1.6-0.3-0.9-0.3-1-0.4-0.9-0.6-0.8-0.7-0.6-0.7-0.5-0.6-5.5-13.3-1.3-6.7-0.4-1.2-1.1-2.5-2.3-7.4-0.8-1.5-0.9-0.9-0.9-0.7-1.6-1-0.5-0.4-0.5-0.7-0.3-0.9-0.1-3 0.4-4.5-0.1-4.3 0.5-8.1 0.8-3.6 0.1-1.8 0-1.1-0.6-1.6-0.1-0.3 0-0.7 0.3-0.8 0.7-1.1 2-2.6 0.1-0.2 0.5-1.4 0.6-2.1-0.1-1.6 0.9-1.8 2.8-4.4 0.6-0.6 1.2-0.9 1-0.4 1-0.2 0.9 0.2 4.6 2.3 1.9 0.7 3.1 0.8 7.8 0.8 2.1 0 6.2-0.9 2 0.1 3.4 0.9 0.8 0 0.9-0.2 1-0.5 1.1-0.9 0.8-1.2 0.7-1.7 0.1-1.3-0.3-1.1-1.2-2-0.4-0.9-0.2-1 0.2-1.2 0.6-1.3 4.2-5.5 4.1-4.2 1.1-0.7 1-0.5 14.4-3.5 1.7-0.8 1.1-0.7 2.3-2.2 3.1-2 0.9-1 0.8-1.3 1.6-3.2 1.2-1.6 0.7-0.7 0.5-0.5 0.7-0.5 0.9-0.4 0.9-0.3 1-0.2 2 0 9.2 1.2 10.3-0.7 3.9 0.3 0.9-0.1 0.8-0.3 0.5-0.7 0.3-0.9 0.2-1 0.1-1.4 0-1.7-0.4-2.8-0.5-1.7-0.6-1.4-1.2-2.2-0.3-1.1 0.2-1.4 0.5-2.2-0.2-1.5-0.1-0.2-3.3-4.5-3.8-6.4-1.1-1.3-3.4-3.4-0.7-1-0.5-0.9-0.2-1 0-1 0.9-6.3 0-2.1-0.3-2.2 0.1-1.1 0.8-1.1 1-0.6 1-0.3 1.7-0.4 0.5-0.2 0.7-0.7 3.2-4.6 1.6-1.8 1.9-1.8 1.1-0.8 1.1-0.6 2.1-0.7 1-0.5 0.8-0.7 0.6-0.8 0.3-0.8 0.2-0.6 0-0.1 0-0.7-0.1-0.9-0.3-1-0.4-1.1-0.5-1-0.7-1-0.9-0.9-1.8-1.5-1.9-1.4-2.8-1.2-0.3-0.6-0.4-1.7-0.1-1.1 0.1-1 0.1-0.9 0.5-1.5 0.6-1.6 1.2-1.9 1.1-1.5 1.4-1.2 0.6-0.5 0.1 0 2.5-1 0.8 0.7 0.2 0.3 0.1 0.1 0.6 0.8 0.8 0.6 0.9 0.4 1 0.1 1.1-0.5 0.9-0.5 1.8-2.6z"
-                                id="1" name="Ar Riyad">
+                                id="1" name="Riyadh">
                             </path>
                             {{-- Makkah --}}
                             <path
@@ -159,7 +159,7 @@
                         <g id="label_points">
 
                             {{-- Riyadh --}}
-                            <circle class="Ar Riyad" cx="530.2" cy="476.2" id="1">
+                            <circle class="Riyadh" cx="530.2" cy="476.2" id="1">
                             </circle>
                             {{-- Makkah --}}
                             <circle class="Makkah" cx="351.3" cy="534.7" id="2">
@@ -201,56 +201,6 @@
                         </g>
                     </svg>
                 </div>
-
-
-                {{-- </div> --}}
-
-                {{-- <div class="col text-center m-3 p-3">
-                @if ($regions)
-                    @if ($administrative_region_id)
-                        <h4 class="p-1">{{ $administrative_region_id->name }}</h4>
-                    @endif
-                    <ol>
-                        @foreach ($regions as $region)
-                            <a class="link-dark link-offset-2 link-underline-opacity-100-hover link-underline-primary"
-                                href="{{ route('contents.regions', $region->id) }}">
-                                @if ($region->is_active)
-                                    <li>
-                                        <h6>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <img src="{{ asset($region->card_photo) }}" class="rounded"
-                                                        alt="{{ $region->card_photo }}" width="50" height="50"
-                                                        !important>
-                                                </div>
-                                                <div class="col-9">
-                                                    {{ $region->name }}
-                                                </div>
-                                            </div>
-                                        </h6>
-                                    </li>
-                                @endif
-                            </a>
-                        @endforeach
-                @endif
-                </ol>
-                @if ($regions->count() > 0)
-                    <h6>
-                        <a class="icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;"
-                            href="{{ route('contents.regions', $administrative_region_id) }}">
-                            View more
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-                                <use xlink:href="#arrow-right"></use>
-                            </svg>
-                        </a>
-                    </h6>
-                @endif
-
-            </div> --}}
-
             </div>
         </div>
     </div>
@@ -260,157 +210,157 @@
         const
             regions = [{
                     id: "1",
-                    name: "الرياض",
+                    name: "Riyadh",
                     cx: 500,
                     cy: 500,
                     historicalPlaces: [{
-                            name: "Place 1",
+                            name: "Riyadh",
                             x: 560,
                             y: 480,
-                            id: 28
+                            id: 1
                         },
                         {
-                            name: "Place 2",
+                            name: "Jeddah",
                             x: 570,
                             y: 500,
-                            id: 29
+                            id: 2
                         },
                         {
-                            name: "Place 3",
+                            name: "Al-Majma'ah Governorate",
                             x: 580,
                             y: 520,
-                            id: 30
+                            id: 3
                         }
                     ]
                 },
                 {
                     id: "2",
-                    name: "مكة المكرمة",
+                    name: "Makkah",
                     cx: 300,
                     cy: 560,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 340,
                             y: 500,
-                            id: 25
+                            id: 4
                         },
                         {
                             name: "Place 2",
                             x: 360,
                             y: 500,
-                            id: 26
+                            id: 5
                         },
                         {
                             name: "Place 3",
                             x: 380,
                             y: 500,
-                            id: 27
+                            id: 6
                         }
                     ]
                 },
                 {
                     id: "3",
-                    name: "المدينة المنورة",
+                    name: "AL Madinah AL Munawwarah",
                     cx: 225,
                     cy: 430,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 230,
-                            y: 435,
-                            id: 22
+                            y: 350,
+                            id: 7
                         },
                         {
                             name: "Place 2",
-                            x: 270,
-                            y: 400,
-                            id: 23
+                            x: 260,
+                            y: 360,
+                            id: 8
                         },
                         {
                             name: "Place 3",
                             x: 300,
-                            y: 430,
-                            id: 24
+                            y: 370,
+                            id: 9
                         }
                     ]
                 },
                 {
                     id: "4",
-                    name: "القصيم",
+                    name: "Al-Qassim",
                     cx: 400,
                     cy: 360,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 410,
-                            y: 350,
-                            id: 31
+                            y: 300,
+                            id: 10
                         },
                         {
                             name: "Place 2",
                             x: 430,
-                            y: 350,
-                            id: 32
+                            y: 300,
+                            id: 11
                         },
                         {
                             name: "Place 3",
-                            x: 460,
-                            y: 330,
-                            id: 33
+                            x: 450,
+                            y: 300,
+                            id: 12
                         }
                     ]
                 },
                 {
                     id: "5",
-                    name: "الشرقية",
+                    name: "Alsharqia",
                     cx: 700,
                     cy: 520,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 650,
                             y: 350,
-                            id: 1
-                        },
-                        {
-                            name: "Place 2",
-                            x: 740,
-                            y: 500,
-                            id: 2
-                        },
-                        {
-                            name: "Place 3",
-                            x: 770,
-                            y: 559,
-                            id: 3
-                        }
-                    ]
-                },
-                {
-                    id: "6",
-                    name: "عسير",
-                    cx: 400,
-                    cy: 665,
-                    historicalPlaces: [{
-                            name: "Place 1",
-                            x: 412,
-                            y: 640,
                             id: 13
                         },
                         {
                             name: "Place 2",
-                            x: 416,
-                            y: 670,
+                            x: 740,
+                            y: 450,
                             id: 14
                         },
                         {
                             name: "Place 3",
-                            x: 420,
-                            y: 600,
+                            x: 750,
+                            y: 550,
                             id: 15
                         }
                     ]
                 },
                 {
+                    id: "6",
+                    name: "Asir",
+                    cx: 400,
+                    cy: 665,
+                    historicalPlaces: [{
+                            name: "Place 1",
+                            x: 400,
+                            y: 600,
+                            id: 16
+                        },
+                        {
+                            name: "Place 2",
+                            x: 410,
+                            y: 600,
+                            id: 17
+                        },
+                        {
+                            name: "Place 3",
+                            x: 420,
+                            y: 600,
+                            id: 18
+                        }
+                    ]
+                },
+                {
                     id: "7",
-                    name: "تبوك",
+                    name: "Tabuk",
                     cx: 143,
                     cy: 275,
                     historicalPlaces: [{
@@ -422,152 +372,152 @@
                         {
                             name: "Place 2",
                             x: 170,
-                            y: 250,
+                            y: 220,
                             id: 20
                         },
                         {
                             name: "Place 3",
-                            x: 190,
-                            y: 250,
+                            x: 130,
+                            y: 210,
                             id: 21
                         }
                     ]
                 },
                 {
                     id: "8",
-                    name: "حائل",
+                    name: "Hail",
                     cx: 347.2,
                     cy: 268.7,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 300,
                             y: 240,
-                            id: 4
+                            id: 22
                         },
                         {
                             name: "Place 2",
                             x: 400,
                             y: 250,
-                            id: 5
+                            id: 23
                         },
                         {
                             name: "Place 3",
                             x: 300,
                             y: 300,
-                            id: 6
+                            id: 24
                         }
                     ]
                 },
                 {
                     id: "9",
-                    name: "الحدود الشمالية",
+                    name: "Alhudud Alshamalia",
                     cx: 350,
                     cy: 190,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 390,
-                            y: 175,
-                            id: 16
+                            y: 180,
+                            id: 25
                         },
                         {
                             name: "Place 2",
                             x: 430,
-                            y: 175,
-                            id: 17
+                            y: 180,
+                            id: 26
                         },
                         {
                             name: "Place 3",
-                            x: 400,
-                            y: 150,
-                            id: 18
+                            x: 410,
+                            y: 180,
+                            id: 27
                         }
                     ]
                 },
                 {
                     id: "10",
-                    name: "جازان",
+                    name: "Jazan",
                     cx: 400,
                     cy: 755,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 365,
                             y: 710,
-                            id: 16
+                            id: 28
                         },
                         {
                             name: "Place 2",
                             x: 385,
                             y: 725,
-                            id: 17
+                            id: 29
                         },
                     ]
                 },
                 {
                     id: "11",
-                    name: "نجران",
+                    name: "Najran",
                     cx: 510,
                     cy: 720,
                     historicalPlaces: [{
                             name: "Place 1",
                             x: 450,
                             y: 700,
-                            id: 37
+                            id: 30
                         },
                         {
                             name: "Place 2",
                             x: 470,
                             y: 715,
-                            id: 38
+                            id: 31
                         },
                         {
                             name: "Place 3",
-                            x: 520,
+                            x: 490,
                             y: 670,
-                            id: 38
+                            id: 32
                         }
                     ]
                 },
                 {
                     id: "12",
-                    name: "الباحة",
-                    cx: 326,
-                    cy: 640,
+                    name: "Al-Baha",
+                    cx: 330,
+                    cy: 635,
                     historicalPlaces: [{
                             name: "Place 1",
-                            x: 329,
-                            y: 600,
-                            id: 37
+                            x: 335,
+                            y: 585,
+                            id: 33
                         },
                         {
                             name: "Place 2",
-                            x: 335,
-                            y: 615,
-                            id: 38
+                            x: 350,
+                            y: 590,
+                            id: 34
                         },
                     ]
                 },
                 {
                     id: "13",
-                    name: "الجوف",
+                    name: "Aljawf",
                     cx: 227.6,
                     cy: 180,
                     historicalPlaces: [{
-                            name: "Place 55",
+                            name: "Place 1",
                             x: 190,
                             y: 150,
-                            id: 50
+                            id: 35
                         },
                         {
-                            name: "Place 66",
+                            name: "Place 2",
                             x: 230,
-                            y: 140,
-                            id: 51
+                            y: 120,
+                            id: 36
                         },
                         {
-                            name: "Place 77",
+                            name: "Place 3",
                             x: 250,
-                            y: 160,
-                            id: 52
+                            y: 110,
+                            id: 37
                         }
                     ]
                 },

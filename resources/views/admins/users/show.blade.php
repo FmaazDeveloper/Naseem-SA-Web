@@ -8,11 +8,14 @@
                 <div class="text-center alert alert-success">{{ session('msg') }}</div>
             @endif
 
-            <div class="col-md-3 mx-auto justify-content-center m-auto text-center">
+            <div class="col-md-4 mx-auto justify-content-center m-auto text-center">
                 <div class="col p-2">
                     <img src="{{ asset($profile->photo ? $profile->photo : 'images/profile_icons/profile_image.png') }}"
                         alt="" width="100" height="100" class="border border-dark rounded-circle" !important>
                 </div>
+                @if (!$profile->user->is_active)
+                    <p class="text-danger">*Your acount unactive</p>
+                @endif
                 <div class="col shadow bg-light p-3 rounded-5">
                     <div class="row">
 
@@ -31,8 +34,18 @@
                             <img src="{{ asset('images/profile_icons/email.png') }}" alt="" width="33"
                                 height="33" !important>
                         </div>
-                        <div class="col-9 text-start">
+                        <div class="col-6 text-start">
                             {{ $profile->user->email }}
+                        </div>
+                        <div class="col-3 text-end">
+                            @if (!is_null($profile->user->email_verified_at))
+                                <img src="{{ asset('images/profile_icons/verified.png') }}" width="25" height="25">
+                            @else
+                                <a href="{{ route('verification.notice') }}">
+                                    <img src="{{ asset('images/profile_icons/unverified.png') }}" width="25"
+                                        height="25">
+                                </a>
+                            @endif
                         </div>
                         </p>
 
@@ -86,30 +99,32 @@
                         </div>
                         </p>
 
-                        <p>
-                        <div class="col-3">
-                            <img src="{{ asset('images/profile_icons/region.png') }}" alt="" width="33"
-                                height="33" !important>
-                        </div>
-                        <div class="col-9 text-start">
-                            {{ $profile->region ? $profile->region->administrative_region->name . ' / ' . $profile->region->type . ' / ' . $profile->region->name : 'No data found' }}
-                        </div>
-                        </p>
+                        @if ($profile->user->role == 'guide')
+                            <p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/region.png') }}" alt="" width="33"
+                                    height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                {{ $profile->region ? $profile->region->administrative_region->name . ' / ' . $profile->region->type . ' / ' . $profile->region->name : 'No data found' }}
+                            </div>
+                            </p>
 
-                        <p>
+                            <p>
 
-                        <div class="col-3">
-                            <img src="{{ asset('images/profile_icons/certificate.png') }}" alt="" width="33"
-                                height="33" !important>
-                        </div>
-                        <div class="col-9 text-start">
-                            @if (!is_null($profile->certificate))
-                                <a href="{{ url($profile->certificate) }}" target="_blank">View</a>
-                            @else
-                                No data found
-                            @endif
-                        </div>
-                        </p>
+                            <div class="col-3">
+                                <img src="{{ asset('images/profile_icons/certificate.png') }}" alt=""
+                                    width="33" height="33" !important>
+                            </div>
+                            <div class="col-9 text-start">
+                                @if (!is_null($profile->certificate))
+                                    <a href="{{ url($profile->certificate) }}" target="_blank">View</a>
+                                @else
+                                    No data found
+                                @endif
+                            </div>
+                            </p>
+                        @endif
 
                     </div>
                     <a href="{{ route('users.edit_profile', $profile->user_id) }}" class="btn btn-success">Update
@@ -117,6 +132,7 @@
                 </div>
 
             </div>
+
 
             <div class="col-md-8 shadow bg-light rounded-5">
 
@@ -177,20 +193,22 @@
                             @endforeach
                         </div>
                     </div>
-                    {{-- Overview --}}
-                    <div class="row m-3">
-                        <div class="row row-cols-1 row-cols-md-3 rounded">
-                            <p>
-                            <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/overview.png') }}" alt="" width="33"
-                                    height="33" !important>
+                    @if ($profile->user->role == 'guide')
+                        {{-- Overview --}}
+                        <div class="row m-3">
+                            <div class="row row-cols-1 row-cols-md-3 rounded">
+                                <p>
+                                <div class="col-3">
+                                    <img src="{{ asset('images/profile_icons/overview.png') }}" alt=""
+                                        width="33" height="33" !important>
+                                </div>
+                                <div class="col-9 text-start">
+                                    {{ $profile->overview ?? 'No data found' }}
+                                </div>
+                                </p>
                             </div>
-                            <div class="col-9 text-start">
-                                {{ $profile->overview ?? 'No data found' }}
-                            </div>
-                            </p>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

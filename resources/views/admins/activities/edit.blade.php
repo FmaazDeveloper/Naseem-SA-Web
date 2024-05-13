@@ -13,7 +13,7 @@
                         </h4>
                     </div>
                     <div class="card-body m-3">
-                        <form method="post" action="{{ route('activities.update', $activity->id) }}">
+                        <form method="post" action="{{ route('activities.update', $activity->id) }}" enctype="multipart/form-data">
 
                             @csrf
                             @method('PUT')
@@ -52,6 +52,23 @@
                                 @error('description')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="photo" class="form-label">Photo</label>
+                                        <input class="form-control" name="photo" type="file" id="photo"
+                                            accept="image/png">
+                                        @error('photo')
+                                            <small class="text-danger">*{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <img src="{{ asset($activity->photo) }}" class="rounded" alt="{{ $activity->photo }}"
+                                        height="100">
+                                </div>
                             </div>
 
                             <div class="mb-3 form-check">
