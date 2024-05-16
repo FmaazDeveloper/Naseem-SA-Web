@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.orders.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -10,7 +10,7 @@
                     @endif
                     <div class="card-header">
                         <h4>
-                            Tickets
+                            Orders
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -90,14 +90,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="card-footer text-body-secondary">
                         <div class="pagination justify-content-center">
                             {{ $orders->links() }}
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        <b>
-                            Orders : {{ $orders->count() }}
-                        </b>
                     </div>
                 </div>
             </div>

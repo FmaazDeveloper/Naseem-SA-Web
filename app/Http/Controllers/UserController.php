@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Welcome\WelcomeUserMail;
 use App\Models\Profile;
 use App\Models\Region;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -25,19 +27,51 @@ class UserController extends Controller
 
     public function index()
     {
+        $roles = Role::all();
+        $all_users = User::all();
+
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $users = User::paginate(10);
         $admin = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'admin')->toArray())->count();
         $guide = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'guide')->toArray())->count();
         $tourist = User::with('roles')->get()->filter(fn ($user) => $user->roles->where('name', 'tourist')->toArray())->count();
-        return view('admins.users.index', ['users' => $users, 'admin' => $admin, 'guide' => $guide, 'tourist' => $tourist]);
+        return view('admins.users.index', [
+            'users' => $users,
+            'admin' => $admin,
+            'guide' => $guide,
+            'tourist' => $tourist,
+            'roles' => $roles,
+            'all_users' => $all_users,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+        ]);
     }
 
 
     public function create()
     {
         $roles = Role::all();
+        $all_users = User::all();
+
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $permissions = Permission::all();
-        return view('admins.users.create', ['roles' => $roles, 'permissions' => $permissions]);
+        return view('admins.users.create', [
+            'roles' => $roles,
+            'permissions' => $permissions,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+            'all_users' => $all_users
+        ]);
     }
 
 
@@ -68,6 +102,10 @@ class UserController extends Controller
             $user->assignRole($request->role);
             $user->givePermissionTo($user->getPermissionsViaRoles());
 
+            Mail::to($user->email)->send(new WelcomeUserMail([
+                'name' => $user->name,'email' => $user->email,'role' => $user->role,'password' => $request->password,
+            ]));
+
             return to_route('users.index')->with('msg', 'User has created successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('msg', 'User not registered!\nError:' . $e->getMessage());
@@ -77,21 +115,51 @@ class UserController extends Controller
 
     public function show(String $user_id)
     {
+        $roles = Role::all();
+        $all_users = User::all();
+
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $profile = Profile::where('user_id', '=', $user_id)->first();
         $orders = $profile->user->guide_orders ?? $profile->user->tourist_orders;
-        return view('admins.users.show', ['profile' => $profile, 'orders' => $orders]);
+        return view('admins.users.show', [
+            'profile' => $profile, 'orders' => $orders,
+            'roles' => $roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+            'all_users' => $all_users
+        ]);
     }
 
 
     public function edit_profile(String $user_id)
     {
+        $roles = Role::all();
+        $all_users = User::all();
+
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $profile = Profile::where('user_id', '=', $user_id)->first();
         $regions = Region::where('is_active', true)->get();
-        return view('admins.users.edit_profile', ['profile' => $profile, 'regions' => $regions]);
+        return view('admins.users.edit_profile', [
+            'profile' => $profile, 'regions' => $regions,
+            'roles' => $roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+            'all_users' => $all_users
+        ]);
     }
 
 
-    public function update_profile(Request $request,String $user_id)
+    public function update_profile(Request $request, String $user_id)
     {
 
         $profile = Profile::where('user_id', '=', $user_id)->first();
@@ -154,15 +222,28 @@ class UserController extends Controller
             'overview' => $request->overview,
         ]);
 
-        return to_route('users.show',$user_id)->with('msg', 'Profile has updated successfully');
+        return to_route('users.show', $user_id)->with('msg', 'Profile has updated successfully');
     }
 
     public function edit(string $id)
     {
         $roles = Role::all();
+        $all_users = User::all();
+
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $user = User::findOrFail($id);
         $permissions = Permission::all();
-        return view('admins.users.edit', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions]);
+        return view('admins.users.edit', [
+            'user' => $user, 'roles' => $roles, 'permissions' => $permissions,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+            'all_users' => $all_users
+        ]);
     }
 
 
@@ -176,10 +257,10 @@ class UserController extends Controller
             'role' => ['required', 'exists:roles,name'],
         ]);
         try {
-
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'email_verified_at' => $user->email !== $request->email ? null : $user->email_verified_at,
                 'role' => $request->role,
                 'is_active' => $request->is_active ? $request->is_active : 0,
             ]);

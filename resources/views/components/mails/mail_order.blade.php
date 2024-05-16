@@ -85,11 +85,6 @@
         <main>
             @yield('message')
         </main>
-
-
-        {{-- <div>
-            <a href="{{ $url }}" class="btn btn-primary">@yield('button-home')</a>
-        </div> --}}
         <p>
             <b>Best regards,<br>
                 {{ config('app.name') }} Team</b>

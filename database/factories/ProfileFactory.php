@@ -20,6 +20,8 @@ class ProfileFactory extends Factory
     {
         $user = User::factory()->create();
 
+        $user->assignRole($user->role);
+
         return [
             'user_id' => $user->id,
             'photo' => fake()->randomElement(['images/profiles/Al-Baha.png', 'images/profiles/Riyadh.png', 'images/profiles/Makkah.png', 'images/profiles/Jazan.png',]),

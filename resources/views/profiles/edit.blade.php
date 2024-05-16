@@ -51,6 +51,14 @@
                                         <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">{{ $profile->certificate ? 'View' : '' }}</a>
                                     </div>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="overview">Overview</label>
+                                    <textarea name="overview" class="form-control" id="overview">{{ $profile->overview }}</textarea>
+                                    @error('overview')
+                                        <small class="text-danger">*{{ $message }}</small>
+                                    @enderror
+                                </div>
                             @endif
 
                             <div class="row">
@@ -73,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @error('type')
+                            @error('gender')
                                 <small class="text-danger">*{{ $message }}</small>
                             @enderror
 

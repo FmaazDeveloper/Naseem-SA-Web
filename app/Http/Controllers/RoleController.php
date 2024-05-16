@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -13,23 +14,47 @@ class RoleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view role',['only'=> ['index']]);
-        $this->middleware('permission:add role',['only'=> ['create','store']]);
-        $this->middleware('permission:update role',['only'=> ['update','edit']]);
-        $this->middleware('permission:add permission',['only'=> ['updatePermissionToRole','editPermissionToRole']]);
-        $this->middleware('permission:delete role',['only'=> ['destroy']]);
+        $this->middleware('permission:view role', ['only' => ['index']]);
+        $this->middleware('permission:add role', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update role', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:add permission', ['only' => ['updatePermissionToRole', 'editPermissionToRole']]);
+        $this->middleware('permission:delete role', ['only' => ['destroy']]);
     }
+
 
     public function index()
     {
+        $all_roles = Role::all();
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($all_roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $roles = Role::paginate(10);
-        return view('admins.roles.index', ['roles' => $roles]);
+        return view('admins.roles.index', [
+            'roles' => $roles,
+            'all_roles' => $all_roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+        ]);
     }
 
 
     public function create()
     {
-        return view('admins.roles.create');
+        $all_roles = Role::all();
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($all_roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
+        return view('admins.roles.create', [
+            'all_roles' => $all_roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+        ]);
     }
 
 
@@ -55,7 +80,19 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('admins.roles.edit', ['role' => $role]);
+        $all_roles = Role::all();
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($all_roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
+        return view('admins.roles.edit', [
+            'role' => $role,
+            'all_roles' => $all_roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+        ]);
     }
 
 
@@ -82,6 +119,13 @@ class RoleController extends Controller
 
     public function editPermissionToRole(String $id)
     {
+        $all_roles = Role::all();
+        $usersRolesActive[] = '';
+        $usersRolesUnactive[] = '';
+        foreach ($all_roles as $role) {
+            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        }
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
         $rolePermissions = DB::table('role_has_permissions')
@@ -89,7 +133,14 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('admins.roles.editPermissionToRole', ['role' => $role, 'permissions' => $permissions, 'rolePermissions' => $rolePermissions]);
+        return view('admins.roles.editPermissionToRole', [
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions,
+            'all_roles' => $all_roles,
+            'usersRolesActive' => $usersRolesActive,
+            'usersRolesUnactive' => $usersRolesUnactive,
+        ]);
     }
 
     public function updatePermissionToRole(Request $request, String $id)

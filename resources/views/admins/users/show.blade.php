@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.users.main')
 
-@section('content')
+@section('form')
     <div class="container">
 
         <div class="row m-5">
@@ -196,17 +196,17 @@
                     @if ($profile->user->role == 'guide')
                         {{-- Overview --}}
                         <div class="row m-3">
-                            <div class="row row-cols-1 row-cols-md-3 rounded">
-                                <p>
-                                <div class="col-3">
+                            <p>
+                            <div class="row">
+                                <div class="col-1">
                                     <img src="{{ asset('images/profile_icons/overview.png') }}" alt=""
                                         width="33" height="33" !important>
                                 </div>
-                                <div class="col-9 text-start">
+                                <div class="col-11 text-start">
                                     {{ $profile->overview ?? 'No data found' }}
                                 </div>
-                                </p>
                             </div>
+                            </p>
                         </div>
                     @endif
                 </div>

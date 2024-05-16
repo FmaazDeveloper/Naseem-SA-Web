@@ -90,7 +90,7 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
 
         $request->validate([
-            'region_id' => ['required', 'exists:regions,id'],
+            'region_id' => ['nullable', 'exists:regions,id'],
             'name' => ['required', 'string', 'max:255'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
             'certificate' => ['nullable', 'mimes:pdf'],

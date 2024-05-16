@@ -17,9 +17,9 @@ class ContactReasons extends Model
     ];
 
     public function tickets(){
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class,'contact_reason_id');
     }
     public function ticket(){
-        return $this->hasOne(Ticket::class);
+        return $this->hasOne(Ticket::class,'contact_reason_id');
     }
 }

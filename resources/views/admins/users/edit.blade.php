@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.users.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">

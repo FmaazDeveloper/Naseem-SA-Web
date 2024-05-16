@@ -14,6 +14,7 @@
                             <a href="{{ route('request_orders.index') }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
+                    {{-- new request --}}
                     <div class="card-body m-3">
                         @if (is_null($actived_order) && is_null($pending_order))
                             <form method="post" action="{{ route('request_orders.store', $guide->id) }}">
@@ -62,6 +63,7 @@
                                     class="btn btn-success">Request</button>
 
                             </form>
+                            {{-- end trip status --}}
                         @elseif (!is_null($actived_order))
                             <div class="text-center">
                                 <h4>Your Guide information</h4>
@@ -82,14 +84,14 @@
                                         <tr>
                                             <th scope="row">{{ $actived_order->id }}</th>
                                             <td>{{ $actived_order->guide->name }}</td>
-                                            <td>{{ $actived_order->age }}</td>
-                                            <td>{{ $actived_order->gender }}</td>
-                                            <td>{{ $actived_order->nationality }}</td>
-                                            <td>{{ $actived_order->language }}</td>
+                                            <td>{{ $actived_order->guide->profile->age }}</td>
+                                            <td>{{ $actived_order->guide->profile->gender }}</td>
+                                            <td>{{ $actived_order->guide->profile->nationality }}</td>
+                                            <td>{{ $actived_order->guide->profile->language }}</td>
                                             <td>
-                                                <a href="https://wa.me/+966{{ $actived_order->phone_number }}"
+                                                <a href="https://wa.me/+966{{ $actived_order->guide->profile->phone_number }}"
                                                     target="_blanck">
-                                                    {{ $actived_order->phone_number }}
+                                                    {{ $actived_order->guide->profile->phone_number }}
                                                 </a>
                                             </td>
                                             <td>
@@ -109,6 +111,8 @@
                                         trip</button>
                                 </form>
                             </div>
+
+                            {{-- Witing status --}}
                         @elseif(!is_null($pending_order))
                             <div class="text-center">
                                 <h4>Your trip information</h4>
@@ -151,7 +155,7 @@
                 </div>
             </div>
         </div>
-
+        {{-- guide general info --}}
         <div class="row m-5 p-3 rounded-3" style="background-image: url(/images/pages/guide_page.jpg)">
             @if (!is_null($guide))
                 <div class="col-md-3 mx-auto justify-content-center m-1 text-center opacity-75">
@@ -240,15 +244,15 @@
                     </div>
                 </div>
                 <div class="row shadow bg-light rounded-5 opacity-75">
-                        <p>
-                        <div class="col-1">
-                            <img src="{{ asset('images/profile_icons/overview.png') }}" alt="" width="33"
-                                height="33" !important>
-                        </div>
-                        <div class="col-11 text-start">
-                            {{ $profile->overview ?? 'No data found' }}
-                        </div>
-                        </p>
+                    <p>
+                    <div class="col-1">
+                        <img src="{{ asset('images/profile_icons/overview.png') }}" alt="" width="33"
+                            height="33" !important>
+                    </div>
+                    <div class="col-11 text-start">
+                        {{ $profile->overview ?? 'No data found' }}
+                    </div>
+                    </p>
                 </div>
             @else
                 <h4 class="text-center">

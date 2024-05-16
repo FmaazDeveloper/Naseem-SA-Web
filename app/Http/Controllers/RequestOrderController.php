@@ -25,6 +25,8 @@ class RequestOrderController extends Controller
 
         if (!$user->is_active) {
             abort(403, 'Your account is not activated');
+        }elseif (is_null($user->profile->phone_number)){
+            abort(403, 'Your have to update your profile');
         }
     }
     public function index(String $region_id = null)
@@ -34,25 +36,43 @@ class RequestOrderController extends Controller
         if (is_null($region_id)) {
             $regions = Region::where('is_active', true)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::whereNotNull('region_id')
-                    ->whereIn('user_id', User::where('is_active', true)
-                        ->where('role', '=', 'guide')->pluck('id'))
-                    ->pluck('region_id'))
                 ->whereIn('id', Profile::whereNotNull('certificate')
                     ->whereIn('user_id', User::where('is_active', true)
-                        ->where('role', '=', 'guide')->whereNotNull('email_verified_at')->pluck('id'))
+                        ->whereNotNull('email_verified_at')
+                        ->where('role', '=', 'guide')->pluck('id'))
                     ->pluck('region_id'))
                 ->paginate(5);
+
+            $guides = [];
+
+            foreach ($regions as $region) {
+                $guides[$region->id] = Profile::whereNotNull('certificate')
+                    ->whereIn('user_id', User::where('is_active', true)
+                        ->whereNotNull('email_verified_at')
+                        ->where('role', '=', 'guide')->pluck('id'))
+                    ->get();
+            }
         } else {
             $regions = Region::where('is_active', true)->where('id', '=', $region_id)
                 ->whereIn('id', Landmark::where('is_active', true)->pluck('region_id'))
-                ->whereIn('id', Profile::where('region_id','=', $region_id)
+                ->whereIn('id', Profile::where('region_id', '=', $region_id)
+                    ->whereNotNull('certificate')
                     ->whereIn('user_id', User::where('is_active', true)
                         ->where('role', '=', 'guide')->whereNotNull('email_verified_at')->pluck('id'))
                     ->pluck('region_id'))
                 ->paginate(5);
+                $guides = [];
+
+            foreach ($regions as $region) {
+                $guides[$region->id] = Profile::where('region_id', '=', $region->id)
+                    ->whereNotNull('certificate')
+                    ->whereIn('user_id', User::where('is_active', true)
+                        ->whereNotNull('email_verified_at')
+                        ->where('role', '=', 'guide')->pluck('id'))
+                    ->get();
+            }
         }
-        return view('orders.index', ['regions' => $regions]);
+        return view('orders.index', ['regions' => $regions, 'guides' => $guides]);
     }
 
 

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.users.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -19,7 +19,7 @@
                             @method('PUT')
 
                             <div class="mb-3">
-                                <label for="region" class="form-label">Select your region</label>
+                                <label for="region" class="form-label">Select the region</label>
                                 <select class="form-select" name="region_id" aria-label="Default select example"
                                     id="region">
                                     <option value="">None</option>
@@ -48,6 +48,14 @@
                                 <div class="col">
                                     <a href="{{ url($profile->certificate ?? '#') }}" target="_blank">View</a>
                                 </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="overview">Overview</label>
+                                <textarea name="overview" class="form-control" id="overview">{{ $profile->overview ?? old('overview') }}</textarea>
+                                @error('overview')
+                                    <small class="text-danger">*{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="row">

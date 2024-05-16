@@ -18,8 +18,8 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/profile/{user_email}', [ProfileController::class, 'index']);
 
 Route::get('/administrative_regions', [ContentController::class, 'administrative_regions']);
-Route::get('/regions', [ContentController::class, 'regions']);
+Route::get('/regions/{administrative_region_id}', [ContentController::class, 'regions']);
 Route::get('/landmarks/{region_id}', [ContentController::class, 'landmarks']);
-// Route::get('/activities', [ContentController::class, 'activities']);
+Route::get('/activities/{landmark_id}', [ContentController::class, 'activities']);
 
 Route::post('/contact_us', [TicketController::class, 'store']);

@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Region;
-use App\Models\StatusType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +23,10 @@ class OrderFactory extends Factory
             'guide_id' => User::all()->random(),
             'admin_id' => User::all()->random(),
             'region_id' => Region::all()->random(),
-            'status' => fake()->randomElement(['Actived','Pending','Completed','Cancelled','Rejected']),
+            'status' => fake()->randomElement(['Actived', 'Pending', 'Completed', 'Cancelled', 'Rejected']),
+            'number_of_people' => rand(1, 10),
+            'start_date' => fake()->dateTimeBetween('-1 month', '+1 month'),
+            'end_date' => fake()->dateTimeBetween('+1 month', '+2 months'),
             'closed_at' => fake()->dateTime(),
         ];
     }

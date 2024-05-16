@@ -21,6 +21,10 @@ class UserSeeder extends Seeder
             'role' => 'manager',
         ]);
 
+        $user->profile()->create([
+            'user_id' => $user->id,
+        ]);
+
         $user->assignRole('manager');
         $user->givePermissionTo(Permission::all());
     }

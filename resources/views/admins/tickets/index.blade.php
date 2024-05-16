@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.tickets.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -88,14 +88,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="card-footer text-body-secondary">
                         <div class="pagination justify-content-center">
                             {{ $tickets->links() }}
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        <b>
-                            Tickets : {{ $tickets->count() }}
-                        </b>
                     </div>
                 </div>
             </div>

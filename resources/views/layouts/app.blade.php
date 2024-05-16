@@ -30,7 +30,7 @@
             <!-- fixed-top bg-success p-2 text-dark bg-opacity-25 border border-dark rounded -->
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Naseem-SA') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -164,9 +164,9 @@
                     <div class="col-4">
                         <div class="footer-social">
                             <h5 class="card-title">Follow Us</h5>
-                                <a href="https://web.snapchat.com/" target="_blanck"><img src="images/footer_icons/snapchat.png" width="50" height="50" alt="Snapchat"></a>
-                                <a href="https://www.instagram.com/" target="_blanck"><img src="images/footer_icons/instagram.png" width="40" height="40" alt="Instagram"></a>
-                                <a href="https://twitter.com/home" target="_blanck"><img src="images/footer_icons/x.png" width="40" height="40" alt="X"></a>
+                                <a href="https://web.snapchat.com/" target="_blanck"><img src="{{ asset('images/footer_icons/snapchat.png') }}" width="50" height="50" alt="Snapchat"></a>
+                                <a href="https://www.instagram.com/" target="_blanck"><img src="{{ asset('images/footer_icons/instagram.png') }}" width="40" height="40" alt="Instagram"></a>
+                                <a href="https://twitter.com/home" target="_blanck"><img src="{{ asset('images/footer_icons/x.png') }}" width="40" height="40" alt="X"></a>
                         </div>
                     </div>
                 </div>

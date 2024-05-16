@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Profile;
 use App\Models\Order;
+use App\Models\Ticket;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Ramsey\Uuid\Guid\Guid;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,7 +32,13 @@ class DatabaseSeeder extends Seeder
         $this->call([ContentSeeder::class]);
 
         //profile
-        Profile::factory(20)->create();
+        // Profile::factory(20)->create();
+
+        //order
+        // Order::factory(100)->create();
+
+        //ticket
+        // Ticket::factory(100)->create();
 
     }
 }

@@ -54,6 +54,7 @@
                                     </table>
                                 </div>
                             @endforeach
+                            {{-- accept or reject --}}
                         @elseif($pending_orders->count() > 0)
                             @foreach ($pending_orders as $order)
                                 <div class="text-center">

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.roles.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h4>
                             Edit Role
-                            <a href="{{ route('roles.update', $role->id) }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('roles.index') }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">

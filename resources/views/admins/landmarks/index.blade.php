@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.administrative_regions.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -11,8 +11,10 @@
                     <div class="card-header">
                         <h4>
                             Landmarks
-                            <a href="{{ route('landmarks.create',$region->id) }}" class="btn btn-success float-end">Add Landmark</a>
-                            <a href="{{ route('regions.index', $region->administrative_region->id) }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('landmarks.create', $region->id) }}" class="btn btn-success float-end">Add
+                                Landmark</a>
+                            <a href="{{ route('regions.index', $region->administrative_region->id) }}"
+                                class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -38,8 +40,9 @@
                                         <td>{{ $landmark->region->name }}</td>
                                         <td>{{ $landmark->name }}</td>
                                         <td>{{ $landmark->location }}</td>
-                                        <td><img src="{{ asset($landmark->photo) }}" class="rounded w-auto"
-                                                alt="{{ $landmark->photo }}" width="75" height="75"></td>
+                                        <td><img src="{{ asset($landmark->photo) }}" class="rounded"
+                                                alt="{{ $landmark->photo }}" width="75" height="75">
+                                        </td>
                                         <td>
                                             <ol>
                                                 @foreach ($landmark->activities as $activity)
@@ -95,14 +98,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="card-footer text-body-secondary">
                         <div class="pagination justify-content-center">
                             {{ $landmarks->links() }}
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        <b>
-                            Landmarks : {{ $landmarks->count() }} | Activities : {{ $activities->count() }}
-                        </b>
                     </div>
                 </div>
             </div>

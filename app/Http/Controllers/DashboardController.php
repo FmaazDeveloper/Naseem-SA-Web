@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\AdministrativeRegion;
+use App\Models\Order;
 use App\Models\Region;
-use App\Models\Landmark;
-use App\Models\Activity;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+
 
 class DashboardController extends Controller
 {
@@ -17,48 +14,29 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $roles = Role::all();
-
-        $permissions = Permission::all();
-
-        $users = User::all();
-
-        $usersRolesActive[] = '';
-        $usersRolesUnactive[] = '';
-        foreach ($roles as $role) {
-            $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
-            $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
+        $administrative_regions = AdministrativeRegion::all();
+        $orders = [];
+        $complete_orders = [];
+        $active_orders = [];
+        $pending_orders = [];
+        $cancel_orders = [];
+        $reject_orders = [];
+        foreach ($administrative_regions as $administrative_region) {
+            $orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->count();
+            $complete_orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->where('status', 'completed')->count();
+            $active_orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->where('status', 'actived')->count();
+            $pending_orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->where('status', 'pending')->count();
+            $cancel_orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->where('status', 'cancelled')->count();
+            $reject_orders[$administrative_region->id] = Order::whereIn('region_id', Region::where('administrative_region_id', $administrative_region->id)->pluck('id'))->where('status', 'rejected')->count();
         }
-
-        $usersPermissions[] = '';
-        foreach ($permissions as $permission) {
-            $usersPermissions[$permission->id] = User::with('permissions')->get()->filter(fn ($user) => $user->permissions->where('name', $permission->name)->toArray())->count();
-        }
-
-        $regionsActive = Region::where('is_active', '=', 1)->count();
-        $regionsUnactive = Region::where('is_active', '=', 0)->count();
-
-        $landmarksActive = Landmark::where('is_active', '=', 1)->count();
-        $landmarksUnactive = Landmark::where('is_active', '=', 0)->count();
-
-        $activitiesActive = Activity::where('is_active', '=', 1)->count();
-        $activitiesUnactive = Activity::where('is_active', '=', 0)->count();
-
-        $contentCount = $regionsActive + $regionsUnactive + $landmarksActive + $landmarksUnactive + $activitiesActive + $activitiesUnactive ;
         return view('admins.dashboards.index', [
-            'roles' => $roles,
-            'permissions' => $permissions,
-            'users' => $users,
-            'usersRolesActive' => $usersRolesActive,
-            'usersRolesUnactive' => $usersRolesUnactive,
-            'usersPermissions' => $usersPermissions,
-            'regionsActive' => $regionsActive,
-            'regionsUnactive' => $regionsUnactive,
-            'landmarksActive' => $landmarksActive,
-            'landmarksUnactive' => $landmarksUnactive,
-            'activitiesActive' => $activitiesActive,
-            'activitiesUnactive' => $activitiesUnactive,
-            'contentCount' => $contentCount,
+            'administrative_regions' => $administrative_regions,
+            'orders' => $orders,
+            'complete_orders' => $complete_orders,
+            'active_orders' => $active_orders,
+            'pending_orders' => $pending_orders,
+            'cancel_orders' => $cancel_orders,
+            'reject_orders' => $reject_orders,
         ]);
     }
 

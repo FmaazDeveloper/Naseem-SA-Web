@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Order\OrderUserMail;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -69,8 +71,17 @@ class OrderController extends Controller
             'end_date' => $request->end_date,
         ]);
 
+        Mail::to($order->tourist->email)->send(new OrderUserMail([
+            'id' => $order->id, 'name' => $order->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+            'region' => $order->region->name, 'number_of_people' => $request->number_of_people, 'status' => $request->status,
+            'tourist_name' => $order->tourist->name, 'guide_name' => $order->guide->name,
+        ]));
+        Mail::to($order->guide->email)->send(new OrderUserMail([
+            'id' => $order->id, 'name' => $order->tourist->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date,
+            'region' => $order->region->name, 'number_of_people' => $request->number_of_people, 'status' => $request->status,
+            'guide_name' => $order->guide->name, 'tourist_name' => $order->tourist->name,
+        ]));
         return to_route('orders.index')->with('msg', 'Order has updated successfully');
-
     }
 
     /**

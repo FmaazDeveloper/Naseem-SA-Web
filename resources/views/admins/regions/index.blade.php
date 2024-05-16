@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admins.administrative_regions.main')
 
-@section('content')
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">
@@ -11,8 +11,10 @@
                     <div class="card-header">
                         <h4>
                             Regions
-                            <a href="{{ route('regions.create',$administrative_region->id) }}" class="btn btn-success float-end">Add Region</a>
-                            <a href="{{ route('administrative_regions.index',$administrative_region->id) }}" class="btn btn-danger float-end">Back</a>
+                            <a href="{{ route('regions.create', $administrative_region->id) }}"
+                                class="btn btn-success float-end">Add Region</a>
+                            <a href="{{ route('administrative_regions.index', $administrative_region->id) }}"
+                                class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body m-3">
@@ -38,7 +40,7 @@
                                         <td>{{ $region->administrative_region->name }}</td>
                                         <td>{{ $region->type }}</td>
                                         <td>{{ $region->name }}</td>
-                                        <td><img src="{{ asset($region->card_photo) }}" class="rounded w-auto"
+                                        <td><img src="{{ asset($region->card_photo) }}" class="rounded"
                                                 alt="{{ $region->card_photo }}" width="75" height="75"></td>
                                         <td>
                                             <ol>
@@ -94,15 +96,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="card-footer text-body-secondary">
                         <div class="pagination justify-content-center">
                             {{ $regions->links() }}
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        <b>
-                            Regions : {{ $regions->count() }} | Landmarks : {{ $landmarks->count() }}
-                            | Activities : {{ $activities->count() }}
-                        </b>
                     </div>
                 </div>
             </div>

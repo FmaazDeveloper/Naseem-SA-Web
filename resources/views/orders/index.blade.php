@@ -34,7 +34,7 @@
                                                 <div class="card-body">
                                                     <div class="row row-cols-1 row-cols-md-2 rounded">
 
-                                                        @foreach ($region->guides as $guide)
+                                                        @foreach ($guides[$region->id] as $guide)
                                                             <div class="row">
                                                                 <div class="col border border-secondary rounded-3 m-1">
                                                                     <a href="{{ route('request_orders.create', $guide->user_id) }}"
@@ -97,7 +97,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer text-body-secondary">
-                                                Number of Guiders is : {{ $region->guides->count() }}
+                                                Number of Guiders is : {{ $guides[$region->id]->count() }}
                                               </div>
                                         </div>
                                     </div>

@@ -1,8 +1,6 @@
-@extends('layouts.app')
-@section('title')
-    Edit
-@endsection
-@section('content')
+@extends('admins.orders.main')
+
+@section('form')
     <div class="container">
         <div class="row">
             <div class="col m-3">

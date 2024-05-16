@@ -33,7 +33,4 @@ class Ticket extends Model
     public function contact_reason(){
         return $this->belongsTo(ContactReasons::class);
     }
-    // public function status_type(){
-    //     return $this->belongsTo(StatusType::class,'status_id');
-    // }
 }
