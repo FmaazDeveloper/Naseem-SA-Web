@@ -22,4 +22,5 @@ Route::get('/regions/{administrative_region_id}', [ContentController::class, 're
 Route::get('/landmarks/{region_id}', [ContentController::class, 'landmarks']);
 Route::get('/activities/{landmark_id}', [ContentController::class, 'activities']);
 
-Route::post('/contact_us', [TicketController::class, 'store']);
+Route::post('/contact_us/{user_email}', [TicketController::class, 'store']);
+Route::get('/contact_us', [TicketController::class, 'create']);

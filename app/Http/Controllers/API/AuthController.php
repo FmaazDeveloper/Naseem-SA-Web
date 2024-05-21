@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Welcome\WelcomeGuideMail;
+use App\Mail\Welcome\WelcomeTouristMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -38,6 +41,11 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        if ($user->role == 'tourist') {
+            Mail::to($user->email)->send(new WelcomeTouristMail(['name' => $request->name]));
+        } elseif ($user->role == 'guide') {
+            Mail::to($user->email)->send(new WelcomeGuideMail(['name' => $request->name]));
+        }
         return response()->json([
             'user' => $user,
             'token' => $token,

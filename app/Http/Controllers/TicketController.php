@@ -138,9 +138,9 @@ class TicketController extends Controller
 
 
 
-    public function destroy(String $ticket)
+    public function destroy(String $ticket_id)
     {
-        $ticket = Ticket::findOrFail($ticket);
+        $ticket = Ticket::findOrFail($ticket_id);
         if (File::exists($ticket->file)) {
             File::delete($ticket->file);
         }

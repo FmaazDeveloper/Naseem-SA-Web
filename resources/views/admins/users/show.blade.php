@@ -138,61 +138,106 @@
 
                 <div class="row">
                     {{-- Tickets --}}
-                    <div class="row m-3">
-                        Number of tickets is : {{ $profile->user->tickets->count() }}
-                        <div class="row row-cols-1 row-cols-md-3 rounded">
-                            @foreach ($profile->user->tickets as $ticket)
-                                <div class="col">
-                                    <div class="card h-100">
-                                        @if ($tickets->count() > 0)
-                                            <div class="card-body">
-                                                <h6 class="card-title">{{ $ticket->title }}</h6>
-                                                <p class="card-text">{{ $ticket->message }}</p>
+                    <div class="row">
+                        <div class="row m-3">
+                            Number of tickets is : {{ $tickets->count() }}
+                            <div class="row row-cols-1 row-cols-md-2">
+                                @foreach ($tickets as $ticket)
+                                    <div class="row">
+                                        <div class="col m-1">
+                                            <div class="card h-100">
+                                                @if ($tickets->count() > 0)
+                                                    <div class="card-body">
+                                                        <table>
+                                                            <tr>
+                                                                <td>ID : </td>
+                                                                <td class="text-center">{{ $ticket->id }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Title : </td>
+                                                                <td class="text-center">{{ $ticket->title }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Status : </td>
+                                                                <td class="text-center">{{ $ticket->status }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Created at : </td>
+                                                                <td class="text-center">{{ $ticket->created_at }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <small class="text-muted">
+                                                                <h6 class="text-center">Closed at : {{ $ticket->closed_at }}</h6>
+                                                        </small>
+                                                    </div>
+                                                @else
+                                                    <div class="card-body">
+                                                        No data found !
+                                                    </div>
+                                                @endif
                                             </div>
-                                            <div class="card-footer">
-                                                <small class="text-muted">
-                                                    <p>Created at : {{ $ticket->created_at }}</p>
-                                                    <p>Closed at : {{ $ticket->closed_at }}</p>
-                                                </small>
-                                            </div>
-                                        @else
-                                            <div class="card-body">
-                                                No data found !
-                                            </div>
-                                        @endif
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+                            <div class="pagination justify-content-center">
+                                {{ $tickets->links() }}
+                            </div>
                         </div>
                     </div>
                     {{-- Orders --}}
                     <div class="row m-3">
                         Number of orders is : {{ $orders->count() }}
-                        <div class="row row-cols-1 row-cols-md-3 rounded">
+                        <div class="row row-cols-1 row-cols-md-2 rounded">
                             @foreach ($orders as $order)
-                                <div class="col">
-                                    <div class="card h-100">
-                                        @if ($orders->count() > 0)
-                                            <div class="card-body">
-                                                <h6 class="card-title">{{ $order->region->name }}</h6>
-                                                <p class="card-text">{{ $order->message }}</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <small class="text-muted">
-                                                    <span>Created at : {{ $order->created_at }}
-                                                        Closed at : {{ $order->closed_at }}</span>
-                                                </small>
-                                            </div>
-                                        @else
-                                            <div class="card-body">
-                                                No data found !
-                                            </div>
-                                        @endif
+                                <div class="row">
+                                    <div class="col m-1">
+                                        <div class="card h-100 rounded-3">
+                                            @if ($orders->count() > 0)
+                                                <div class="card-body">
+                                                    <table>
+                                                        <tr>
+                                                            <td>ID : </td>
+                                                            <td class="text-center">{{ $order->id }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Region : </td>
+                                                            <td class="text-center">{{ $order->region->name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Participants : </td>
+                                                            <td class="text-center">{{ $order->number_of_people }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Start date : </td>
+                                                            <td class="text-center">{{ $order->start_date }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>End date : </td>
+                                                            <td class="text-center">{{ $order->end_date }}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <small class="text-muted">
+                                                            <h6 class="text-center">Closed at : {{ $order->closed_at }}</h6>
+                                                    </small>
+                                                </div>
+                                            @else
+                                                <div class="card-body">
+                                                    No data found !
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                        <div class="pagination justify-content-center">
+                            {{ $orders->links() }}
+                        </div>
                     @if ($profile->user->role == 'guide')
                         {{-- Overview --}}
                         <div class="row m-3">

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Welcome\WelcomeUserMail;
+use App\Models\Order;
 use App\Models\Profile;
 use App\Models\Region;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -125,13 +127,15 @@ class UserController extends Controller
             $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
         }
         $profile = Profile::where('user_id', '=', $user_id)->first();
-        $orders = $profile->user->guide_orders ?? $profile->user->tourist_orders;
+        $orders = Order::where('guide_id', '=', $profile->user->id)->orWhere('tourist_id', '=', $profile->user->id)->paginate(2);
+        $tickets =  Ticket::where('user_id', '=', $profile->user->id)->paginate(2);
         return view('admins.users.show', [
             'profile' => $profile, 'orders' => $orders,
             'roles' => $roles,
             'usersRolesActive' => $usersRolesActive,
             'usersRolesUnactive' => $usersRolesUnactive,
-            'all_users' => $all_users
+            'all_users' => $all_users,
+            'tickets' => $tickets,
         ]);
     }
 

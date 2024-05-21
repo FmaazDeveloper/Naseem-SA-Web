@@ -1,5 +1,12 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <style>
+        .active-link {
+            font-weight: bold; /* Apply bold font weight to the active link */
+            border-left: 2px solid #555; /* Add a left border to the active link */
+            padding-left: 10px; /* Add some left padding to the active link */
+        }
+    </style>
 
 <head>
     <meta charset="utf-8">
@@ -42,42 +49,37 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                href="{{ route('contents.index') }}">
-                                <img src="/images/navbar_icons/home.png" class="rounded" alt="regions" width="22"
-                                    height="22" !important>
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('home') ? 'active-link' : '' }}"
+                                href="{{ route('home') }}">
+                                <img src="/images/navbar_icons/home.png" class="rounded" width="22" height="22" !important>
                                 {{ __('Home Page') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.administrative_regions') ? 'active-link' : '' }}"
                                 href="{{ route('contents.administrative_regions') }}">
-                                <img src="/images/navbar_icons/administrative_regions.png" class="rounded" alt="regions"
-                                    width="22" height="22" !important>
+                                <img src="/images/navbar_icons/administrative_regions.png" class="rounded" alt="regions" width="22" height="22" !important>
                                 {{ __('Regions') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.regions') ? 'active-link' : '' }}"
                                 href="{{ route('contents.regions') }}">
-                                <img src="/images/navbar_icons/regions.png" class="rounded" alt="landmarks"
-                                    width="22" height="22" !important>
+                                <img src="/images/navbar_icons/regions.png" class="rounded" width="22" height="22" !important>
                                 {{ __('Cities/Islands') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.landmarks') ? 'active-link' : '' }}"
                                 href="{{ route('contents.landmarks') }}">
-                                <img src="/images/navbar_icons/landmarks.png" class="rounded" alt="landmarks"
-                                    width="22" height="22" !important>
+                                <img src="/images/navbar_icons/landmarks.png" class="rounded" width="22" height="22" !important>
                                 {{ __('Landmarks') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
-                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                            <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('tickets.create') ? 'active-link' : '' }}"
                                 href="{{ route('tickets.create') }}">
-                                <img src="/images/navbar_icons/contact_us.png" class="rounded" alt="contact_us"
-                                    width="22" height="22" !important>
+                                <img src="/images/navbar_icons/contact_us.png" class="rounded" width="22" height="22" !important>
                                 {{ __('Contact Us') }}
                             </a>
                         </li>
@@ -128,7 +130,8 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -152,21 +155,29 @@
                 <div class="row">
                     <div class="col-4">
                         <h5 class="card-title">Contact Us</h5>
-                        <p class="card-text">Phone number: <a href="https://wa.me/+966123456789" target="_blanck">+966 12 345 6789</a></p>
-                        <p class="card-text">Email address: <a href="mailto:FmaazDeveloper@gmail.com" target="_blanck">FmaazDeveloper@gmail.com</a></p>
+                        <p class="card-text">Phone number: <a href="https://wa.me/+966123456789"
+                                target="_blanck">+966 12 345 6789</a></p>
+                        <p class="card-text">Email address: <a href="mailto:FmaazDeveloper@gmail.com"
+                                target="_blanck">FmaazDeveloper@gmail.com</a></p>
                     </div>
                     <div class="col-4">
                         <h5 class="card-title">Links</h5>
-                        <p><a href="{{ route('contents.index') }}">Home</a></p>
+                        <p><a href="{{ route('home') }}">Home</a></p>
                         <p><a href="{{ route('contents.regions') }}">Regions</a></p>
                         <p><a href="{{ route('tickets.create') }}">Contact Us</a></p>
                     </div>
                     <div class="col-4">
                         <div class="footer-social">
                             <h5 class="card-title">Follow Us</h5>
-                                <a href="https://web.snapchat.com/" target="_blanck"><img src="{{ asset('images/footer_icons/snapchat.png') }}" width="50" height="50" alt="Snapchat"></a>
-                                <a href="https://www.instagram.com/" target="_blanck"><img src="{{ asset('images/footer_icons/instagram.png') }}" width="40" height="40" alt="Instagram"></a>
-                                <a href="https://twitter.com/home" target="_blanck"><img src="{{ asset('images/footer_icons/x.png') }}" width="40" height="40" alt="X"></a>
+                            <a href="https://web.snapchat.com/" target="_blanck"><img
+                                    src="{{ asset('images/footer_icons/snapchat.png') }}" width="50"
+                                    height="50" alt="Snapchat"></a>
+                            <a href="https://www.instagram.com/" target="_blanck"><img
+                                    src="{{ asset('images/footer_icons/instagram.png') }}" width="40"
+                                    height="40" alt="Instagram"></a>
+                            <a href="https://twitter.com/home" target="_blanck"><img
+                                    src="{{ asset('images/footer_icons/x.png') }}" width="40" height="40"
+                                    alt="X"></a>
                         </div>
                     </div>
                 </div>
@@ -176,7 +187,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <p class="text-muted">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
+                                <p class="text-muted">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}.
+                                    All rights reserved.</p>
                             </div>
                         </div>
                     </div>

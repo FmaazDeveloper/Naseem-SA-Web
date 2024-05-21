@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/auth.php';
 
 //contents
-Route::get('/', [ContentController::class, 'index'])->name('contents.index');
+Route::get('/', [ContentController::class, 'index'])->name('home');
 Route::get('/home/administrative_regions/{administrative_region_id?}', [ContentController::class, 'administrative_regions'])->name('contents.administrative_regions');
 Route::get('/home/regions/{administrative_region_id?}', [ContentController::class, 'regions'])->name('contents.regions');
 Route::get('/home/landmarks/{region_id?}/{landmrk_id?}', [ContentController::class, 'landmarks'])->name('contents.landmarks');

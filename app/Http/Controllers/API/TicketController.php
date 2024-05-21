@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Ticket\TicketRequestMail;
+use App\Models\ContactReasons;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -21,14 +25,16 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $contactReasons = ContactReasons::all();
+        return response()->json($contactReasons);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,String $user_email)
     {
+        $user = User::where('email',$user_email)->first();
         $request->validate([
             'title' => ['required', 'string', 'min:3', 'max:50'],
             'message' => ['required', 'string', 'min:10', 'max:255'],
@@ -36,12 +42,19 @@ class TicketController extends Controller
 
 
         Ticket::create([
-            'user_id' => 1,
+            'user_id' => $user->id,
             'contact_reason_id' => $request->contact_reason_id,
             'status' => 'New',
             'title' => $request->title,
             'message' => $request->message,
         ]);
+
+        $add_file = null;
+        
+        Mail::to($user->email)->send(new TicketRequestMail([
+            'name' => $user->name, 'email' => $user->email, 'contact_reason' => $user->ticket->contact_reason->name,
+            'title' => $request->title, 'message' => $request->message, 'ticket_file' => $add_file
+        ]));
         return response()->json(['Success send',200]);
     }
 

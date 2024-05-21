@@ -64,7 +64,7 @@ class ContentController extends Controller
                 $landmarks = Landmark::where('is_active', true)->where('region_id', '=', $region_id)->paginate(5);
             } else {
                 $landmarks_sliders = Landmark::where('id', '=', $landmrk_id)->where('is_active', true)->where('region_id', '=', $region_id)->get();
-                $landmarks = Landmark::where('id', '=', $landmrk_id)->where('is_active', true)->where('region_id', '=', $region_id)->get();
+                $landmarks = Landmark::where('id', '=', $landmrk_id)->where('is_active', true)->where('region_id', '=', $region_id)->paginate(5);
             }
             $guides = Profile::whereIn('region_id', Region::where('id', '=', $region_id)
                 ->where('is_active', true)

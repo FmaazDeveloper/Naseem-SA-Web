@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
                 Mail::to($user->email)->send(new WelcomeGuideMail(['name' => $request->name]));
             }
             Auth::login($user);
-            return to_route('contents.index')->with('msg', 'User has created successfully');
+            return to_route('home')->with('msg', 'User has created successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('msg', 'User not registered!\nError:' . $e->getMessage());
         }

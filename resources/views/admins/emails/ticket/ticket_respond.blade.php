@@ -7,8 +7,8 @@
         Answer: {{ $data['answer'] }}
         <br><br>
     </b>
-    If you have any further questions or require additional assistance, please don't hesitate to reach out to us. We are
-    here to help you.
-
-    Thank you for choosing our services.
+    If you have any further questions or require additional assistance, please don't hesitate to reach out to us.<br>
+    We are here to help you.<br>
+    <br>
+    Thank you for choosing our services.<br>
 @endsection

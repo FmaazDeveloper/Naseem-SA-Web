@@ -1,8 +1,8 @@
 @extends('components.mails.mail_order')
 
 @section('message')
-    We are thrilled to inform you that your order has been accepted by the guide you selected. They are excited to show you
-    the wonders of Saudi Arabia's cities and islands.
+    We are thrilled to inform you that your order has been accepted by the guide you selected. They are excited to show you<b>
+    the wonders of Saudi Arabia's cities and islands.<b>
 
     <b>
         <br><br>
@@ -20,8 +20,8 @@
         <br><br>
     </b>
 
-    Please review the attached itinerary for your upcoming journey. Should you have any questions or require any
-    modifications, please reach out to our support team.
-
-    We wish you an unforgettable experience filled with breathtaking sights and memorable moments.
+    Please review the attached itinerary for your upcoming journey. Should you have any questions or require any<b>
+    modifications, please reach out to our support team.<b>
+        <b>
+    We wish you an unforgettable experience filled with breathtaking sights and memorable moments.<b>
 @endsection

@@ -11,7 +11,7 @@
             @if (!is_null($profile))
                 <div class="col-md-4 mx-auto justify-content-center m-auto text-center">
                     <div class="col p-2">
-                        <img src="{{ asset($profile->photo ? $profile->photo : 'images/profile_icons/profile_image.png') }}"
+                        <img src="{{ asset($profile->photo ?? 'images/profile_icons/profile_image.png') }}"
                             alt="" width="100" height="100" class="border border-dark rounded-circle" !important>
                     </div>
                     @if (!$profile->user->is_active)
@@ -22,7 +22,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/name.png') }}" alt="" width="33"
+                                <img src="{{ asset('images/profile_icons/name.png') }}" width="33"
                                     height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -32,7 +32,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/email.png') }}" alt="" width="33"
+                                <img src="{{ asset('images/profile_icons/email.png') }}" width="33"
                                     height="33" !important>
                             </div>
                             <div class="col-6 text-start">
@@ -53,7 +53,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/phone_number.png') }}" alt=""
+                                <img src="{{ asset('images/profile_icons/phone_number.png') }}"
                                     width="33" height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -63,7 +63,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/age.png') }}" alt="" width="33"
+                                <img src="{{ asset('images/profile_icons/age.png') }}" width="33"
                                     height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -73,7 +73,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/gender.png') }}" alt="" width="33"
+                                <img src="{{ asset('images/profile_icons/gender.png') }}" width="33"
                                     height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -83,7 +83,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/nationality.png') }}" alt=""
+                                <img src="{{ asset('images/profile_icons/nationality.png') }}"
                                     width="33" height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -93,7 +93,7 @@
 
                             <p>
                             <div class="col-3">
-                                <img src="{{ asset('images/profile_icons/language.png') }}" alt="" width="33"
+                                <img src="{{ asset('images/profile_icons/language.png') }}" width="33"
                                     height="33" !important>
                             </div>
                             <div class="col-9 text-start">
@@ -104,7 +104,7 @@
                             @if ($profile->user->role == 'guide')
                                 <p>
                                 <div class="col-3">
-                                    <img src="{{ asset('images/profile_icons/region.png') }}" alt="" width="33"
+                                    <img src="{{ asset('images/profile_icons/region.png') }}" width="33"
                                         height="33" !important>
                                 </div>
                                 <div class="col-9 text-start">
@@ -115,7 +115,7 @@
                                 <p>
 
                                 <div class="col-3">
-                                    <img src="{{ asset('images/profile_icons/certificate.png') }}" alt=""
+                                    <img src="{{ asset('images/profile_icons/certificate.png') }}"
                                         width="33" height="33" !important>
                                 </div>
                                 <div class="col-9 text-start">
@@ -139,59 +139,99 @@
 
                     <div class="row">
                         {{-- Tickets --}}
-                        <div class="row m-3">
-                            Number of tickets is : {{ $tickets->count() }}
-                            <div class="row row-cols-1 row-cols-md-3 rounded">
-                                @foreach ($tickets as $ticket)
-                                    <div class="col m-1">
-                                        <div class="card h-100">
-                                            @if ($tickets->count() > 0)
-                                                <div class="card-body">
-                                                    <h6 class="card-title">{{ $ticket->title }}</h6>
-                                                    <p class="card-text">{{ $ticket->message }}</p>
+                        <div class="row">
+                            <div class="row m-3">
+                                Number of tickets is : {{ $tickets->count() }}
+                                <div class="row row-cols-1 row-cols-md-2">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="row">
+                                            <div class="col m-1">
+                                                <div class="card h-100">
+                                                    @if ($tickets->count() > 0)
+                                                        <div class="card-body">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>ID : </td>
+                                                                    <td class="text-center">{{ $ticket->id }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Title : </td>
+                                                                    <td class="text-center">{{ $ticket->title }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Status : </td>
+                                                                    <td class="text-center">{{ $ticket->status }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Created at : </td>
+                                                                    <td class="text-center">{{ $ticket->created_at }}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <small class="text-muted">
+                                                                    <h6 class="text-center">Closed at : {{ $ticket->closed_at }}</h6>
+                                                            </small>
+                                                        </div>
+                                                    @else
+                                                        <div class="card-body">
+                                                            No data found !
+                                                        </div>
+                                                    @endif
                                                 </div>
-                                                <div class="card-footer">
-                                                    <small class="text-muted">
-                                                        <p>Created at : {{ $ticket->created_at }}</p>
-                                                        <p>Closed at : {{ $ticket->closed_at }}</p>
-                                                    </small>
-                                                </div>
-                                            @else
-                                                <div class="card-body">
-                                                    No data found !
-                                                </div>
-                                            @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="pagination justify-content-center">
-                                {{ $tickets->links() }}
+                                    @endforeach
+                                </div>
+                                <div class="pagination justify-content-center">
+                                    {{ $tickets->links() }}
+                                </div>
                             </div>
                         </div>
                         {{-- Orders --}}
                         <div class="row m-3">
                             Number of orders is : {{ $orders->count() }}
-                            <div class="row row-cols-1 row-cols-md-3 rounded">
+                            <div class="row row-cols-1 row-cols-md-2 rounded">
                                 @foreach ($orders as $order)
-                                    <div class="col m-1">
-                                        <div class="card h-100">
-                                            @if ($orders->count() > 0)
-                                                <div class="card-body">
-                                                    <h6 class="card-title">{{ $order->region->name }}</h6>
-                                                    <p class="card-text">{{ $order->message }}</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <small class="text-muted">
-                                                        <span>Created at : {{ $order->created_at }}
-                                                            Closed at : {{ $order->closed_at }}</span>
-                                                    </small>
-                                                </div>
-                                            @else
-                                                <div class="card-body">
-                                                    No data found !
-                                                </div>
-                                            @endif
+                                    <div class="row">
+                                        <div class="col m-1">
+                                            <div class="card h-100 rounded-3">
+                                                @if ($orders->count() > 0)
+                                                    <div class="card-body">
+                                                        <table>
+                                                            <tr>
+                                                                <td>ID : </td>
+                                                                <td class="text-center">{{ $order->id }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Region : </td>
+                                                                <td class="text-center">{{ $order->region->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Participants : </td>
+                                                                <td class="text-center">{{ $order->number_of_people }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Start date : </td>
+                                                                <td class="text-center">{{ $order->start_date }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>End date : </td>
+                                                                <td class="text-center">{{ $order->end_date }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <small class="text-muted">
+                                                                <h6 class="text-center">Closed at : {{ $order->closed_at }}</h6>
+                                                        </small>
+                                                    </div>
+                                                @else
+                                                    <div class="card-body">
+                                                        No data found !
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach

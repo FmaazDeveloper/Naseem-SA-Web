@@ -22,8 +22,8 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', '=', Auth::user()->id)->first();
-        $tickets = Ticket::where('user_id', '=', Auth::user()->id)->paginate(4);
-        $orders = Order::where('tourist_id', '=', Auth::user()->id)->orWhere('guide_id', '=', Auth::user()->id)->paginate(4);
+        $tickets = Ticket::where('user_id', '=', Auth::user()->id)->paginate(2);
+        $orders = Order::where('tourist_id', '=', Auth::user()->id)->orWhere('guide_id', '=', Auth::user()->id)->paginate(2);
         return view('profiles.index', ['profile' => $profile, 'tickets' => $tickets, 'orders' => $orders]);
     }
 

@@ -81,8 +81,7 @@
     </script>
     <div class="container">
         <div class="logo-container">
-            <img src="{{ asset(config('app.logo')) }}" alt="App Logo" class="logo">
-            <span class="logo-text">{{ config('app.name') }}</span>
+            <a href="{{ route('home') }}" class="logo-text">{{ config('app.name') }}</a>
         </div>
         <h1 class="mt-4 mb-4">Dear {{ $data['name'] }},</h1>
 

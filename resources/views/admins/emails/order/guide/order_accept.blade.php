@@ -1,8 +1,8 @@
 @extends('components.mails.mail_order')
 
 @section('message')
-    Congratulations! Your acceptance of the order has been confirmed. The tourist is looking forward to exploring the
-    enchanting regions of Saudi Arabia under your expert guidance.
+    Congratulations! Your acceptance of the order has been confirmed. The tourist is looking forward to exploring the<b>
+    enchanting regions of Saudi Arabia under your expert guidance.<b>
 
     <b>
         <br><br>
@@ -20,8 +20,8 @@
         <br><br>
     </b>
 
-    Please refer to the attached itinerary for the details of the tour. If you have any questions or require any assistance,
-    please don't hesitate to contact us.
-
-    Thank you for your dedication and commitment to providing an exceptional experience.
+    Please refer to the attached itinerary for the details of the tour. If you have any questions or require any assistance,<b>
+    please don't hesitate to contact us.<b>
+        <b>
+    Thank you for your dedication and commitment to providing an exceptional experience.<b>
 @endsection
