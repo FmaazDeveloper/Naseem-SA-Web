@@ -57,7 +57,7 @@
                                             </small>
                                         </td>
                                         <td>
-                                            <a href="{{ route('landmarks.index', $region->id) }}" class="btn btn-info">
+                                            <a href="{{ route('landmarks.index', $region->id) }}" class="btn btn-info m-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                     <path
@@ -66,7 +66,7 @@
                                                         d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                                 </svg>
                                             </a>
-                                            <a href="{{ route('regions.edit', $region->id) }}" class="btn btn-warning">
+                                            <a href="{{ route('regions.edit', $region->id) }}" class="btn btn-warning m-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -75,13 +75,13 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                                 </svg>
                                             </a>
-                                            <form style="display: inline" method="post"
+                                            <form method="post"
                                                 action="{{ route('regions.destroy', $region->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     onclick="return confirm('Are you sure to delete Region ID #  {{ $region->id }}?')"
-                                                    class="btn btn-danger">
+                                                    class="btn btn-danger m-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path

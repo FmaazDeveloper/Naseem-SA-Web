@@ -40,31 +40,8 @@
             background-color: green;
         }
 
-        body {
-
-
-            /* background-image: url("images/pages/main_page.jpg");
-                                                    background-repeat: no-repeat; */
-        }
     </style>
 
-    {{-- <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
-            <div class="carousel-item active">
-                <img src="images/pages/main_page.jpg" class="1-slide"
-                    alt="x" width="1700" height="500">
-                <div class="container">
-                    <div class="carousel-caption text-start"> --}}
-    {{-- <h1>xxxxxxxxxxx</h1> --}}
-    {{-- <p class="opacity-75">Some representative placeholder content for the first slide of the
-                                carousel.</p> --}}
-    {{-- <p><a class="btn btn-primary" href="#">View more</a></p> --}}
-    {{-- </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <div style=" background-image: url(images/pages/main_page.jpg); background-size: cover;">
         <div class="container p-3">
             <div class="row text-center">

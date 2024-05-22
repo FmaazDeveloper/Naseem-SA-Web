@@ -51,35 +51,35 @@
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('home') ? 'active-link' : '' }}"
                                 href="{{ route('home') }}">
-                                <img src="/images/navbar_icons/home.png" class="rounded" width="22" height="22" !important>
+                                <img src="{{ asset('images/navbar_icons/home.png') }}" class="rounded" width="22" height="22" !important>
                                 {{ __('Home Page') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.administrative_regions') ? 'active-link' : '' }}"
                                 href="{{ route('contents.administrative_regions') }}">
-                                <img src="/images/navbar_icons/administrative_regions.png" class="rounded" alt="regions" width="22" height="22" !important>
+                                <img src="{{ asset('images/navbar_icons/administrative_regions.png') }}" class="rounded" alt="regions" width="22" height="22" !important>
                                 {{ __('Regions') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.regions') ? 'active-link' : '' }}"
                                 href="{{ route('contents.regions') }}">
-                                <img src="/images/navbar_icons/regions.png" class="rounded" width="22" height="22" !important>
+                                <img src="{{ asset('images/navbar_icons/regions.png') }}" class="rounded" width="22" height="22" !important>
                                 {{ __('Cities/Islands') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('contents.landmarks') ? 'active-link' : '' }}"
                                 href="{{ route('contents.landmarks') }}">
-                                <img src="/images/navbar_icons/landmarks.png" class="rounded" width="22" height="22" !important>
+                                <img src="{{ asset('images/navbar_icons/landmarks.png') }}" class="rounded" width="22" height="22" !important>
                                 {{ __('Landmarks') }}
                             </a>
                         </li>
                         <li class="nav-item pt-1 m-3">
                             <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover {{ request()->routeIs('tickets.create') ? 'active-link' : '' }}"
                                 href="{{ route('tickets.create') }}">
-                                <img src="/images/navbar_icons/contact_us.png" class="rounded" width="22" height="22" !important>
+                                <img src="{{ asset('images/navbar_icons/contact_us.png') }}" class="rounded" width="22" height="22" !important>
                                 {{ __('Contact Us') }}
                             </a>
                         </li>

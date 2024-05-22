@@ -42,7 +42,7 @@
                                                                         <div
                                                                             class="row rounded-2 p-1 border-2 border-secondary">
                                                                             <div class="col-2 text-center">
-                                                                                <img src="{{ '/' . $guide->photo ?? '/images/profile_icons/profile_image.png' }}"
+                                                                                <img src="{{ asset($guide->photo ?? 'images/profile_icons/profile_image.png') }}"
                                                                                     class="rounded-circle justify-content-center"
                                                                                     alt="" width="50"
                                                                                     height="50">

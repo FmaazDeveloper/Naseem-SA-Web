@@ -51,7 +51,7 @@
             <div class="position-fixed m-2 p-1">
                 @if (is_null($guides))
                     <a class="btn btn-outline-success" href="{{ route('request_orders.index') }}">
-                        <img src="/images/navbar_icons/request-guide.png" class="rounded" alt="guide" width="22"
+                        <img src="{{ asset('images/navbar_icons/request-guide.png') }}" class="rounded" alt="guide" width="22"
                             height="22" !important>
                         {{ __('Request Tour Guide') }}
                     </a>
