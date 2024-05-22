@@ -95,7 +95,7 @@
 
                             <div class="mb-3">
                                 <label for="card_photo" class="form-label">Card photo</label>
-                                <input class="form-control" name="card_photo" type="file" id="card_photo" accept="image/png">
+                                <input class="form-control" name="card_photo" type="file" id="card_photo" accept="image/*">
                                 @error('card_photo')
                                     <small class="text-danger">*{{ $message }}</small>
                                 @enderror

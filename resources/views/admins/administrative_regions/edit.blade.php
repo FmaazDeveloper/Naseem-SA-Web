@@ -32,7 +32,7 @@
                                     <div class="mb-3">
                                         <label for="photo" class="form-label">Photo</label>
                                         <input class="form-control" name="photo" value="{{ $administrativeRegion->photo }}"
-                                            type="file" id="photo" accept="image/png">
+                                            type="file" id="photo" accept="image/*">
                                         @error('photo')
                                             <small class="text-danger">*{{ $message }}</small>
                                         @enderror

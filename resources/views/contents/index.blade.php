@@ -197,13 +197,13 @@
                             id: 1
                         },
                         {
-                            name: "Jeddah",
+                            name: "Wadi Hanifah",
                             x: 570,
                             y: 500,
                             id: 2
                         },
                         {
-                            name: "Al-Majma'ah Governorate",
+                            name: "Shaqra Governorate",
                             x: 580,
                             y: 520,
                             id: 3

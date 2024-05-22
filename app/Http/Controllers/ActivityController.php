@@ -116,7 +116,7 @@ class ActivityController extends Controller
             'region_id' => $landmark->region_id,
             'landmark_id' => $request->landmark_id,
             'description' => $request->description,
-            'photo' => $update_photo ? $update_photo : $landmark->photo,
+            'photo' => $update_photo ? $update_photo : $activity->photo,
             'is_active' => $request->is_active ? $request->is_active : 0,
         ]);
 
