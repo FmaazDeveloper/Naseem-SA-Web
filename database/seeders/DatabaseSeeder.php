@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
         $this->call([ContentSeeder::class]);
 
         //profile
-        // Profile::factory(20)->create();
+        Profile::factory(20)->create();
 
         //order
-        // Order::factory(100)->create();
+        Order::factory(100)->create();
 
         //ticket
-        // Ticket::factory(100)->create();
+        Ticket::factory(100)->create();
 
     }
 }

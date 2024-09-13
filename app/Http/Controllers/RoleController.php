@@ -78,7 +78,7 @@ class RoleController extends Controller
     }
 
 
-    public function edit(Role $role)
+    public function edit(string $id)
     {
         $all_roles = Role::all();
         $usersRolesActive[] = '';
@@ -87,6 +87,7 @@ class RoleController extends Controller
             $usersRolesActive[$role->id] = User::where('is_active', '=', 1)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
             $usersRolesUnactive[$role->id] = User::where('is_active', '=', 0)->with('roles')->get()->filter(fn ($user) => $user->roles->where('name', $role->name)->toArray())->count();
         }
+        $role = Role::findOrFail($id);
         return view('admins.roles.edit', [
             'role' => $role,
             'all_roles' => $all_roles,
